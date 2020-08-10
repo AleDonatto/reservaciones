@@ -1,0 +1,238 @@
+<template>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                Agregar Unidades de Negocio
+            </h6>
+        </div>
+        <div class="card-body">
+            <ValidationObserver v-slot="{handleSubmit, reset }" ref="form">
+                <form method="post" id="form" @submit.prevent="handleSubmit(bussinesUnit)" @reset.prevent="reset">
+                    <div class="row form-group">
+                        <div class="col-12 col-md-12 col-sm-12">
+                            <label for="company">Seleccione Compañia</label>
+                            <ValidationProvider name="company" rules="required" v-slot="{ errors }">
+                                <select name="company" id="company" class="form-control" v-model="companies.company"
+                                :class="{'is-invalid':errors[0] }">
+                                    <option value="" selected>Seleccione:</option>
+                                    <option v-for="(item, index) in listSocios" v-bind:value="item.idCompanies" :key="index">
+                                        {{ item.name }}
+                                    </option>
+                                </select>
+
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ errors[0] }}</strong>
+                                </div>
+                            </ValidationProvider>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6 col-6 col-sm-12">
+                            <label for="RFC">RFC <sup class="text-danger"> <strong>*</strong> </sup> </label>
+                            <ValidationProvider name="RFC" rules="required" v-slot="{ errors }">
+                                <input type="text" name="RFC" id="RFC" class="form-control" placeholder="RFC" v-model="companies.RFC"
+                                :class="{ 'is-invalid': errors[0], 'is-invalid': RFCValido }" v-on:blur="VerificacionRFC">
+
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ errors[0] }}</strong>
+                                    <strong v-if="RFCValido">RFC Invalido</strong>
+                                </div>
+                            </ValidationProvider>
+                        </div>
+                        <div class="col-md-6 col-6 col-sm-12">
+                            <label for="nombreUNit">Nombre de la Unidad <sup class="text-danger"> <strong>*</strong> </sup></label>
+                            <ValidationProvider name="nombreUnit" rules="required" v-slot="{ errors }">
+                                <input type="text" name="nombreUnit" id="nombreUnit" class="form-control" placeholder="Nombre de la Unidad"
+                                :class="{ 'is-invalid': errors[0] }" v-model="companies.nameUnit">
+
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ errors[0] }}</strong>
+                                </div>
+                            </ValidationProvider>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-6 col-md-6 col-sm-12">
+                            <label for="telefono1">Telefono 1 <sup class="text-danger"> <strong>*</strong> </sup></label>
+                            <ValidationProvider name="telefono1" rules="required" v-slot="{ errors }">
+                                <input type="tel" name="telefono1" id="telefono1" class="form-control" placeholder="Telefono 1" v-model="companies.telefono1"
+                                :class="{ 'is-invalid': errors[0] }">
+
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ errors [0] }}</strong>
+                                </div>
+                            </ValidationProvider>
+                        </div>
+                        <div class="col-6 col-md-6 col-sm-12">
+                            <label for="telefono2">Telefono 2</label>
+                            <ValidationProvider name="telefono2" rules="" v-slot="{ errors }">
+                                <input type="tel" name="telefono2" id="telefono2" class="form-control" placeholder="Telefono 2" v-model="companies.telefono2"
+                                :class="{ 'is-invalid':errors[0] }">
+
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ errors[0] }}</strong>
+                                </div>
+                            </ValidationProvider>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-6 col-md-6 col-sm-12">
+                            <label for="correo">Correo <sup class="text-danger"> <strong>*</strong> </sup></label>
+                            <ValidationProvider name="correo" rules="required" v-slot="{ errors }">
+                                <input type="email" name="correo" id="correo" class="form-control" placeholder="Correo" v-model="companies.correo"
+                                :class="{ 'is-invalid':errors[0] }">
+
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ errors[0] }}</strong>
+                                </div>
+                            </ValidationProvider>
+                        </div>
+                        <div class="col-6 col-md-6 col-sm-12">
+                            <label for="sitioweb">Sitio Web</label>
+                            <ValidationProvider name="sitioweb" rules="" v-slot="{ errors }">
+                                <input type="text" name="sitioweb" id="sitioweb" class="form-control" placeholder="Sitio Web" v-model="companies.sitioweb"
+                                :class="{ 'is-invalid':errors[0] }">
+
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ errors[0] }}</strong>
+                                </div>
+                            </ValidationProvider>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-6 col-md-6 col-sm-12">
+                            <label for="namecontact">Nombre del Contacto<sup class="text-danger"> <strong>*</strong> </sup></label>
+                            <ValidationProvider name="namecontact" rules="required" v-slot="{ errors }">
+                                <input type="text" name="namecontact" id="namecontact" class="form-control" placeholder="Nombre del Contacto"
+                                :class="{ 'is-invalid':errors[0] }" v-model="companies.namecontact">
+
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ errors[0] }}</strong>
+                                </div>
+                            </ValidationProvider>
+                        </div>
+                        <div class="col-6 col-md-6 col-sm-12">
+                            <label for="horacancelation">Tiempo de Cancelacion <sup class="text-danger"> <strong>*</strong> </sup>(Horas)</label>
+                            <ValidationProvider name="horacancelation" rules="required" v-slot="{ errors }">
+                                <!--<input type="time" name="horacancelation" id="horacancelation" class="form-control" placeholder="00:00:00"
+                                :class="{ 'is-invalid':errors[0] }" max="22:30:00" min="10:00:00" step="1" 
+                                v-model="companies.horacancelation">-->
+
+                                <input type="number" name="horacancelation" id="horacancelation" min="0" max="24" step="1" class="form-control"
+                                :class="{ 'is-invalid':errors[0] }" v-model="companies.horacancelation" placeholder="0">
+
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ errors[0] }}</strong>
+                                    <strong v-if="Hora">Hora Invalida</strong>
+                                </div>
+                            </ValidationProvider>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-store-alt"></i>
+                        Agregar Unidad
+                    </button>
+                    <button type="reset" class="btn btn-light">Restablecer</button>
+                </form>
+            </ValidationObserver>
+        </div>
+    </div>
+  
+</template>
+
+<script>
+import { extend } from 'vee-validate';
+import { required, email } from 'vee-validate/dist/rules';
+
+extend('email',email);
+
+extend('required', {
+  ...required,
+  message: 'This field is required'
+});
+
+export default {
+    data(){
+        return{
+            listSocios: [],
+            companies:{company:"", RFC:"", nameUnit:"", telefono1:"", telefono2:"", correo:"", sitioweb:"", namecontact:"", horacancelation:"" },
+            RFCValido: false,
+            Hora: false
+        };
+    },
+    created(){
+        axios.get('/socios').then(res=>{
+            this.listSocios = res.data;
+            //console.log(this.listSocios);
+        });
+    },
+    methods:{
+        bussinesUnit(){
+
+            axios.post("/negocios",this.companies)
+            .then(res => {
+                const server = res.data;
+                //console.log(server)
+
+                toastr.options.closeButton = true;
+                toastr.options.escapeHtml = true;
+                toastr.options.progressBar = true;
+                toastr.success(server.messageDB,server.messageHeader,{timeOut :  15000});
+            })
+            .catch( err => {
+                const error = err 
+                console.log(error)
+            })
+
+            this.$refs.form.validate().then(success => {
+                if (!success) {
+                    return;
+                }
+                // Resetting Values
+                this.companies.RFC = this.companies.company = this.companies.nameUnit = this.companies.telefono1 = this.companies.telefono2 = this.companies.correo = this.companies.sitioweb = '';
+                this.companies.namecontact = this.companies.horacancelation = '';
+                
+                // Wait until the models are updated in the UI
+                this.$nextTick(() => {
+                    this.$refs.form.reset();
+                });
+            });
+        },
+        VerificacionRFC(){
+            var input = this.companies.RFC
+
+            if(input !== ''){
+                var patt = new RegExp("^[A-Z,Ñ,&]{3,4}[0-9]{2}[0-1][0-9][0-3][0-9][A-Z,0-9]?[A-Z,0-9]?[0-9,A-Z]?$");
+                this.rfcValido = patt.test(input)
+
+                if(patt.test(input)){
+                    this.RFCValido = false
+                }else{
+                    this.RFCValido = true
+                }
+            }
+        },
+        HoraVerificacion(){
+            var hora = this.companies.horacancelation
+            console.log(hora.length)
+
+            if(hora !== ''){
+                var patt = new RegExp("^([01]?[0-9]|2[0-3]):[0-5][0-9]?$");
+                //$("html, body").stop().animate({scrollTop:$( '#form' ).offset().top - 30}, 500, 'swing');
+                this.Hora = patt.test(hora)
+
+                if(patt.test(hora)){
+                    this.Hora = false
+                }else{
+                    this.Hora = true
+                }
+            }
+        }
+
+    }
+
+}
+</script>
+
+<style>
+</style>

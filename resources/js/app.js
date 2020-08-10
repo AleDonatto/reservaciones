@@ -6,18 +6,17 @@
 
 require('./bootstrap');
 
-
 window.Vue = require('vue');
 
 
-/*import Vue from 'vue';
+/*import Vue from 'vue';*/
 import { ValidationProvider } from 'vee-validate';
-import { ValidationObserver } from 'vee-validate';*/
+import { ValidationObserver } from 'vee-validate';
 
 
 // Register it globally
-/*Vue.component('ValidationProvider', ValidationProvider);
-Vue.component('ValidationObserver', ValidationObserver);*/
+Vue.component('ValidationProvider', ValidationProvider);
+Vue.component('ValidationObserver', ValidationObserver);
 
 
 /**
@@ -34,6 +33,12 @@ Vue.component('ValidationObserver', ValidationObserver);*/
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 Vue.component('formsocios-componet', require('./components/FormSociosComponent.vue').default);
+
+Vue.component('formbussines-component', require('./components/FormBusinessComponent.vue').default);
+
+Vue.component('bussinesunist_socios', require('./components/FormUnitsSociosComponent.vue').default);
+
+Vue.component('mesas-component', require('./components/MesasComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

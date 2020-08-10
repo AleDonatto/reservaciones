@@ -55,10 +55,10 @@
                                         <a href="#mail" class="scroll button1">Mail Us</a>
                                     </li>
                                     <li class="">
-                                        <a href="{{ url('/app_login') }}">Login</a>
+                                        <a href="{{ url('/app_login') }}">Clientes</a>
                                     </li>
                                     <li class="">
-                                        <a href="{{ url('/app_register') }}">Registro</a>
+                                        <a href="{{ route('login_socios') }}">Negocios</a>
                                     </li>
                                 </ul>
                             </nav>

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Socios;
+use App\Codigos;
 
 class CodigosController extends Controller
 {
@@ -24,7 +27,9 @@ class CodigosController extends Controller
     public function create()
     {
         //
-        return view('componets.codigoseguridad');
+        $socios = Socios::all();
+        $codigos = Codigos::all();
+        return view('componets.codigoseguridad')->with(compact('socios','codigos'));
     }
 
     /**
@@ -36,6 +41,26 @@ class CodigosController extends Controller
     public function store(Request $request)
     {
         //
+        $validation = $request->validate([
+            'codigo' => 'required|integer',
+            'fecha' => 'required|date',
+            'socio' => 'required'
+        ]);
+
+        $codigo = new Codigos;
+        $codigo->code_verification = $request->codigo;
+        $codigo->date_expiration = $request->fecha;
+        $codigo->user = Auth::id();
+        $codigo->companies = $request->socio;
+        $codigo->save();
+
+        $notification = array(
+            'messageHeader' => 'Codigos',
+            'messageDB' => 'Codigo se seguridad agregado al socio!',
+            'alert-type' => 'success'
+        );
+        
+        return back()->with($notification);
     }
 
     /**

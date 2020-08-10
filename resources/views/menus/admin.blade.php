@@ -23,7 +23,7 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
             <a class="collapse-item" href="{{ route('socios.create') }}">Registrar Socios </a>
-            <a class="collapse-item" href="">{{ __('Consulta de Socios') }}</a>
+            <a class="collapse-item" href="{{ route('socios.index') }}">{{ __('Consulta de Socios') }}</a>
         </div>
     </div>
 </li>
@@ -35,8 +35,21 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="buttons.html">Agregar Nueva Unidad</a>
-            <a class="collapse-item" href="cards.html">Consulta de UNidades </a>
+            <a class="collapse-item" href="{{ route('negocios.create') }}">Agregar Nueva Unidad</a>
+            <a class="collapse-item" href="{{ route('negocios.index') }}">Consulta de Unidades </a>
+        </div>
+    </div>
+</li>
+<li class="nav-item">
+    <a href="#" class="nav-link collapsed" data-toggle="collapse" data-target="#collapseTables" aria-expanded="true" aria-controls="collpaseTables">
+        <i class="fas fa-fw fa-chair"></i>
+        <span>Mesas</span>
+    </a>
+    <div class="collapse" id="collapseTables" aria-labelledby="headingTables" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Custom Components:</h6>
+            <a href="{{ route('mesas.create') }}" class="collapse-item">Agregar Mesas</a>
+            <a href="{{ route('mesas.index') }}" class="collapse-item">Consulta Mesas</a>
         </div>
     </div>
 </li>

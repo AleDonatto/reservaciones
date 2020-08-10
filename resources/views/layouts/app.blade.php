@@ -9,9 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts 
-    <script src="{{ asset('js/app.js') }}" defer></script>-->
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -20,8 +17,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/sb-2.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <!--<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">-->
     <link href="//fonts.googleapis.com/css?family=Pacifico&amp;subset=latin-ext,vietnamese" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/toastr.css') }}">
     <style>
         .sidebar-brand-text > h4{
             text-decoration: none;
@@ -29,8 +27,9 @@
             font-size: 2rem;
         }
     </style>
+    @stack('styles')
 </head>
-<body>
+<body id="page-top">
     <div id="app">
         <div id="wrapper">
 
@@ -144,9 +143,46 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
+    
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/toastr.js') }}"></script>
+    @if(session('messageDB'))
+    <script type="text/javascript">
+            var type = "{{ Session::get('alert-type', 'info') }}";
+            switch(type){
+                case 'info':
+                    toastr.options.closeButton = true;
+                    toastr.options.escapeHtml = true;
+                    toastr.options.progressBar = true;
+                    toastr.info("{{ Session::get('messageDB') }}","{{ Session::get('messageHeader') }}",{timeOut :  15000});
+                    break;
+    
+                case 'warning':
+                    toastr.options.closeButton = true;
+                    toastr.options.escapeHtml = true;
+                    toastr.options.progressBar = true;
+                    toastr.warning("{{ Session::get('messageDB') }}","{{ Session::get('messageHeader') }}",{timeOut :  15000});
+                    break;
+    
+                case 'success':
+                    toastr.options.closeButton = true;
+                    toastr.options.escapeHtml = true;
+                    toastr.options.progressBar = true;  
+                    toastr.success("{{ Session::get('messageDB') }}","{{ Session::get('messageHeader') }}",{timeOut :  15000});
+                    break;
+    
+                case 'error':
+                    toastr.options.closeButton = true;
+                    toastr.options.escapeHtml = true;
+                    toastr.options.progressBar = true;
+                    toastr.error("{{ Session::get('messageDB') }}","{{ Session::get('messageHeader') }}",{timeOut :  15000});
+                    break;
+            }
+    </script>
+    @endif
     <!--<script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>-->
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 
@@ -155,5 +191,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-2.min.js') }}"></script>
+    @stack('scripts')
 </body>
 </html>

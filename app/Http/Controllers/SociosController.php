@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Socios;
 
 class SociosController extends Controller
 {
@@ -11,9 +12,15 @@ class SociosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        if($request->ajax()){
+            return Socios::all();
+        }else{
+            $socios = Socios::all();
+            return view('componets.consultaSocios')->with(compact('socios'));
+        }
     }
 
     /**
@@ -38,10 +45,31 @@ class SociosController extends Controller
         //
         $validate = $request->validate([
             'RFC' => 'required|string',
-            'nombreContacto' => 'required|string',
-            'razon-social' => 'required|string',
+            'nameContact' => 'required|string',
+            'razonsocial' => 'required|string',
             'correo' => 'required|email',
+            'telefono1' => 'required|integer', 
         ]);
+
+        $socio = new Socios;
+        $socio->RFC = $request->RFC;
+        $socio->name = $request->razonsocial;
+        $socio->phone1 = $request->telefono1;
+        $socio->phone2 = $request->telefono2;
+        $socio->email = $request->correo;
+        $socio->website = $request->website;
+        $socio->name_contact = $request->nameContact;
+        $socio->idUser = 1;
+        $socio->save(); 
+
+        $notification = array(
+            'messageHeader' => 'Socios',
+            'messageDB' => 'Socio agregado con exito!',
+            'alert-type' => 'success'
+        );
+
+        return $notification;
+
     }
 
     /**
