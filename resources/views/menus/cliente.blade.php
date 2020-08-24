@@ -1,6 +1,6 @@
 <!-- Nav Item - Dashboard -->
 <li class="nav-item active">
-    <a class="nav-link" href="">
+    <a class="nav-link" href="{{ route('home') }}">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span>
     </a>
@@ -20,6 +20,7 @@
     <div id="collapseBooking" class="collapse" aria-labelledby="headingBookig" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
+            <a href="" class="collapse-item">Hacer Reservacion</a>
             <a href="" class="collapse-item">Consulta de Reservaciones</a>
         </div>
     </div>

@@ -43,6 +43,8 @@ Route::get('app_register',function(){
 
 Route::post('registro_socios','SpecialController@RegistroSocios')->name('registro_socios');
 
+Route::post('registro_clientes', 'SpecialController@RegistroClientes')->name('registro_clientes');
+
 /*rutas administrador */
 Route::resource('socios','SociosController')->only([
     'index','store','update','create'
@@ -62,17 +64,30 @@ Route::resource('mesas','TablesController')->only([
 /* fin rutas admintrador*/
 
 /*rutas de socios */
-Route::resource('socios/negocios','SociosBusinessUnitController')->only([
-    'index','updated','destroy','create'
+Route::resource('socios_negocios','SociosBusinessUnitController')->only([
+    'index','update','destroy','create','store','edit'
 ])->middleware('auth');
 
-Route::resource('socios/mesas','SociosTablesUnitController')->only([
-    'index','updated','destroy','create'
+Route::resource('socios_mesas','SociosTablesUnitController')->only([
+    'index','updated','destroy','create','store','show'
 ])->middleware('auth');
+
+Route::resource('socios_reservaciones','SociosReservasController')->only([
+    'index','store','destroy','create','show','updated'
+])->middleware('auth');
+
+Route::get('socios_getListBookings/{id}/{fecha}','SpecialController@getListBookings')->name('getlistbookings')->middleware('auth');
 /* fin rutas de socios*/
 
 
 /* rutas de clientes */
+Route::get('getlistunidades','SpecialController@getListUnidades')->name('getlistunidades')->middleware('auth');
+
+Route::get('getLitsReservaciones', 'SpecialController@getClientesResevaciones')->name('getListBookings')->middleware('auth');
+
+Route::get('getMesasUnidad/{id}', 'SpecialController@getMesasUnidad')->name('getMesasUnidad')->middleware('auth');
+
+Route::post('postReservacion', 'SpecialController@postReservacion')->name('postReservacion')->middleware('auth');
 
 /* fin rutas clientes*/
 

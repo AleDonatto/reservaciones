@@ -16,7 +16,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('fontawesome-free/css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/sb-2.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sb-2.min.css') }}">
     <!--<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">-->
     <link href="//fonts.googleapis.com/css?family=Pacifico&amp;subset=latin-ext,vietnamese" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/toastr.css') }}">
@@ -33,7 +33,7 @@
     <div id="app">
         <div id="wrapper">
 
-            @Auth
+            <!--@Auth-->
             <!-- Sidebar -->
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
                 
@@ -53,12 +53,12 @@
                     @include('menus.admin')
                 @elseif( Auth::user()->rol == 2)
                     @include('menus.socio')
-                @elseif( Auth::user()->rol == 1)
+                @elseif( Auth::user()->rol == 3)
                     @include('menus.cliente')
                 @endif
             </ul>
             <!-- End of Sidebar -->
-            @endauth
+            <!--@endauth-->
 
             <div id="content-wrapper" class="d-flex flex-column">
                 <div id="content">
@@ -120,6 +120,15 @@
 
                     @Auth
                     <div class="container-fluid">
+                        @if(session('mensaje'))
+                        <div class="alert alert-success alert-dismissible fade show my-5" role="alert">
+                            <strong>{{ Session::get('title') }}!</strong> <br> {{ Session::get('mensaje') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
+                        
                         <main class="">
                             @yield('content')
                         </main>
@@ -129,9 +138,9 @@
                 </div>
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
-                      <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2019</span>
-                      </div>
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Your Website @php $year = date('Y'); print($year); @endphp</span>
+                        </div>
                     </div>
                 </footer>
             </div>    

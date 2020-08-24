@@ -29,7 +29,7 @@ class CodigosController extends Controller
         //
         $socios = Socios::all();
         $codigos = Codigos::all();
-        return view('componets.codigoseguridad')->with(compact('socios','codigos'));
+        return view('components.codigoseguridad')->with(compact('socios','codigos'));
     }
 
     /**

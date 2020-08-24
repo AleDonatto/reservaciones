@@ -14,6 +14,16 @@
 <body>
 
     <div class="container">
+
+        @if(session('mensaje'))
+        <div class="alert alert-danger alert-dismissible fade show my-5" role="alert">
+            <strong>{{ Session::get('title') }}!</strong> <br> {{ Session::get('mensaje') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
+
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
@@ -26,7 +36,7 @@
                             </div>
                             
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                <form class="user" action="{{ route('register') }}">
+                                <form class="user" action="{{ route('registro_clientes') }}" method="post">
                                     @csrf
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
@@ -44,7 +54,7 @@
                                             id="LastName" placeholder="Last Name">
 
                                             @error('LastName')
-                                            <span class="invalid-feddback" role="alert">
+                                            <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                             @enderror
@@ -82,6 +92,29 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <div class="">
+                                            <input type="tel" name="telefono" id="telefono" class="form-control form-control-user @error('telefono') is-invalid @enderror" placeholder="Num. Phone">
+
+                                            @error('telefono')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{$message}}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label for="datebirth" style="font-size: 0.8rem !important; color: gray;">Date Birth</label>
+                                            <input type="date" name="datebirth" id="datebirth" class="form-control form-control-user @error('datebirth') is-invalid @enderror">
+
+                                            @error('databirth')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                     <button type="submit" class="btn btn-primary btn-user btn-block">Register Account</button>
                                     <hr>
                                     <a href="index.html" class="btn btn-google btn-user btn-block">
@@ -94,7 +127,6 @@
                                     </a>
                                 </form>
                             </div>
-                            
                             <hr>
                             <div class="text-center">
                                 <a class="small" href="">Forgot Password?</a>

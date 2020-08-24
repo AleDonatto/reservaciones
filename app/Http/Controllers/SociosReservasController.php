@@ -3,24 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Socios;
+use Illuminate\Support\Facades\DB;
+use App\Bookins;
+use App\BusinessUnits;
+use App\Mesas;
 
-class SociosController extends Controller
+class SociosReservasController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         //
-        if($request->ajax()){
-            return Socios::all();
-        }else{
-            $socios = Socios::all();
-            return view('components.consultaSocios')->with(compact('socios'));
-        }
     }
 
     /**
@@ -31,7 +28,7 @@ class SociosController extends Controller
     public function create()
     {
         //
-        return view('components.socios');
+
     }
 
     /**
@@ -43,33 +40,6 @@ class SociosController extends Controller
     public function store(Request $request)
     {
         //
-        $validate = $request->validate([
-            'RFC' => 'required|string',
-            'nameContact' => 'required|string',
-            'razonsocial' => 'required|string',
-            'correo' => 'required|email',
-            'telefono1' => 'required|integer', 
-        ]);
-
-        $socio = new Socios;
-        $socio->RFC = $request->RFC;
-        $socio->name = $request->razonsocial;
-        $socio->phone1 = $request->telefono1;
-        $socio->phone2 = $request->telefono2;
-        $socio->email = $request->correo;
-        $socio->website = $request->website;
-        $socio->name_contact = $request->nameContact;
-        $socio->idUser = 1;
-        $socio->save(); 
-
-        $notification = array(
-            'messageHeader' => 'Socios',
-            'messageDB' => 'Socio agregado con exito!',
-            'alert-type' => 'success'
-        );
-
-        return $notification;
-
     }
 
     /**
@@ -81,6 +51,15 @@ class SociosController extends Controller
     public function show($id)
     {
         //
+        $date = date('Y-m-d');
+        $booking = DB::table('bookings')
+        ->join('clients','clients.idClients','=','bookings.clients')
+        ->join('users','users.id','=','clients.idUser')
+        ->select('bookings.hour','bookings.pax','bookings.status','users.name','users.lastname')
+        ->where('bookings.date',$date)
+        ->where('bookings.table',$id)
+        ->get();
+        return view('components.socios.showBookings')->with(compact('booking'));
     }
 
     /**

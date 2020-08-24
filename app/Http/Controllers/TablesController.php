@@ -27,7 +27,7 @@ class TablesController extends Controller
     {
         //
         $unidades = BusinessUnits::all();
-        return view('componets.tablesUnits')->with(compact('unidades'));
+        return view('components.tablesUnits')->with(compact('unidades'));
     }
 
     /**

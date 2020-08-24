@@ -6,7 +6,7 @@
     <title>Registro Socios</title>
     <link rel="stylesheet" href="{{ asset('css/sb-2.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('fontawesome-free/css/all.min.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" 
     rel="stylesheet">
 
@@ -15,9 +15,9 @@
 
     <div class="container">
 
-        @if( session('error') )
+        @if(session('title'))
         <div class="alert alert-danger alert-dismissible fade show my-5" role="alert">
-            <strong>{{ Session::get('title') }}!</strong> {{ Session::get('mensaje') }}
+            <strong>{{ Session::get('title') }}!</strong> <br> {{ Session::get('mensaje') }}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>

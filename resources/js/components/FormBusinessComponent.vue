@@ -148,7 +148,7 @@ extend('email',email);
 
 extend('required', {
   ...required,
-  message: 'This field is required'
+  message: 'Este Campo es Requerido'
 });
 
 export default {

@@ -94,7 +94,7 @@
                             </ValidationProvider>
                         </div>
                         <div class="col-6 col-md-6 col-sm-12">
-                            <label for="horacancelation">Tiempo de Cancelacion <sup class="text-danger"> <strong>*</strong> </sup></label>
+                            <label for="horacancelation">Tiempo de Cancelacion <sup class="text-danger"> <strong>*</strong>(Horas)</sup></label>
                             <ValidationProvider name="horacancelation" rules="required" v-slot="{ errors }">
                                 <!--<input type="time" name="horacancelation" id="horacancelation" class="form-control" placeholder="00:00:00"
                                 :class="{ 'is-invalid':errors[0] }" max="22:30:00" min="10:00:00" step="1" 
@@ -130,13 +130,13 @@ extend('email',email);
 
 extend('required', {
   ...required,
-  message: 'This field is required'
+  message: 'Este Campo es Requerido'
 });
 
 export default {
     data(){
         return{
-            companies:{company:"", RFC:"", nameUnit:"", telefono1:"", telefono2:"", correo:"", sitioweb:"", namecontact:"", horacancelation:"" },
+            companies:{RFC:"", nameUnit:"", telefono1:"", telefono2:"", correo:"", sitioweb:"", namecontact:"", horacancelation:"" },
             RFCValido: false,
             Hora: false
         };
@@ -146,18 +146,17 @@ export default {
     methods:{
         bussinesUnit(){
 
-            axios.post("socios",this.companies)
+            axios.post("/socios_negocios",this.companies)
             .then(res => {
                 const server = res.data;
 
                 toastr.options.closeButton = true;
                 toastr.options.escapeHtml = true;
                 toastr.options.progressBar = true;
-                toastr.success(serverSocios.messageDB,serverSocios.messageHeader,{timeOut :  15000});
+                toastr.success(server.messageDB,server.messageHeader,{timeOut :  15000});
             })
-            .catch( err => {
-                const error = err 
-                console.log(error)
+            .catch( err => { 
+                console.log(err.response)
             })
 
             this.$refs.form.validate().then(success => {

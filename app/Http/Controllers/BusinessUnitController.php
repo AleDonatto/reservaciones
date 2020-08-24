@@ -17,11 +17,11 @@ class BusinessUnitController extends Controller
     public function index()
     {
         if(Request::ajax()){
-            $units =BusinessUnits::all();
+            $units = BusinessUnits::all();
             return $units;
         }else{
             $units = BusinessUnits::all();
-            return view('componets.consultaUnits')->with(compact('units'));
+            return view('components.consultaUnits')->with(compact('units'));
         }   
     }
 
@@ -34,7 +34,7 @@ class BusinessUnitController extends Controller
     {
         //
         $socios = Socios::all();
-        return view('componets.bussinesUnit')->with(compact('socios'));
+        return view('components.bussinesUnit')->with(compact('socios'));
     }
 
     /**

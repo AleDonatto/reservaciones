@@ -1,6 +1,6 @@
 <!-- Nav Item - Dashboard -->
-<li class="nav-item active">
-    <a class="nav-link" href="">
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('home') }}">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span>
     </a>
@@ -22,8 +22,8 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="{{ route('socios/negocios.create') }}">Agregar Nueva Unidad</a>
-            <a class="collapse-item" href="">Consulta de Unidades </a>
+            <a class="collapse-item" href="{{ route('socios_negocios.create') }}">Agregar Nueva Unidad</a>
+            <a class="collapse-item" href="{{ route('socios_negocios.index') }}">Consulta de Unidades </a>
         </div>
     </div>
 </li>
@@ -35,8 +35,8 @@
     <div class="collapse" id="collapseTables" aria-labelledby="headingTables" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
-            <a href="{{ route('mesas.create') }}" class="collapse-item">Agregar Mesas</a>
-            <a href="" class="collapse-item">Consulta Mesas</a>
+            <a href="{{ route('socios_mesas.create') }}" class="collapse-item">Agregar Mesas</a>
+            <a href="{{ route('socios_mesas.index') }}" class="collapse-item">Consulta Mesas</a>
         </div>
     </div>
 </li>
@@ -48,7 +48,8 @@
     <div id="collapseBooking" class="collapse" aria-labelledby="headingBookig" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
-            <a href="" class="collapse-item">Consulta de Reservaciones</a>
+            <a href="{{ route('socios_reservaciones.create') }}" class="collapse-item">Reservar Mesa</a>
+            <a href="{{ route('socios_reservaciones.index') }}" class="collapse-item">Consulta de Reservaciones</a>
         </div>
     </div>
 </li>
