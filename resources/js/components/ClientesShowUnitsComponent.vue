@@ -104,7 +104,6 @@ extend('required', {
   message: 'Este Campo es Requerido'
 });
 
-
 export default {
     data(){
         return{

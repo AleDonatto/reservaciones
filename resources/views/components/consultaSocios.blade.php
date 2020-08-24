@@ -88,7 +88,7 @@
         "scrollX": true,
         lengthChange: false,
         //buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
-        buttons: ['copy', 'excel', 'pdf', 'colvis']
+        buttons: ['copy', 'excel', 'colvis']
     } );
     
     table.buttons().container()
