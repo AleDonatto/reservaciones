@@ -59,6 +59,11 @@
                                                     </label>
                                                 </div>
                                             </div>
+                                            @if(session('mensaje'))
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ Session::get('mensaje') }}
+                                            </div>
+                                            @endif
                                             <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
                                             <hr>
                                         </form>

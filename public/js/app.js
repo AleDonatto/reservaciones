@@ -1899,10 +1899,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesListReservasComponent.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ClientesListReservasComponent.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesConsultaReservacionesComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ClientesConsultaReservacionesComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1930,6 +1930,326 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    lista: {}
+  },
+  data: function data() {
+    return {};
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["extend"])('required', _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_2__["required"]), {}, {
+  message: 'Este Campo es Requerido'
+}));
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["extend"])('fechav', function (fecha) {
+  var fechanow = new Date();
+  var fechainput = new Date(fecha);
+  return fechainput > fechanow;
+});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      listUnits: [],
+      listMesas: [],
+      showUnits: true,
+      showMesas: false,
+      booking: {
+        businessUnit: 0,
+        table: 0,
+        fecha: '',
+        hora: '',
+        personas: 0
+      },
+      formMesas: false
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    axios.get('/getlistunidades').then(function (res) {
+      _this.listUnits = res.data;
+    });
+  },
+  methods: {
+    MesasShow: function MesasShow(id) {
+      this.booking.businessUnit = id;
+      this.showUnits = false;
+      this.formMesas = true;
+    },
+    reservarMesa: function reservarMesa() {
+      var _this2 = this;
+
+      axios.post('/postReservacion', this.booking).then(function (res) {
+        var response = res.data;
+        sweetalert__WEBPACK_IMPORTED_MODULE_0___default()(response.titulo, response.mensage, response.tipo);
+      })["catch"](function (err) {
+        console.log(err.response);
+      });
+      this.$refs.form.validate().then(function (success) {
+        if (!success) {
+          return;
+        } // Resetting Values
+
+
+        _this2.booking.businessUnit = _this2.booking.table = _this2.booking.personas = 0;
+        _this2.booking.fecha = _this2.booking.hora = ''; // Wait until the models are updated in the UI
+
+        _this2.$nextTick(function () {
+          _this2.$refs.form.reset();
+
+          _this2.showMesas = false;
+          _this2.showUnits = true;
+        });
+      });
+    },
+    buscarMesas: function buscarMesas() {
+      var _this3 = this;
+
+      axios.post('/buscarMesas', this.booking).then(function (res) {
+        var response = res.data;
+        _this3.listMesas = response;
+      })["catch"](function (err) {
+        console.log(err.response);
+      });
+      this.showMesas = true;
+      this.formMesas = false;
+    },
+    cancelarReservacion: function cancelarReservacion() {
+      this.showMesas = false;
+      this.showUnits = true;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesListReservasComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ClientesListReservasComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1944,6 +2264,189 @@ __webpack_require__.r(__webpack_exports__);
     })["catch"](function (err) {
       console.log(err.response);
     });
+  },
+  methods: {
+    modificarReservacion: function modificarReservacion() {},
+    cancelarReservacion: function cancelarReservacion(reservacion) {
+      var _this2 = this;
+
+      sweetalert__WEBPACK_IMPORTED_MODULE_0___default()({
+        title: "Esta seguro?",
+        text: "Una vez hechos los cambio no podran revertirse!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(function (willDelete) {
+        if (willDelete) {
+          var data;
+          axios.get('cancelarReservacion/' + reservacion).then(function (res) {
+            data = res.data;
+            _this2.misReservaciones = data.listaReservacion;
+            sweetalert__WEBPACK_IMPORTED_MODULE_0___default()(data.notificacion.mensage, {
+              icon: data.notificacion.tipo
+            }); //swal(data.titulo,data.mensage, data.tipo);
+          })["catch"](function (err) {
+            console.log(err.response);
+          });
+        }
+      });
+      axios.get('/getLitsReservaciones').then(function (res) {
+        _this2.misReservaciones = res.data;
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesReservacionComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ClientesReservacionComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vee-validate/dist/rules */ "./node_modules/vee-validate/dist/rules.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["extend"])('required', _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_2__["required"]), {}, {
+  message: 'Este Campo es Requerido'
+}));
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["extend"])('fechav', function (fecha) {
+  var fechanow = new Date();
+  var fechainput = new Date(fecha);
+  return fechainput > fechanow;
+});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    unidad: 0
+  },
+  data: function data() {
+    return {
+      listMesas: [],
+      booking: {
+        businessUnit: 0,
+        table: 0,
+        fecha: '',
+        hora: '',
+        personas: 0
+      },
+      showMesas: true
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    console.log(this.unidad);
+    axios.get('getMesasUnidad/' + this.unidad).then(function (res) {
+      _this.listMesas = res.data;
+    });
+  },
+  methods: {
+    buscarMesas: function buscarMesas() {
+      var _this2 = this;
+
+      console.log(this.unidad);
+      axios.get('getMesasUnidad/' + this.unidad).then(function (res) {
+        _this2.listMesas = res.data;
+      });
+    },
+    reservarMesa: function reservarMesa() {
+      axios.post('/postReservacion', this.booking).then(function (res) {
+        var response = res.data;
+        sweetalert__WEBPACK_IMPORTED_MODULE_0___default()(response.titulo, response.mensage, response.tipo);
+      })["catch"](function (err) {
+        console.log(err.response);
+      });
+    }
   }
 });
 
@@ -2064,12 +2567,83 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["extend"])('required', _objectSpread(_objectSpread({}, vee_validate_dist_rules__WEBPACK_IMPORTED_MODULE_2__["required"]), {}, {
   message: 'Este Campo es Requerido'
 }));
+Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["extend"])('fechav', function (fecha) {
+  var fechanow = new Date();
+  var fechainput = new Date(fecha);
+  return fechainput > fechanow;
+});
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2084,7 +2658,7 @@ Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["extend"])('required', _objectS
         hora: '',
         personas: 0
       },
-      fechaValida: true
+      formMesas: false
     };
   },
   created: function created() {
@@ -2096,28 +2670,50 @@ Object(vee_validate__WEBPACK_IMPORTED_MODULE_1__["extend"])('required', _objectS
   },
   methods: {
     MesasShow: function MesasShow(id) {
-      var _this2 = this;
-
       this.booking.businessUnit = id;
       this.showUnits = false;
-      this.showMesas = true;
-      axios.get('getMesasUnidad/' + id).then(function (res) {
-        _this2.listMesas = res.data;
-      });
+      this.formMesas = true;
     },
     reservarMesa: function reservarMesa() {
+      var _this2 = this;
+
       axios.post('/postReservacion', this.booking).then(function (res) {
-        console.log(res.data);
-        sweetalert__WEBPACK_IMPORTED_MODULE_0___default()("Good job!", "You clicked the button!", "success");
+        var response = res.data;
+        sweetalert__WEBPACK_IMPORTED_MODULE_0___default()(response.titulo, response.mensage, response.tipo);
+      })["catch"](function (err) {//console.log(err.response)
+      });
+      this.$refs.form.validate().then(function (success) {
+        if (!success) {
+          return;
+        } // Resetting Values
+
+
+        _this2.booking.businessUnit = _this2.booking.table = _this2.booking.personas = 0;
+        _this2.booking.fecha = _this2.booking.hora = ''; // Wait until the models are updated in the UI
+
+        _this2.$nextTick(function () {
+          _this2.$refs.form.reset();
+
+          _this2.showMesas = false;
+          _this2.showUnits = true;
+        });
+      });
+    },
+    buscarMesas: function buscarMesas() {
+      var _this3 = this;
+
+      axios.post('/buscarMesas', this.booking).then(function (res) {
+        var response = res.data;
+        _this3.listMesas = response;
       })["catch"](function (err) {
         console.log(err.response);
       });
+      this.showMesas = true;
+      this.formMesas = false;
     },
-    selectFecha: function selectFecha() {
-      var fecha = new Date();
-      var fechainput = new Date(this.booking.fecha);
-      this.fechaValida = fechainput > fecha;
-      console.log(this.fechaValida);
+    cancelarReservacion: function cancelarReservacion() {
+      this.showMesas = false;
+      this.showUnits = true;
     }
   }
 });
@@ -7661,6 +8257,25 @@ __webpack_require__.r(__webpack_exports__);
 
 })));
 //# sourceMappingURL=bootstrap.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=style&index=0&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.contenedor{\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    justify-content: space-between;\n}\n.contenedor > .card {\r\n    margin-bottom: 10px;\n}\r\n", ""]);
+
+// exports
 
 
 /***/ }),
@@ -38862,6 +39477,36 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ClientesFormReservacionComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesShowUnitsComponent.vue?vue&type=style&index=0&lang=css&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ClientesShowUnitsComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -42228,10 +42873,10 @@ var version = '3.3.7';
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesListReservasComponent.vue?vue&type=template&id=64290b70&":
-/*!********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ClientesListReservasComponent.vue?vue&type=template&id=64290b70& ***!
-  \********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesConsultaReservacionesComponent.vue?vue&type=template&id=530a40eb&":
+/*!*****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ClientesConsultaReservacionesComponent.vue?vue&type=template&id=530a40eb& ***!
+  \*****************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -42243,66 +42888,53 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.misReservaciones > 0
-    ? _c("div", {}, [
-        _c("h3", [_vm._v("Mis Reservaciones")]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "contenedor" },
-          _vm._l(_vm.misReservaciones, function(item, index) {
-            return _c(
-              "div",
-              {
-                key: index,
-                staticClass: "card mb-3",
-                staticStyle: { "max-width": "500px" }
-              },
-              [
-                _c("div", { staticClass: "row no-gutters" }, [
-                  _vm._m(0, true),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-8" }, [
-                    _c("div", { staticClass: "card-body" }, [
-                      _c("h5", { staticClass: "card-title" }, [
-                        _vm._v(_vm._s(item.nameUnit))
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "card-text" }, [
-                        _vm._v(
-                          "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(1, true)
-                    ])
-                  ])
-                ])
-              ]
-            )
-          }),
-          0
-        )
-      ])
-    : _vm._e()
+  return _c("div", {}, [
+    _c("table", { staticClass: "table" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.lista, function(item, index) {
+          return _c("tr", { key: index }, [
+            _c("td", [_vm._v(_vm._s(index + 1))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(item.nameUnit))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(item.num_mesa))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(item.B_date))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(item.B_hour))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(item.pax))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(item.status))])
+          ])
+        }),
+        0
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4 text-center" }, [
-      _c("i", { staticClass: "far fa-calendar-alt fa-10x" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "card-text" }, [
-      _c("small", { staticClass: "text-muted" }, [
-        _vm._v("Last updated 3 mins ago")
-      ])
+    return _c("thead", [
+      _c("th", [_vm._v("#")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Restaurant")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Mesa")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Dia")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Hora")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Personas")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Estatus")])
     ])
   }
 ]
@@ -42312,10 +42944,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesShowUnitsComponent.vue?vue&type=template&id=46e8b8ef&":
-/*!*****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ClientesShowUnitsComponent.vue?vue&type=template&id=46e8b8ef& ***!
-  \*****************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=template&id=c5eea0b0&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=template&id=c5eea0b0& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -42329,7 +42961,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm.showUnits
-      ? _c("div", {}, [_c("h3", [_vm._v("Reservar Ahora")])])
+      ? _c("div", {}, [_c("h3", [_vm._v("Restaurantes")])])
       : _vm._e(),
     _vm._v(" "),
     _vm.showUnits
@@ -42342,7 +42974,7 @@ var render = function() {
               {
                 key: index,
                 staticClass: "card",
-                staticStyle: { width: "18rem" }
+                staticStyle: { width: "16rem" }
               },
               [
                 _c("img", {
@@ -42394,474 +43026,2096 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    _vm.showMesas
-      ? _c("div", { staticClass: "mesas" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div", [
-            _vm.listMesas == 0
-              ? _c("div", {}, [
-                  _c("p", [_vm._v("No hay mesas por el momento")])
-                ])
-              : _c(
-                  "div",
-                  { staticClass: "listamesas" },
-                  [
-                    _vm._l(_vm.listMesas, function(item, index) {
-                      return _c(
-                        "div",
-                        {
-                          key: index,
-                          staticClass: "card mb-3",
-                          class: {
-                            "card text-white bg-success mb-3": item.status == 0,
-                            "text-white bg-danger": item.status == 1
+    _vm.formMesas
+      ? _c(
+          "div",
+          {},
+          [
+            _c("ValidationObserver", {
+              ref: "form",
+              scopedSlots: _vm._u(
+                [
+                  {
+                    key: "default",
+                    fn: function(ref) {
+                      var handleSubmit = ref.handleSubmit
+                      var reset = ref.reset
+                      return [
+                        _c(
+                          "form",
+                          {
+                            attrs: { method: "post" },
+                            on: {
+                              submit: function($event) {
+                                $event.preventDefault()
+                                return handleSubmit(_vm.buscarMesas)
+                              },
+                              reset: function($event) {
+                                $event.preventDefault()
+                                return reset($event)
+                              }
+                            }
                           },
-                          staticStyle: { "max-width": "400px" }
-                        },
-                        [
-                          _c("div", { staticClass: "row no-gutters" }, [
-                            _c("div", { staticClass: "col-md-12" }, [
-                              _c("div", { staticClass: "card-body" }, [
-                                _c(
-                                  "h5",
-                                  { staticClass: "card-title text-center" },
-                                  [_vm._v(_vm._s(item.num_mesa))]
-                                ),
-                                _vm._v(" "),
-                                item.status == 0
-                                  ? _c("label", [
-                                      _vm._v("Estatus: Disponible ")
-                                    ])
-                                  : _c("label", [_vm._v("Estatus: Reservada")]),
-                                _vm._v(" "),
-                                _c("br"),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass: "custom-control custom-radio"
-                                  },
-                                  [
-                                    _c("input", {
-                                      directives: [
+                          [
+                            _c("div", { staticClass: "row form-group" }, [
+                              _c(
+                                "div",
+                                { staticClass: "col-6 col-md-6" },
+                                [
+                                  _c("label", { attrs: { for: "fecha" } }, [
+                                    _vm._v("Fecha")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("ValidationProvider", {
+                                    attrs: {
+                                      name: "fecha",
+                                      rules: "required|fechav"
+                                    },
+                                    scopedSlots: _vm._u(
+                                      [
                                         {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.booking.table,
-                                          expression: "booking.table"
+                                          key: "default",
+                                          fn: function(ref) {
+                                            var errors = ref.errors
+                                            return [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.booking.fecha,
+                                                    expression: "booking.fecha"
+                                                  }
+                                                ],
+                                                staticClass: "form-control",
+                                                class: {
+                                                  "is-invalid": errors[0]
+                                                },
+                                                attrs: {
+                                                  type: "date",
+                                                  name: "fecha",
+                                                  id: "fecha",
+                                                  min: "2020-09-01",
+                                                  max: "2020-12-31"
+                                                },
+                                                domProps: {
+                                                  value: _vm.booking.fecha
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      _vm.booking,
+                                                      "fecha",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  staticClass:
+                                                    "invalid-feedback",
+                                                  attrs: { role: "alert" }
+                                                },
+                                                [
+                                                  _c("strong", [
+                                                    _vm._v(_vm._s(errors[0]))
+                                                  ])
+                                                ]
+                                              )
+                                            ]
+                                          }
                                         }
                                       ],
-                                      staticClass: "custom-control-input",
-                                      attrs: {
-                                        type: "radio",
-                                        id: "customRadio" + index,
-                                        name: "customRadio"
-                                      },
-                                      domProps: {
-                                        value: item.idTables,
-                                        checked: _vm._q(
-                                          _vm.booking.table,
-                                          item.idTables
-                                        )
-                                      },
-                                      on: {
-                                        change: function($event) {
-                                          return _vm.$set(
-                                            _vm.booking,
-                                            "table",
-                                            item.idTables
-                                          )
-                                        }
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "label",
-                                      {
-                                        staticClass: "custom-control-label",
-                                        attrs: { for: "customRadio" + index }
-                                      },
-                                      [_vm._v("Seleccionar Mesa")]
+                                      null,
+                                      true
                                     )
-                                  ]
-                                )
-                              ])
-                            ])
-                          ])
-                        ]
-                      )
-                    }),
-                    _vm._v(" "),
-                    _c("ValidationObserver", {
-                      ref: "form",
-                      scopedSlots: _vm._u(
-                        [
-                          {
-                            key: "default",
-                            fn: function(ref) {
-                              var handleSubmit = ref.handleSubmit
-                              var reset = ref.reset
-                              return [
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "col-6 col-md-6" },
+                                [
+                                  _c("label", { attrs: { for: "hora" } }, [
+                                    _vm._v("Hora")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("ValidationProvider", {
+                                    attrs: { name: "hora", rules: "required" },
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "default",
+                                          fn: function(ref) {
+                                            var errors = ref.errors
+                                            return [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.booking.hora,
+                                                    expression: "booking.hora"
+                                                  }
+                                                ],
+                                                staticClass: "form-control",
+                                                class: {
+                                                  "is-invalid": errors[0]
+                                                },
+                                                attrs: {
+                                                  type: "time",
+                                                  name: "hora",
+                                                  id: "hora",
+                                                  min: "00:00",
+                                                  max: "23:00"
+                                                },
+                                                domProps: {
+                                                  value: _vm.booking.hora
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      _vm.booking,
+                                                      "hora",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  staticClass:
+                                                    "invalid-feedback",
+                                                  attrs: { role: "alert" }
+                                                },
+                                                [
+                                                  _c("strong", [
+                                                    _vm._v(_vm._s(errors[0]))
+                                                  ])
+                                                ]
+                                              )
+                                            ]
+                                          }
+                                        }
+                                      ],
+                                      null,
+                                      true
+                                    )
+                                  })
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary",
+                                attrs: { type: "submit" }
+                              },
+                              [_vm._v("Buscar Mesa")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                attrs: { type: "reset" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.cancelarReservacion()
+                                  }
+                                }
+                              },
+                              [_vm._v("Cancelar")]
+                            )
+                          ]
+                        )
+                      ]
+                    }
+                  }
+                ],
+                null,
+                false,
+                3054320148
+              )
+            })
+          ],
+          1
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.showMesas
+      ? _c("div", [
+          _c("div", { staticClass: "mesas" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "div",
+              {},
+              [
+                _c("ValidationObserver", {
+                  ref: "form",
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "default",
+                        fn: function(ref) {
+                          var handleSubmit = ref.handleSubmit
+                          var reset = ref.reset
+                          return [
+                            _c(
+                              "form",
+                              {
+                                attrs: { method: "post" },
+                                on: {
+                                  submit: function($event) {
+                                    $event.preventDefault()
+                                    return handleSubmit(_vm.reservarMesa)
+                                  },
+                                  reset: function($event) {
+                                    $event.preventDefault()
+                                    return reset($event)
+                                  }
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "row form-group" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "col-4 col-md-4 col-sm-12" },
+                                    [
+                                      _c("label", { attrs: { for: "fecha" } }, [
+                                        _vm._v("Fecha")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("ValidationProvider", {
+                                        attrs: {
+                                          name: "fecha",
+                                          rules: "required|fechav"
+                                        },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "default",
+                                              fn: function(ref) {
+                                                var errors = ref.errors
+                                                return [
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.booking.fecha,
+                                                        expression:
+                                                          "booking.fecha"
+                                                      }
+                                                    ],
+                                                    staticClass: "form-control",
+                                                    class: {
+                                                      "is-invalid": errors[0]
+                                                    },
+                                                    attrs: {
+                                                      type: "date",
+                                                      name: "fecha",
+                                                      id: "fecha",
+                                                      min: "2020-09-01",
+                                                      max: "2020-12-31"
+                                                    },
+                                                    domProps: {
+                                                      value: _vm.booking.fecha
+                                                    },
+                                                    on: {
+                                                      input: function($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.$set(
+                                                          _vm.booking,
+                                                          "fecha",
+                                                          $event.target.value
+                                                        )
+                                                      }
+                                                    }
+                                                  }),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "invalid-feedback",
+                                                      attrs: { role: "alert" }
+                                                    },
+                                                    [
+                                                      _c("strong", [
+                                                        _vm._v(
+                                                          _vm._s(errors[0])
+                                                        )
+                                                      ])
+                                                    ]
+                                                  )
+                                                ]
+                                              }
+                                            }
+                                          ],
+                                          null,
+                                          true
+                                        )
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "col-4 col-md-4 col-sm-12" },
+                                    [
+                                      _c("label", { attrs: { for: "hora" } }, [
+                                        _vm._v("Hora")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("ValidationProvider", {
+                                        attrs: {
+                                          name: "hora",
+                                          rules: "required"
+                                        },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "default",
+                                              fn: function(ref) {
+                                                var errors = ref.errors
+                                                return [
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value: _vm.booking.hora,
+                                                        expression:
+                                                          "booking.hora"
+                                                      }
+                                                    ],
+                                                    staticClass: "form-control",
+                                                    class: {
+                                                      "is-invalid": errors[0]
+                                                    },
+                                                    attrs: {
+                                                      type: "time",
+                                                      name: "hora",
+                                                      id: "hora",
+                                                      min: "00:00",
+                                                      max: "23:00"
+                                                    },
+                                                    domProps: {
+                                                      value: _vm.booking.hora
+                                                    },
+                                                    on: {
+                                                      input: function($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.$set(
+                                                          _vm.booking,
+                                                          "hora",
+                                                          $event.target.value
+                                                        )
+                                                      }
+                                                    }
+                                                  }),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "invalid-feedback",
+                                                      attrs: { role: "alert" }
+                                                    },
+                                                    [
+                                                      _c("strong", [
+                                                        _vm._v(
+                                                          _vm._s(errors[0])
+                                                        )
+                                                      ])
+                                                    ]
+                                                  )
+                                                ]
+                                              }
+                                            }
+                                          ],
+                                          null,
+                                          true
+                                        )
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "col-4 col-md-4 col-sm-12" },
+                                    [
+                                      _c(
+                                        "label",
+                                        { attrs: { for: "personas" } },
+                                        [_vm._v("Personas")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("ValidationProvider", {
+                                        attrs: {
+                                          name: "personas",
+                                          rules: "required"
+                                        },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "default",
+                                              fn: function(ref) {
+                                                var errors = ref.errors
+                                                return [
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.booking.personas,
+                                                        expression:
+                                                          "booking.personas"
+                                                      }
+                                                    ],
+                                                    staticClass: "form-control",
+                                                    class: {
+                                                      "is-invalid": errors[0]
+                                                    },
+                                                    attrs: {
+                                                      type: "number",
+                                                      name: "personas",
+                                                      id: "personas",
+                                                      step: "1",
+                                                      min: "0"
+                                                    },
+                                                    domProps: {
+                                                      value:
+                                                        _vm.booking.personas
+                                                    },
+                                                    on: {
+                                                      input: function($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.$set(
+                                                          _vm.booking,
+                                                          "personas",
+                                                          $event.target.value
+                                                        )
+                                                      }
+                                                    }
+                                                  }),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "invalid-feedback",
+                                                      attrs: { role: "alert" }
+                                                    },
+                                                    [
+                                                      _c("strong", [
+                                                        _vm._v(
+                                                          _vm._s(errors[0])
+                                                        )
+                                                      ])
+                                                    ]
+                                                  )
+                                                ]
+                                              }
+                                            }
+                                          ],
+                                          null,
+                                          true
+                                        )
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "row" }, [
+                                  _c("div", { staticClass: "col-12" }, [
+                                    _c("h5", [_vm._v("Mesas")])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "listamesas col-md-12" },
+                                    _vm._l(_vm.listMesas, function(
+                                      item,
+                                      index
+                                    ) {
+                                      return _c(
+                                        "div",
+                                        {
+                                          key: item.idTables,
+                                          staticClass: "card mb-3",
+                                          class: {
+                                            "card text-white bg-success mb-3":
+                                              item.status == 0,
+                                            "text-white bg-warning":
+                                              item.status == 1
+                                          },
+                                          staticStyle: { "max-width": "400px" }
+                                        },
+                                        [
+                                          _c(
+                                            "div",
+                                            { staticClass: "row no-gutters" },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "col-md-12" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass: "card-body"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "h5",
+                                                        {
+                                                          staticClass:
+                                                            "card-title text-center"
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              item.num_mesa
+                                                            )
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      item.status == 0
+                                                        ? _c("label", [
+                                                            _vm._v(
+                                                              "Estatus: Disponible "
+                                                            )
+                                                          ])
+                                                        : _c("label", [
+                                                            _vm._v(
+                                                              "Estatus: Reservada"
+                                                            )
+                                                          ]),
+                                                      _vm._v(" "),
+                                                      _c("br"),
+                                                      _vm._v(" "),
+                                                      item.status == 0
+                                                        ? _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "custom-control custom-radio"
+                                                            },
+                                                            [
+                                                              _c("input", {
+                                                                directives: [
+                                                                  {
+                                                                    name:
+                                                                      "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm
+                                                                        .booking
+                                                                        .table,
+                                                                    expression:
+                                                                      "booking.table"
+                                                                  }
+                                                                ],
+                                                                staticClass:
+                                                                  "custom-control-input",
+                                                                attrs: {
+                                                                  type: "radio",
+                                                                  id:
+                                                                    "customRadio" +
+                                                                    index,
+                                                                  name:
+                                                                    "customRadio"
+                                                                },
+                                                                domProps: {
+                                                                  value:
+                                                                    item.idTables,
+                                                                  checked: _vm._q(
+                                                                    _vm.booking
+                                                                      .table,
+                                                                    item.idTables
+                                                                  )
+                                                                },
+                                                                on: {
+                                                                  change: function(
+                                                                    $event
+                                                                  ) {
+                                                                    return _vm.$set(
+                                                                      _vm.booking,
+                                                                      "table",
+                                                                      item.idTables
+                                                                    )
+                                                                  }
+                                                                }
+                                                              }),
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "label",
+                                                                {
+                                                                  staticClass:
+                                                                    "custom-control-label",
+                                                                  attrs: {
+                                                                    for:
+                                                                      "customRadio" +
+                                                                      index
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "Seleccionar Mesa"
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
+                                                          )
+                                                        : _c("div", {})
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    }),
+                                    0
+                                  )
+                                ]),
+                                _vm._v(" "),
                                 _c(
-                                  "form",
+                                  "button",
                                   {
-                                    attrs: { method: "post" },
+                                    staticClass: "btn btn-primary",
+                                    attrs: { type: "submit" }
+                                  },
+                                  [_vm._v("Reservar")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-danger",
+                                    attrs: { type: "reset" },
                                     on: {
-                                      submit: function($event) {
-                                        $event.preventDefault()
-                                        return handleSubmit(_vm.reservarMesa)
-                                      },
-                                      reset: function($event) {
-                                        $event.preventDefault()
-                                        return reset($event)
+                                      click: function($event) {
+                                        return _vm.cancelarReservacion()
                                       }
                                     }
                                   },
-                                  [
-                                    _c(
-                                      "div",
-                                      { staticClass: "row form-group" },
-                                      [
-                                        _c(
-                                          "div",
-                                          { staticClass: "col-4 col-md-4" },
-                                          [
-                                            _c(
-                                              "label",
-                                              { attrs: { for: "fecha" } },
-                                              [_vm._v("Fecha")]
-                                            ),
-                                            _vm._v(" "),
-                                            _c("ValidationProvider", {
-                                              attrs: {
-                                                name: "fecha",
-                                                rules: "required"
-                                              },
-                                              scopedSlots: _vm._u(
-                                                [
-                                                  {
-                                                    key: "default",
-                                                    fn: function(ref) {
-                                                      var errors = ref.errors
-                                                      return [
-                                                        _c("input", {
-                                                          directives: [
-                                                            {
-                                                              name: "model",
-                                                              rawName:
-                                                                "v-model",
-                                                              value:
-                                                                _vm.booking
-                                                                  .fecha,
-                                                              expression:
-                                                                "booking.fecha"
-                                                            }
-                                                          ],
-                                                          staticClass:
-                                                            "form-control",
-                                                          class: {
-                                                            "is-invalid":
-                                                              _vm.fechaValida ==
-                                                              false,
-                                                            "is-invalid":
-                                                              errors[0]
-                                                          },
-                                                          attrs: {
-                                                            type: "date",
-                                                            name: "fecha",
-                                                            id: "fecha"
-                                                          },
-                                                          domProps: {
-                                                            value:
-                                                              _vm.booking.fecha
-                                                          },
-                                                          on: {
-                                                            blur:
-                                                              _vm.selectFecha,
-                                                            input: function(
-                                                              $event
-                                                            ) {
-                                                              if (
-                                                                $event.target
-                                                                  .composing
-                                                              ) {
-                                                                return
-                                                              }
-                                                              _vm.$set(
-                                                                _vm.booking,
-                                                                "fecha",
-                                                                $event.target
-                                                                  .value
-                                                              )
-                                                            }
-                                                          }
-                                                        }),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "span",
-                                                          {
-                                                            staticClass:
-                                                              "invalid-feedback",
-                                                            attrs: {
-                                                              role: "alert"
-                                                            }
-                                                          },
-                                                          [
-                                                            _vm.fechaValida ==
-                                                            false
-                                                              ? _c("strong", [
-                                                                  _vm._v(
-                                                                    "Fecha Invalida"
-                                                                  )
-                                                                ])
-                                                              : _vm._e()
-                                                          ]
-                                                        )
-                                                      ]
-                                                    }
-                                                  }
-                                                ],
-                                                null,
-                                                true
-                                              )
-                                            })
-                                          ],
-                                          1
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          { staticClass: "col-4 col-md-4" },
-                                          [
-                                            _c(
-                                              "label",
-                                              { attrs: { for: "hora" } },
-                                              [_vm._v("Hora")]
-                                            ),
-                                            _vm._v(" "),
-                                            _c("ValidationProvider", {
-                                              attrs: {
-                                                name: "hora",
-                                                rules: "required"
-                                              },
-                                              scopedSlots: _vm._u(
-                                                [
-                                                  {
-                                                    key: "default",
-                                                    fn: function(ref) {
-                                                      var errors = ref.errors
-                                                      return [
-                                                        _c("input", {
-                                                          directives: [
-                                                            {
-                                                              name: "model",
-                                                              rawName:
-                                                                "v-model",
-                                                              value:
-                                                                _vm.booking
-                                                                  .hora,
-                                                              expression:
-                                                                "booking.hora"
-                                                            }
-                                                          ],
-                                                          staticClass:
-                                                            "form-control",
-                                                          class: {
-                                                            "is-invalid":
-                                                              errors[0]
-                                                          },
-                                                          attrs: {
-                                                            type: "time",
-                                                            name: "hora",
-                                                            id: "hora",
-                                                            step: "1",
-                                                            min: "00:00:00",
-                                                            max: "23:59:59"
-                                                          },
-                                                          domProps: {
-                                                            value:
-                                                              _vm.booking.hora
-                                                          },
-                                                          on: {
-                                                            input: function(
-                                                              $event
-                                                            ) {
-                                                              if (
-                                                                $event.target
-                                                                  .composing
-                                                              ) {
-                                                                return
-                                                              }
-                                                              _vm.$set(
-                                                                _vm.booking,
-                                                                "hora",
-                                                                $event.target
-                                                                  .value
-                                                              )
-                                                            }
-                                                          }
-                                                        }),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "span",
-                                                          {
-                                                            staticClass:
-                                                              "invalid-feedback",
-                                                            attrs: {
-                                                              role: "alert"
-                                                            }
-                                                          },
-                                                          [
-                                                            _c("strong", [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  errors[0]
-                                                                )
-                                                              )
-                                                            ])
-                                                          ]
-                                                        )
-                                                      ]
-                                                    }
-                                                  }
-                                                ],
-                                                null,
-                                                true
-                                              )
-                                            })
-                                          ],
-                                          1
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "div",
-                                          { staticClass: "col-4 col-md-4" },
-                                          [
-                                            _c(
-                                              "label",
-                                              { attrs: { for: "personas" } },
-                                              [_vm._v("Personas")]
-                                            ),
-                                            _vm._v(" "),
-                                            _c("ValidationProvider", {
-                                              attrs: {
-                                                name: "personas",
-                                                rules: "required"
-                                              },
-                                              scopedSlots: _vm._u(
-                                                [
-                                                  {
-                                                    key: "default",
-                                                    fn: function(ref) {
-                                                      var errors = ref.errors
-                                                      return [
-                                                        _c("input", {
-                                                          directives: [
-                                                            {
-                                                              name: "model",
-                                                              rawName:
-                                                                "v-model",
-                                                              value:
-                                                                _vm.booking
-                                                                  .personas,
-                                                              expression:
-                                                                "booking.personas"
-                                                            }
-                                                          ],
-                                                          staticClass:
-                                                            "form-control",
-                                                          class: {
-                                                            "is-invalid":
-                                                              errors[0]
-                                                          },
-                                                          attrs: {
-                                                            type: "number",
-                                                            name: "personas",
-                                                            id: "personas",
-                                                            step: "1",
-                                                            min: "0"
-                                                          },
-                                                          domProps: {
-                                                            value:
-                                                              _vm.booking
-                                                                .personas
-                                                          },
-                                                          on: {
-                                                            input: function(
-                                                              $event
-                                                            ) {
-                                                              if (
-                                                                $event.target
-                                                                  .composing
-                                                              ) {
-                                                                return
-                                                              }
-                                                              _vm.$set(
-                                                                _vm.booking,
-                                                                "personas",
-                                                                $event.target
-                                                                  .value
-                                                              )
-                                                            }
-                                                          }
-                                                        }),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "span",
-                                                          {
-                                                            staticClass:
-                                                              "invalid-feedback",
-                                                            attrs: {
-                                                              role: "alert"
-                                                            }
-                                                          },
-                                                          [
-                                                            _c("strong", [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  errors[0]
-                                                                )
-                                                              )
-                                                            ])
-                                                          ]
-                                                        )
-                                                      ]
-                                                    }
-                                                  }
-                                                ],
-                                                null,
-                                                true
-                                              )
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-primary",
-                                        attrs: { type: "submit" }
-                                      },
-                                      [_vm._v("Reservar")]
-                                    )
-                                  ]
+                                  [_vm._v("Cancelar")]
                                 )
                               ]
+                            )
+                          ]
+                        }
+                      }
+                    ],
+                    null,
+                    false,
+                    2555048376
+                  )
+                })
+              ],
+              1
+            )
+          ])
+        ])
+      : _vm._e()
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [_c("h3", [_vm._v("Seleccione Mesa")])])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesListReservasComponent.vue?vue&type=template&id=64290b70&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ClientesListReservasComponent.vue?vue&type=template&id=64290b70& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", {}, [
+    _vm.misReservaciones == 0
+      ? _c("div", {})
+      : _c("div", {}, [
+          _c("h3", [_vm._v("Mis Reservaciones")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "contenedor" },
+            _vm._l(_vm.misReservaciones, function(item, index) {
+              return _c("div", { key: index + 1, staticClass: "card w-75" }, [
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h5", { staticClass: "card-title" }, [
+                    _vm._v(_vm._s(item.nameUnit))
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "card-text" }, [
+                    _vm._v(
+                      "\n                        Contacto: " +
+                        _vm._s(item.phone1) +
+                        " "
+                    ),
+                    _c("br"),
+                    _vm._v(
+                      "\n                        Fecha: " +
+                        _vm._s(item.B_date + "-" + item.B_hour) +
+                        " "
+                    ),
+                    _c("br"),
+                    _vm._v(
+                      "\n                        Personas: " +
+                        _vm._s(item.pax + " Mesa: " + item.num_mesa) +
+                        " "
+                    ),
+                    _c("br")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "card-text" }, [
+                    _c("small", { staticClass: "text-muted" }, [
+                      _vm._v("Realizada el: " + _vm._s(item.created_at))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0, true),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.cancelarReservacion(item.idBooking)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-window-close" })]
+                  )
+                ])
+              ])
+            }),
+            0
+          )
+        ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-info", attrs: { type: "button" } },
+      [_c("i", { staticClass: "fas fa-edit" })]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesReservacionComponent.vue?vue&type=template&id=2b1680c4&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ClientesReservacionComponent.vue?vue&type=template&id=2b1680c4& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", {}, [
+    _c("div", { staticClass: "mesas" }, [
+      _c("div", [
+        _vm.showMesas ? _c("h3", [_vm._v("Complete el formulario")]) : _vm._e(),
+        _vm._v(" "),
+        _c("h3", [_vm._v("Seleccione Mesa")])
+      ]),
+      _vm._v(" "),
+      _c("div", [
+        _c(
+          "div",
+          { staticClass: "listamesas" },
+          [
+            _c("ValidationObserver", {
+              ref: "form",
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(ref) {
+                    var handleSubmit = ref.handleSubmit
+                    var reset = ref.reset
+                    return [
+                      _c(
+                        "form",
+                        {
+                          attrs: { method: "post" },
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return handleSubmit(_vm.reservarMesa)
+                            },
+                            reset: function($event) {
+                              $event.preventDefault()
+                              return reset($event)
                             }
                           }
-                        ],
-                        null,
-                        false,
-                        3807944254
+                        },
+                        [
+                          _c("div", { staticClass: "row form-group" }, [
+                            _c(
+                              "div",
+                              { staticClass: "col-4 col-md-4" },
+                              [
+                                _c("label", { attrs: { for: "fecha" } }, [
+                                  _vm._v("Fecha")
+                                ]),
+                                _vm._v(" "),
+                                _c("ValidationProvider", {
+                                  attrs: {
+                                    name: "fecha",
+                                    rules: "required|fechav"
+                                  },
+                                  scopedSlots: _vm._u(
+                                    [
+                                      {
+                                        key: "default",
+                                        fn: function(ref) {
+                                          var errors = ref.errors
+                                          return [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.booking.fecha,
+                                                  expression: "booking.fecha"
+                                                }
+                                              ],
+                                              staticClass: "form-control",
+                                              class: {
+                                                "is-invalid": errors[0]
+                                              },
+                                              attrs: {
+                                                type: "date",
+                                                name: "fecha",
+                                                id: "fecha"
+                                              },
+                                              domProps: {
+                                                value: _vm.booking.fecha
+                                              },
+                                              on: {
+                                                input: function($event) {
+                                                  if ($event.target.composing) {
+                                                    return
+                                                  }
+                                                  _vm.$set(
+                                                    _vm.booking,
+                                                    "fecha",
+                                                    $event.target.value
+                                                  )
+                                                }
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c(
+                                              "span",
+                                              {
+                                                staticClass: "invalid-feedback",
+                                                attrs: { role: "alert" }
+                                              },
+                                              [
+                                                _c("strong", [
+                                                  _vm._v(_vm._s(errors[0]))
+                                                ])
+                                              ]
+                                            )
+                                          ]
+                                        }
+                                      }
+                                    ],
+                                    null,
+                                    true
+                                  )
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col-4 col-md-4" },
+                              [
+                                _c("label", { attrs: { for: "hora" } }, [
+                                  _vm._v("Hora")
+                                ]),
+                                _vm._v(" "),
+                                _c("ValidationProvider", {
+                                  attrs: { name: "hora", rules: "required" },
+                                  scopedSlots: _vm._u(
+                                    [
+                                      {
+                                        key: "default",
+                                        fn: function(ref) {
+                                          var errors = ref.errors
+                                          return [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.booking.hora,
+                                                  expression: "booking.hora"
+                                                }
+                                              ],
+                                              staticClass: "form-control",
+                                              class: {
+                                                "is-invalid": errors[0]
+                                              },
+                                              attrs: {
+                                                type: "time",
+                                                name: "hora",
+                                                id: "hora",
+                                                step: "1",
+                                                min: "00:00:00",
+                                                max: "23:59:59"
+                                              },
+                                              domProps: {
+                                                value: _vm.booking.hora
+                                              },
+                                              on: {
+                                                input: function($event) {
+                                                  if ($event.target.composing) {
+                                                    return
+                                                  }
+                                                  _vm.$set(
+                                                    _vm.booking,
+                                                    "hora",
+                                                    $event.target.value
+                                                  )
+                                                }
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c(
+                                              "span",
+                                              {
+                                                staticClass: "invalid-feedback",
+                                                attrs: { role: "alert" }
+                                              },
+                                              [
+                                                _c("strong", [
+                                                  _vm._v(_vm._s(errors[0]))
+                                                ])
+                                              ]
+                                            )
+                                          ]
+                                        }
+                                      }
+                                    ],
+                                    null,
+                                    true
+                                  )
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col-4 col-md-4" },
+                              [
+                                _c("label", { attrs: { for: "personas" } }, [
+                                  _vm._v("Personas")
+                                ]),
+                                _vm._v(" "),
+                                _c("ValidationProvider", {
+                                  attrs: {
+                                    name: "personas",
+                                    rules: "required"
+                                  },
+                                  scopedSlots: _vm._u(
+                                    [
+                                      {
+                                        key: "default",
+                                        fn: function(ref) {
+                                          var errors = ref.errors
+                                          return [
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.booking.personas,
+                                                  expression: "booking.personas"
+                                                }
+                                              ],
+                                              staticClass: "form-control",
+                                              class: {
+                                                "is-invalid": errors[0]
+                                              },
+                                              attrs: {
+                                                type: "number",
+                                                name: "personas",
+                                                id: "personas",
+                                                step: "1",
+                                                min: "0"
+                                              },
+                                              domProps: {
+                                                value: _vm.booking.personas
+                                              },
+                                              on: {
+                                                input: function($event) {
+                                                  if ($event.target.composing) {
+                                                    return
+                                                  }
+                                                  _vm.$set(
+                                                    _vm.booking,
+                                                    "personas",
+                                                    $event.target.value
+                                                  )
+                                                }
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c(
+                                              "span",
+                                              {
+                                                staticClass: "invalid-feedback",
+                                                attrs: { role: "alert" }
+                                              },
+                                              [
+                                                _c("strong", [
+                                                  _vm._v(_vm._s(errors[0]))
+                                                ])
+                                              ]
+                                            )
+                                          ]
+                                        }
+                                      }
+                                    ],
+                                    null,
+                                    true
+                                  )
+                                })
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm.showMesas
+                            ? _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-primary",
+                                  attrs: { type: "submit" }
+                                },
+                                [_vm._v("Buscar Mesas ")]
+                              )
+                            : _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-primary",
+                                  attrs: { type: "submit" }
+                                },
+                                [_vm._v("Reservar")]
+                              )
+                        ]
                       )
-                    })
-                  ],
-                  2
-                )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.listMesas, function(item, index) {
+              return _c(
+                "div",
+                {
+                  key: index,
+                  staticClass: "card mb-3",
+                  class: {
+                    "card text-white bg-success mb-3": item.status == 0,
+                    "text-white bg-warning": item.status == 1
+                  },
+                  staticStyle: { "max-width": "400px" }
+                },
+                [
+                  _c("div", { staticClass: "row no-gutters" }, [
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h5", { staticClass: "card-title text-center" }, [
+                          _vm._v(_vm._s(item.num_mesa))
+                        ]),
+                        _vm._v(" "),
+                        item.status == 0
+                          ? _c("label", [_vm._v("Estatus: Disponible ")])
+                          : _c("label", [_vm._v("Estatus: Reservada")]),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        item.status == 0
+                          ? _c(
+                              "div",
+                              { staticClass: "custom-control custom-radio" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.booking.table,
+                                      expression: "booking.table"
+                                    }
+                                  ],
+                                  staticClass: "custom-control-input",
+                                  attrs: {
+                                    type: "radio",
+                                    id: "customRadio" + index,
+                                    name: "customRadio"
+                                  },
+                                  domProps: {
+                                    value: item.idTables,
+                                    checked: _vm._q(
+                                      _vm.booking.table,
+                                      item.idTables
+                                    )
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      return _vm.$set(
+                                        _vm.booking,
+                                        "table",
+                                        item.idTables
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "custom-control-label",
+                                    attrs: { for: "customRadio" + index }
+                                  },
+                                  [_vm._v("Seleccionar Mesa")]
+                                )
+                              ]
+                            )
+                          : _c("div", {})
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            })
+          ],
+          2
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesShowUnitsComponent.vue?vue&type=template&id=46e8b8ef&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ClientesShowUnitsComponent.vue?vue&type=template&id=46e8b8ef& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.showUnits ? _c("div", {}, [_c("clientes_reservaciones")], 1) : _vm._e(),
+    _vm._v(" "),
+    _vm.showUnits
+      ? _c("div", {}, [
+          _c("hr", { staticClass: "divider" }),
+          _vm._v(" "),
+          _c("h3", [_vm._v("Reservar Ahora")])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.showUnits
+      ? _c(
+          "div",
+          { staticClass: "contenedor" },
+          _vm._l(_vm.listUnits, function(item, index) {
+            return _c(
+              "div",
+              {
+                key: index,
+                staticClass: "card",
+                staticStyle: { width: "16rem" }
+              },
+              [
+                _c("img", {
+                  staticClass: "card-img-top",
+                  attrs: { src: "images/break.jpg", alt: "" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h5", { staticClass: "card-title" }, [
+                    _vm._v(_vm._s(item.nameUnit))
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "card-text" }, [
+                    _vm._v(
+                      "\r\n                    Tiempo de Cancelacion: " +
+                        _vm._s(item.cancelation_time_limit) +
+                        " (horas) "
+                    ),
+                    _c("br"),
+                    _vm._v(
+                      "\r\n                    Telefono: " +
+                        _vm._s(item.phone1) +
+                        " "
+                    ),
+                    _c("br")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-light btn-block",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.MesasShow(item.idUnits)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-address-book" }),
+                      _vm._v("  Reservar\r\n                ")
+                    ]
+                  )
+                ])
+              ]
+            )
+          }),
+          0
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.formMesas
+      ? _c(
+          "div",
+          {},
+          [
+            _c("ValidationObserver", {
+              ref: "form",
+              scopedSlots: _vm._u(
+                [
+                  {
+                    key: "default",
+                    fn: function(ref) {
+                      var handleSubmit = ref.handleSubmit
+                      var reset = ref.reset
+                      return [
+                        _c(
+                          "form",
+                          {
+                            attrs: { method: "post" },
+                            on: {
+                              submit: function($event) {
+                                $event.preventDefault()
+                                return handleSubmit(_vm.buscarMesas)
+                              },
+                              reset: function($event) {
+                                $event.preventDefault()
+                                return reset($event)
+                              }
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "row form-group" }, [
+                              _c(
+                                "div",
+                                { staticClass: "col-6 col-md-6" },
+                                [
+                                  _c("label", { attrs: { for: "fecha" } }, [
+                                    _vm._v("Fecha")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("ValidationProvider", {
+                                    attrs: {
+                                      name: "fecha",
+                                      rules: "required|fechav"
+                                    },
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "default",
+                                          fn: function(ref) {
+                                            var errors = ref.errors
+                                            return [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.booking.fecha,
+                                                    expression: "booking.fecha"
+                                                  }
+                                                ],
+                                                staticClass: "form-control",
+                                                class: {
+                                                  "is-invalid": errors[0]
+                                                },
+                                                attrs: {
+                                                  type: "date",
+                                                  name: "fecha",
+                                                  id: "fecha",
+                                                  min: "2020-09-01",
+                                                  max: "2020-12-31"
+                                                },
+                                                domProps: {
+                                                  value: _vm.booking.fecha
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      _vm.booking,
+                                                      "fecha",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  staticClass:
+                                                    "invalid-feedback",
+                                                  attrs: { role: "alert" }
+                                                },
+                                                [
+                                                  _c("strong", [
+                                                    _vm._v(_vm._s(errors[0]))
+                                                  ])
+                                                ]
+                                              )
+                                            ]
+                                          }
+                                        }
+                                      ],
+                                      null,
+                                      true
+                                    )
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "col-6 col-md-6" },
+                                [
+                                  _c("label", { attrs: { for: "hora" } }, [
+                                    _vm._v("Hora")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("ValidationProvider", {
+                                    attrs: { name: "hora", rules: "required" },
+                                    scopedSlots: _vm._u(
+                                      [
+                                        {
+                                          key: "default",
+                                          fn: function(ref) {
+                                            var errors = ref.errors
+                                            return [
+                                              _c("input", {
+                                                directives: [
+                                                  {
+                                                    name: "model",
+                                                    rawName: "v-model",
+                                                    value: _vm.booking.hora,
+                                                    expression: "booking.hora"
+                                                  }
+                                                ],
+                                                staticClass: "form-control",
+                                                class: {
+                                                  "is-invalid": errors[0]
+                                                },
+                                                attrs: {
+                                                  type: "time",
+                                                  name: "hora",
+                                                  id: "hora",
+                                                  min: "00:00",
+                                                  max: "23:00"
+                                                },
+                                                domProps: {
+                                                  value: _vm.booking.hora
+                                                },
+                                                on: {
+                                                  input: function($event) {
+                                                    if (
+                                                      $event.target.composing
+                                                    ) {
+                                                      return
+                                                    }
+                                                    _vm.$set(
+                                                      _vm.booking,
+                                                      "hora",
+                                                      $event.target.value
+                                                    )
+                                                  }
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  staticClass:
+                                                    "invalid-feedback",
+                                                  attrs: { role: "alert" }
+                                                },
+                                                [
+                                                  _c("strong", [
+                                                    _vm._v(_vm._s(errors[0]))
+                                                  ])
+                                                ]
+                                              )
+                                            ]
+                                          }
+                                        }
+                                      ],
+                                      null,
+                                      true
+                                    )
+                                  })
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary",
+                                attrs: { type: "submit" }
+                              },
+                              [_vm._v("Buscar Mesa")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                attrs: { type: "reset" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.cancelarReservacion()
+                                  }
+                                }
+                              },
+                              [_vm._v("Cancelar")]
+                            )
+                          ]
+                        )
+                      ]
+                    }
+                  }
+                ],
+                null,
+                false,
+                3054320148
+              )
+            })
+          ],
+          1
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.showMesas
+      ? _c("div", [
+          _c("div", { staticClass: "mesas" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "div",
+              {},
+              [
+                _c("ValidationObserver", {
+                  ref: "form",
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "default",
+                        fn: function(ref) {
+                          var handleSubmit = ref.handleSubmit
+                          var reset = ref.reset
+                          return [
+                            _c(
+                              "form",
+                              {
+                                attrs: { method: "post" },
+                                on: {
+                                  submit: function($event) {
+                                    $event.preventDefault()
+                                    return handleSubmit(_vm.reservarMesa)
+                                  },
+                                  reset: function($event) {
+                                    $event.preventDefault()
+                                    return reset($event)
+                                  }
+                                }
+                              },
+                              [
+                                _c("div", { staticClass: "row form-group" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "col-4 col-md-4 col-sm-12" },
+                                    [
+                                      _c("label", { attrs: { for: "fecha" } }, [
+                                        _vm._v("Fecha")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("ValidationProvider", {
+                                        attrs: {
+                                          name: "fecha",
+                                          rules: "required|fechav"
+                                        },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "default",
+                                              fn: function(ref) {
+                                                var errors = ref.errors
+                                                return [
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.booking.fecha,
+                                                        expression:
+                                                          "booking.fecha"
+                                                      }
+                                                    ],
+                                                    staticClass: "form-control",
+                                                    class: {
+                                                      "is-invalid": errors[0]
+                                                    },
+                                                    attrs: {
+                                                      type: "date",
+                                                      name: "fecha",
+                                                      id: "fecha",
+                                                      min: "2020-09-01",
+                                                      max: "2020-12-31"
+                                                    },
+                                                    domProps: {
+                                                      value: _vm.booking.fecha
+                                                    },
+                                                    on: {
+                                                      input: function($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.$set(
+                                                          _vm.booking,
+                                                          "fecha",
+                                                          $event.target.value
+                                                        )
+                                                      }
+                                                    }
+                                                  }),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "invalid-feedback",
+                                                      attrs: { role: "alert" }
+                                                    },
+                                                    [
+                                                      _c("strong", [
+                                                        _vm._v(
+                                                          _vm._s(errors[0])
+                                                        )
+                                                      ])
+                                                    ]
+                                                  )
+                                                ]
+                                              }
+                                            }
+                                          ],
+                                          null,
+                                          true
+                                        )
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "col-4 col-md-4 col-sm-12" },
+                                    [
+                                      _c("label", { attrs: { for: "hora" } }, [
+                                        _vm._v("Hora")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("ValidationProvider", {
+                                        attrs: {
+                                          name: "hora",
+                                          rules: "required"
+                                        },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "default",
+                                              fn: function(ref) {
+                                                var errors = ref.errors
+                                                return [
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value: _vm.booking.hora,
+                                                        expression:
+                                                          "booking.hora"
+                                                      }
+                                                    ],
+                                                    staticClass: "form-control",
+                                                    class: {
+                                                      "is-invalid": errors[0]
+                                                    },
+                                                    attrs: {
+                                                      type: "time",
+                                                      name: "hora",
+                                                      id: "hora",
+                                                      min: "00:00",
+                                                      max: "23:00"
+                                                    },
+                                                    domProps: {
+                                                      value: _vm.booking.hora
+                                                    },
+                                                    on: {
+                                                      input: function($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.$set(
+                                                          _vm.booking,
+                                                          "hora",
+                                                          $event.target.value
+                                                        )
+                                                      }
+                                                    }
+                                                  }),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "invalid-feedback",
+                                                      attrs: { role: "alert" }
+                                                    },
+                                                    [
+                                                      _c("strong", [
+                                                        _vm._v(
+                                                          _vm._s(errors[0])
+                                                        )
+                                                      ])
+                                                    ]
+                                                  )
+                                                ]
+                                              }
+                                            }
+                                          ],
+                                          null,
+                                          true
+                                        )
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "col-4 col-md-4 col-sm-12" },
+                                    [
+                                      _c(
+                                        "label",
+                                        { attrs: { for: "personas" } },
+                                        [_vm._v("Personas")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("ValidationProvider", {
+                                        attrs: {
+                                          name: "personas",
+                                          rules: "required"
+                                        },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "default",
+                                              fn: function(ref) {
+                                                var errors = ref.errors
+                                                return [
+                                                  _c("input", {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          _vm.booking.personas,
+                                                        expression:
+                                                          "booking.personas"
+                                                      }
+                                                    ],
+                                                    staticClass: "form-control",
+                                                    class: {
+                                                      "is-invalid": errors[0]
+                                                    },
+                                                    attrs: {
+                                                      type: "number",
+                                                      name: "personas",
+                                                      id: "personas",
+                                                      step: "1",
+                                                      min: "0"
+                                                    },
+                                                    domProps: {
+                                                      value:
+                                                        _vm.booking.personas
+                                                    },
+                                                    on: {
+                                                      input: function($event) {
+                                                        if (
+                                                          $event.target
+                                                            .composing
+                                                        ) {
+                                                          return
+                                                        }
+                                                        _vm.$set(
+                                                          _vm.booking,
+                                                          "personas",
+                                                          $event.target.value
+                                                        )
+                                                      }
+                                                    }
+                                                  }),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "invalid-feedback",
+                                                      attrs: { role: "alert" }
+                                                    },
+                                                    [
+                                                      _c("strong", [
+                                                        _vm._v(
+                                                          _vm._s(errors[0])
+                                                        )
+                                                      ])
+                                                    ]
+                                                  )
+                                                ]
+                                              }
+                                            }
+                                          ],
+                                          null,
+                                          true
+                                        )
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "row" }, [
+                                  _c("div", { staticClass: "col-12" }, [
+                                    _c("h5", [_vm._v("Mesas")])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "listamesas col-md-12" },
+                                    _vm._l(_vm.listMesas, function(
+                                      item,
+                                      index
+                                    ) {
+                                      return _c(
+                                        "div",
+                                        {
+                                          key: item.idTables,
+                                          staticClass: "card mb-3",
+                                          class: {
+                                            "card text-white bg-success mb-3":
+                                              item.status == 0,
+                                            "text-white bg-warning":
+                                              item.status == 1
+                                          },
+                                          staticStyle: { "max-width": "400px" }
+                                        },
+                                        [
+                                          _c(
+                                            "div",
+                                            { staticClass: "row no-gutters" },
+                                            [
+                                              _c(
+                                                "div",
+                                                { staticClass: "col-md-12" },
+                                                [
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass: "card-body"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "h5",
+                                                        {
+                                                          staticClass:
+                                                            "card-title text-center"
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            _vm._s(
+                                                              item.num_mesa
+                                                            )
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      item.status == 0
+                                                        ? _c("label", [
+                                                            _vm._v(
+                                                              "Estatus: Disponible "
+                                                            )
+                                                          ])
+                                                        : _c("label", [
+                                                            _vm._v(
+                                                              "Estatus: Reservada"
+                                                            )
+                                                          ]),
+                                                      _vm._v(" "),
+                                                      _c("br"),
+                                                      _vm._v(" "),
+                                                      item.status == 0
+                                                        ? _c(
+                                                            "div",
+                                                            {
+                                                              staticClass:
+                                                                "custom-control custom-radio"
+                                                            },
+                                                            [
+                                                              _c("input", {
+                                                                directives: [
+                                                                  {
+                                                                    name:
+                                                                      "model",
+                                                                    rawName:
+                                                                      "v-model",
+                                                                    value:
+                                                                      _vm
+                                                                        .booking
+                                                                        .table,
+                                                                    expression:
+                                                                      "booking.table"
+                                                                  }
+                                                                ],
+                                                                staticClass:
+                                                                  "custom-control-input",
+                                                                attrs: {
+                                                                  type: "radio",
+                                                                  id:
+                                                                    "customRadio" +
+                                                                    index,
+                                                                  name:
+                                                                    "customRadio"
+                                                                },
+                                                                domProps: {
+                                                                  value:
+                                                                    item.idTables,
+                                                                  checked: _vm._q(
+                                                                    _vm.booking
+                                                                      .table,
+                                                                    item.idTables
+                                                                  )
+                                                                },
+                                                                on: {
+                                                                  change: function(
+                                                                    $event
+                                                                  ) {
+                                                                    return _vm.$set(
+                                                                      _vm.booking,
+                                                                      "table",
+                                                                      item.idTables
+                                                                    )
+                                                                  }
+                                                                }
+                                                              }),
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "label",
+                                                                {
+                                                                  staticClass:
+                                                                    "custom-control-label",
+                                                                  attrs: {
+                                                                    for:
+                                                                      "customRadio" +
+                                                                      index
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "Seleccionar Mesa"
+                                                                  )
+                                                                ]
+                                                              )
+                                                            ]
+                                                          )
+                                                        : _c("div", {})
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    }),
+                                    0
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-primary",
+                                    attrs: { type: "submit" }
+                                  },
+                                  [_vm._v("Reservar")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-danger",
+                                    attrs: { type: "reset" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.cancelarReservacion()
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Cancelar")]
+                                )
+                              ]
+                            )
+                          ]
+                        }
+                      }
+                    ],
+                    null,
+                    false,
+                    2555048376
+                  )
+                })
+              ],
+              1
+            )
           ])
         ])
       : _vm._e()
@@ -57991,15 +60245,9 @@ module.exports = function(module) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/*import Vue from 'vue';*/
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); //import Vue from 'vue';
 
 
  //import { TheLitsBookins } from '../components/TheBookingList.vue';
@@ -58007,14 +60255,6 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.component('ValidationProvider', vee_validate__WEBPACK_IMPORTED_MODULE_0__["ValidationProvider"]);
 Vue.component('ValidationObserver', vee_validate__WEBPACK_IMPORTED_MODULE_0__["ValidationObserver"]); //Vue.component('TheLitsBookins', TheLitsBookins );
-
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
@@ -58029,12 +60269,9 @@ Vue.component('socios_formReservacion', __webpack_require__(/*! ./components/Soc
 Vue.component('socios_show_booking', __webpack_require__(/*! ./components/SociosShowBookings.vue */ "./resources/js/components/SociosShowBookings.vue")["default"]);
 Vue.component('clientes_show_negocios', __webpack_require__(/*! ./components/ClientesShowUnitsComponent.vue */ "./resources/js/components/ClientesShowUnitsComponent.vue")["default"]);
 Vue.component('clientes_reservaciones', __webpack_require__(/*! ./components/ClientesListReservasComponent.vue */ "./resources/js/components/ClientesListReservasComponent.vue")["default"]);
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
-*/
-
+Vue.component('clientesReservaciones', __webpack_require__(/*! ./components/ClientesReservacionComponent.vue */ "./resources/js/components/ClientesReservacionComponent.vue")["default"]);
+Vue.component('clientes_formreservacion', __webpack_require__(/*! ./components/ClientesFormReservacionComponent.vue */ "./resources/js/components/ClientesFormReservacionComponent.vue")["default"]);
+Vue.component('clientes_all_bookings', __webpack_require__(/*! ./components/ClientesConsultaReservacionesComponent.vue */ "./resources/js/components/ClientesConsultaReservacionesComponent.vue")["default"]);
 var app = new Vue({
   el: '#app'
 });
@@ -58083,6 +60320,162 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/ClientesConsultaReservacionesComponent.vue":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/ClientesConsultaReservacionesComponent.vue ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ClientesConsultaReservacionesComponent_vue_vue_type_template_id_530a40eb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ClientesConsultaReservacionesComponent.vue?vue&type=template&id=530a40eb& */ "./resources/js/components/ClientesConsultaReservacionesComponent.vue?vue&type=template&id=530a40eb&");
+/* harmony import */ var _ClientesConsultaReservacionesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ClientesConsultaReservacionesComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ClientesConsultaReservacionesComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ClientesConsultaReservacionesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ClientesConsultaReservacionesComponent_vue_vue_type_template_id_530a40eb___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ClientesConsultaReservacionesComponent_vue_vue_type_template_id_530a40eb___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ClientesConsultaReservacionesComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ClientesConsultaReservacionesComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/ClientesConsultaReservacionesComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesConsultaReservacionesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ClientesConsultaReservacionesComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesConsultaReservacionesComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesConsultaReservacionesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ClientesConsultaReservacionesComponent.vue?vue&type=template&id=530a40eb&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/components/ClientesConsultaReservacionesComponent.vue?vue&type=template&id=530a40eb& ***!
+  \***********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesConsultaReservacionesComponent_vue_vue_type_template_id_530a40eb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ClientesConsultaReservacionesComponent.vue?vue&type=template&id=530a40eb& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesConsultaReservacionesComponent.vue?vue&type=template&id=530a40eb&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesConsultaReservacionesComponent_vue_vue_type_template_id_530a40eb___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesConsultaReservacionesComponent_vue_vue_type_template_id_530a40eb___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ClientesFormReservacionComponent.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/ClientesFormReservacionComponent.vue ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ClientesFormReservacionComponent_vue_vue_type_template_id_c5eea0b0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ClientesFormReservacionComponent.vue?vue&type=template&id=c5eea0b0& */ "./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=template&id=c5eea0b0&");
+/* harmony import */ var _ClientesFormReservacionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ClientesFormReservacionComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ClientesFormReservacionComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ClientesFormReservacionComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ClientesFormReservacionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ClientesFormReservacionComponent_vue_vue_type_template_id_c5eea0b0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ClientesFormReservacionComponent_vue_vue_type_template_id_c5eea0b0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ClientesFormReservacionComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesFormReservacionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ClientesFormReservacionComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesFormReservacionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesFormReservacionComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ClientesFormReservacionComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesFormReservacionComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesFormReservacionComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesFormReservacionComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesFormReservacionComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesFormReservacionComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=template&id=c5eea0b0&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=template&id=c5eea0b0& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesFormReservacionComponent_vue_vue_type_template_id_c5eea0b0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ClientesFormReservacionComponent.vue?vue&type=template&id=c5eea0b0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesFormReservacionComponent.vue?vue&type=template&id=c5eea0b0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesFormReservacionComponent_vue_vue_type_template_id_c5eea0b0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesFormReservacionComponent_vue_vue_type_template_id_c5eea0b0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
@@ -58150,6 +60543,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesListReservasComponent_vue_vue_type_template_id_64290b70___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesListReservasComponent_vue_vue_type_template_id_64290b70___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ClientesReservacionComponent.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/ClientesReservacionComponent.vue ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ClientesReservacionComponent_vue_vue_type_template_id_2b1680c4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ClientesReservacionComponent.vue?vue&type=template&id=2b1680c4& */ "./resources/js/components/ClientesReservacionComponent.vue?vue&type=template&id=2b1680c4&");
+/* harmony import */ var _ClientesReservacionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ClientesReservacionComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ClientesReservacionComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ClientesReservacionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ClientesReservacionComponent_vue_vue_type_template_id_2b1680c4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ClientesReservacionComponent_vue_vue_type_template_id_2b1680c4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ClientesReservacionComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ClientesReservacionComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/ClientesReservacionComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesReservacionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ClientesReservacionComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesReservacionComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesReservacionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ClientesReservacionComponent.vue?vue&type=template&id=2b1680c4&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/ClientesReservacionComponent.vue?vue&type=template&id=2b1680c4& ***!
+  \*************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesReservacionComponent_vue_vue_type_template_id_2b1680c4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ClientesReservacionComponent.vue?vue&type=template&id=2b1680c4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ClientesReservacionComponent.vue?vue&type=template&id=2b1680c4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesReservacionComponent_vue_vue_type_template_id_2b1680c4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ClientesReservacionComponent_vue_vue_type_template_id_2b1680c4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
