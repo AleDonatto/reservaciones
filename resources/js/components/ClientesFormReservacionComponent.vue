@@ -1,13 +1,7 @@
 <template>
 <div> 
-
     <div class="" v-if="showUnits">
-        <clientes_reservaciones></clientes_reservaciones>
-    </div>
-
-    <div class="" v-if="showUnits">
-        <hr class="divider">
-        <h3>Reservar Ahora</h3>
+        <h3>Restaurantes</h3>
     </div>
     <div class="contenedor" v-if="showUnits">
         <div class="card" style="width: 16rem;" v-for="(item, index) in listUnits" :key="index">
@@ -173,7 +167,8 @@ extend('required', {
 extend('fechav', fecha => {
     var fechanow = new Date();
     var fechainput = new Date(fecha)
-    return fechainput > fechanow ;  
+
+    return fechainput > fechanow;  
 } );
 
 export default {
@@ -206,7 +201,7 @@ export default {
                 swal(response.titulo,response.mensage, response.tipo);
             })
             .catch(err =>{
-                //console.log(err.response)
+                console.log(err.response)
             })
 
             this.$refs.form.validate().then(success => {

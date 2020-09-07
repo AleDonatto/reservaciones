@@ -4,10 +4,10 @@
 <div class="container">
 
     @if(Auth::user()->rol == 3)
-    @include('components.clientes.homereservar')
+        @include('components.clientes.homereservar')
     @endif
 
-
+    
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

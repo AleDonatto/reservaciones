@@ -21,6 +21,8 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth','verified');
 
+//Route::get('/home/{any}', 'HomeController@index')->name('home')->where('any','.*');
+
 Route::get('prueba',function(){
     return view('prueba');
 });
@@ -44,6 +46,8 @@ Route::get('app_register',function(){
 Route::post('registro_socios','SpecialController@RegistroSocios')->name('registro_socios');
 
 Route::post('registro_clientes', 'SpecialController@RegistroClientes')->name('registro_clientes');
+
+Route::post('loginClientes', 'SpecialController@loginClientes')->name('loginClientes');
 
 /*rutas administrador */
 Route::resource('socios','SociosController')->only([
@@ -89,6 +93,13 @@ Route::get('getMesasUnidad/{id}', 'SpecialController@getMesasUnidad')->name('get
 
 Route::post('postReservacion', 'SpecialController@postReservacion')->name('postReservacion')->middleware('auth');
 
+Route::post('buscarMesas', 'SpecialController@postBuscarMesas')->name('postBuscarMesas')->middleware('auth');
+
+Route::get('clientes_reservacion', 'SpecialController@formClientesReservacion')->name('clientes_reservacion')->middleware('auth');
+
+Route::get('cancelarReservacion/{id}', 'SpecialController@cancelarReservacion')->name('cancelarReservacion')->middleware('auth');
+
+Route::get('clients/reservaciones', 'SpecialController@getClientesAllReservaciones')->name('allReservasClients')->middleware('auth');
 /* fin rutas clientes*/
 
 

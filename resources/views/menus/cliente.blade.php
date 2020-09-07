@@ -20,8 +20,8 @@
     <div id="collapseBooking" class="collapse" aria-labelledby="headingBookig" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
-            <a href="" class="collapse-item">Hacer Reservacion</a>
-            <a href="" class="collapse-item">Consulta de Reservaciones</a>
+            <a href="{{ route('clientes_reservacion') }}" class="collapse-item">Hacer Reservacion</a>
+            <a href="{{ route('allReservasClients') }}" class="collapse-item">Consultar Reservaciones</a>
         </div>
     </div>
 </li>

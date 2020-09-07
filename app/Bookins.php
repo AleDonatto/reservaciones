@@ -10,5 +10,5 @@ class Bookins extends Model
     protected $table = 'bookings';
     protected $primaryKey = 'idBooking';
 
-    protected $fillable = ['idBooking','businessUnits','table','client','date','hour','pax','status'];
+    protected $fillable = ['idBooking','businessUnits','idtable','client','B_date','B_hour','pax','status'];
 }
