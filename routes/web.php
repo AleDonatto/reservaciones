@@ -65,6 +65,8 @@ Route::resource('negocios','BusinessUnitController')->only([
 Route::resource('mesas','TablesController')->only([
     'index','create','store','update','destroy','show'
 ])->middleware('auth');
+
+Route::get('getlistaunidades/{id}','SpecialController@getlistaunidades')->name('getlistaunidades')->middleware('auth');
 /* fin rutas admintrador*/
 
 /*rutas de socios */
@@ -73,14 +75,24 @@ Route::resource('socios_negocios','SociosBusinessUnitController')->only([
 ])->middleware('auth');
 
 Route::resource('socios_mesas','SociosTablesUnitController')->only([
-    'index','updated','destroy','create','store','show'
+    'index','update','destroy','create','store','show'
 ])->middleware('auth');
+
+Route::get('socios_mesas/{any}', 'SociosTablesUnitsController@index')->where('any','.*');
+
+/*Route::get('socios_mesas/{any}/{any}', 'SociosTablesUnitsController@index')->where('any','.*');*/
 
 Route::resource('socios_reservaciones','SociosReservasController')->only([
     'index','store','destroy','create','show','updated'
 ])->middleware('auth');
 
 Route::get('socios_getListBookings/{id}/{fecha}','SpecialController@getListBookings')->name('getlistbookings')->middleware('auth');
+
+Route::get('consallbookings/{unidad}','SpecialController@consAllReservaciones')->name('getAllBookingsSocios')->middleware('auth');
+
+Route::post('confirmarLlegadaReservacion','SpecialController@confirmarLlegadaReservacion')->name('cofirmarLlegada')->middleware('auth');
+
+Route::post('confirmarAusenciaReservacion','SpecialController@confirmarFaltaReservacion')->name('confirmarAusencia')->middleware('auth');
 /* fin rutas de socios*/
 
 
@@ -100,6 +112,8 @@ Route::get('clientes_reservacion', 'SpecialController@formClientesReservacion')-
 Route::get('cancelarReservacion/{id}', 'SpecialController@cancelarReservacion')->name('cancelarReservacion')->middleware('auth');
 
 Route::get('clients/reservaciones', 'SpecialController@getClientesAllReservaciones')->name('allReservasClients')->middleware('auth');
+
+Route::get('getClienteReservacion/{id}','SpecialController@getAllReservacionCliente')->name('gteClienteReservacion')->middleware('auth');
 /* fin rutas clientes*/
 
 

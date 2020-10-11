@@ -170,11 +170,11 @@ class SpecialController extends Controller
 
     public function getListBookings($id, $fecha){
         $booking = DB::table('bookings')
-        ->join('clients','clients.idCliets','=','bookings.clients')
+        ->join('clients','clients.idClients','=','bookings.clients')
         ->join('users','users.id','=','clients.idUser')
-        ->select('bookings.hour','bookings.pax','bookings.status','users.name','users.lastname')
-        ->where('bookings.date',$fecha)
-        ->where('bookings.table',$id)
+        ->select('bookings.B_hour','bookings.pax','bookings.status','users.name','users.lastname')
+        ->where('bookings.B_date',$fecha)
+        ->where('bookings.idtable',$id)
         ->get();
         
         return $booking;
@@ -207,6 +207,8 @@ class SpecialController extends Controller
         $idUsurio = Auth::id();
         $idCliente = Clientes::where('idUser',$idUsurio)->select('idClients')->first();
 
+        $cliente = $idCliente->idClients;
+
         $fecha = date('Y-m-d');
 
         $listBookings = DB::table('bookings')
@@ -216,7 +218,18 @@ class SpecialController extends Controller
         ->where('bookings.clients',$idCliente->idClients)
         ->get();
 
-        return view('components.clientes.allBookings')->with(compact('listBookings'));
+        return view('components.clientes.allBookings')->with(compact('listBookings','cliente'));
+    }
+
+    public function getAllReservacionCliente($idcliente){
+        $listBookings = DB::table('bookings')
+        ->join('business_units','bookings.businessUnit','=','business_units.idUnits')
+        ->join('tables_units','bookings.idtable','=','tables_units.idTables')
+        ->select('business_units.nameUnit','tables_units.num_mesa','bookings.*')
+        ->where('bookings.clients',$idcliente)
+        ->get(); 
+        
+        return $listBookings;
     }
 
     public function getMesasUnidad($id){
@@ -255,6 +268,11 @@ class SpecialController extends Controller
 
         return $notificacion;
         
+    }
+
+    public function getlistaunidades($id){
+        $unidades = BusinessUnits::where('idcompany',$id)->get();
+        return $unidades;
     }
 
     //clientes
@@ -327,6 +345,48 @@ class SpecialController extends Controller
             return $notificacion;
         }
 
+    }
+
+    public function consAllReservaciones($unidad){
+        $reservaciones = DB::table('bookings')
+        ->join('clients','bookings.clients','=','clients.idClients')
+        ->join('users','clients.idUser','=','users.id')
+        ->join('tables_units','bookings.idtable','=','tables_units.idTables')
+        ->select('users.name','users.lastname','clients.phone','tables_units.num_mesa','bookings.*')
+        ->where('bookings.businessUnit',$unidad)
+        ->orderBy('bookings.created_at','desc')
+        ->get();
+        return $reservaciones;
+    }
+
+    public function confirmarLegadaReservacion(Request $request){
+        $reservacion = Bookins::where('idBoking', $request->id)
+        ->update([
+            'status' => 3
+        ]);
+
+        $notificacion = array(
+            'messageHeader' => 'Bookings',
+            'messageDB' => 'Reservacion Confirmada!',
+            'alert-type' => 'success'
+        );
+
+        return $notificacion;
+    }
+
+    public function confirmarAusenciaReservacion(Request $request){
+        $reservacion = Bookins::where('idBooking', $request->id )
+        ->update([
+            'status' => 4
+        ]);
+
+        $notificacion = array(
+            'messageHeader' => 'Bookings',
+            'messageDB' => 'Reservacion Actualizada!',
+            'alert-type' => 'success'
+        );
+
+        return $notificacion;
     }
 
 }

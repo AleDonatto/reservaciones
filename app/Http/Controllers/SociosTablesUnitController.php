@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 use App\Mesas;
 use App\Socios;
+use App\Bookins;
 
 class SociosTablesUnitController extends Controller
 {
@@ -84,8 +86,21 @@ class SociosTablesUnitController extends Controller
     public function show($id)
     {
         //
+        $dateNow = now();
+        $idUnidad = $id;
+        
         $mesas = Mesas::where('units',$id)->get();
-        return view('components.socios.showMesas')->with(compact('mesas'));
+
+        $bookings = DB::table('clients')
+        ->join('bookings','bookings.clients','=','clients.idClients')
+        ->join('users','users.id','=','clients.idUser')
+        ->select('users.name','users.lastname','clients.phone','bookings.*')
+        ->where('bookings.businessUnit',$id)
+        ->where('bookings.B_date',$dateNow->toDateString())
+        ->where('bookings.status',1)
+        ->get();
+
+        return view('components.socios.showMesas')->with(compact('idUnidad','mesas','bookings'));
     }
 
     /**
@@ -109,6 +124,26 @@ class SociosTablesUnitController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validation = $request->validate([
+            'numMesa' => 'required|string',
+            'numPersonas' => 'required|string',
+            'estatusMesa' => 'required|string'
+        ]);
+
+        $units = Mesas::where('idTables',$request->idMesa)
+        ->update([
+            'num_mesa' => $request->numMesa,
+            'number_chairs' => $request->numPersonas,
+            'status' => $request->estatusMesa
+        ]);
+
+        $notification = array(
+            'messageHeader' => 'Mesas',
+            'messageDB' => 'Mesa actualizada con exito!',
+            'alert-type' => 'success'
+        );
+
+        return back()->with($notification);
     }
 
     /**

@@ -7,144 +7,88 @@
         </div>
         <div class="card-body">
             <ValidationObserver v-slot="{handleSubmit, reset }" ref="form">
-                <form method="post" id="form" @submit.prevent="handleSubmit(bussinesUnit)" @reset.prevent="reset">
-                    <div class="row form-group">
-                        <div class="col-12 col-md-12 col-sm-12">
-                            <label for="company">Seleccione Compañia</label>
-                            <ValidationProvider name="company" rules="required" v-slot="{ errors }">
-                                <select name="company" id="company" class="form-control" v-model="companies.company"
-                                :class="{'is-invalid':errors[0] }">
-                                    <option value="" selected>Seleccione:</option>
-                                    <option v-for="(item, index) in listSocios" v-bind:value="item.idCompanies" :key="index">
-                                        {{ item.name }}
-                                    </option>
-                                </select>
-
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ errors[0] }}</strong>
-                                </div>
-                            </ValidationProvider>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-md-6 col-6 col-sm-12">
-                            <label for="RFC">RFC <sup class="text-danger"> <strong>*</strong> </sup> </label>
-                            <ValidationProvider name="RFC" rules="required" v-slot="{ errors }">
-                                <input type="text" name="RFC" id="RFC" class="form-control" placeholder="RFC" v-model="companies.RFC"
-                                :class="{ 'is-invalid': errors[0], 'is-invalid': RFCValido }" v-on:blur="VerificacionRFC">
-
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ errors[0] }}</strong>
-                                    <strong v-if="RFCValido">RFC Invalido</strong>
-                                </div>
-                            </ValidationProvider>
-                        </div>
-                        <div class="col-md-6 col-6 col-sm-12">
-                            <label for="nombreUNit">Nombre de la Unidad <sup class="text-danger"> <strong>*</strong> </sup></label>
-                            <ValidationProvider name="nombreUnit" rules="required" v-slot="{ errors }">
-                                <input type="text" name="nombreUnit" id="nombreUnit" class="form-control" placeholder="Nombre de la Unidad"
-                                :class="{ 'is-invalid': errors[0] }" v-model="companies.nameUnit">
-
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ errors[0] }}</strong>
-                                </div>
-                            </ValidationProvider>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-6 col-md-6 col-sm-12">
-                            <label for="telefono1">Telefono 1 <sup class="text-danger"> <strong>*</strong> </sup></label>
-                            <ValidationProvider name="telefono1" rules="required" v-slot="{ errors }">
-                                <input type="tel" name="telefono1" id="telefono1" class="form-control" placeholder="Telefono 1" v-model="companies.telefono1"
-                                :class="{ 'is-invalid': errors[0] }">
-
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ errors [0] }}</strong>
-                                </div>
-                            </ValidationProvider>
-                        </div>
-                        <div class="col-6 col-md-6 col-sm-12">
-                            <label for="telefono2">Telefono 2</label>
-                            <ValidationProvider name="telefono2" rules="" v-slot="{ errors }">
-                                <input type="tel" name="telefono2" id="telefono2" class="form-control" placeholder="Telefono 2" v-model="companies.telefono2"
-                                :class="{ 'is-invalid':errors[0] }">
-
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ errors[0] }}</strong>
-                                </div>
-                            </ValidationProvider>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-6 col-md-6 col-sm-12">
-                            <label for="correo">Correo <sup class="text-danger"> <strong>*</strong> </sup></label>
-                            <ValidationProvider name="correo" rules="required" v-slot="{ errors }">
-                                <input type="email" name="correo" id="correo" class="form-control" placeholder="Correo" v-model="companies.correo"
-                                :class="{ 'is-invalid':errors[0] }">
-
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ errors[0] }}</strong>
-                                </div>
-                            </ValidationProvider>
-                        </div>
-                        <div class="col-6 col-md-6 col-sm-12">
-                            <label for="sitioweb">Sitio Web</label>
-                            <ValidationProvider name="sitioweb" rules="" v-slot="{ errors }">
-                                <input type="text" name="sitioweb" id="sitioweb" class="form-control" placeholder="Sitio Web" v-model="companies.sitioweb"
-                                :class="{ 'is-invalid':errors[0] }">
-
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ errors[0] }}</strong>
-                                </div>
-                            </ValidationProvider>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-6 col-md-6 col-sm-12">
-                            <label for="namecontact">Nombre del Contacto<sup class="text-danger"> <strong>*</strong> </sup></label>
-                            <ValidationProvider name="namecontact" rules="required" v-slot="{ errors }">
-                                <input type="text" name="namecontact" id="namecontact" class="form-control" placeholder="Nombre del Contacto"
-                                :class="{ 'is-invalid':errors[0] }" v-model="companies.namecontact">
-
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ errors[0] }}</strong>
-                                </div>
-                            </ValidationProvider>
-                        </div>
-                        <div class="col-6 col-md-6 col-sm-12">
-                            <label for="horacancelation">Tiempo de Cancelacion <sup class="text-danger"> <strong>*</strong> </sup>(Horas)</label>
-                            <ValidationProvider name="horacancelation" rules="required" v-slot="{ errors }">
-                                <!--<input type="time" name="horacancelation" id="horacancelation" class="form-control" placeholder="00:00:00"
-                                :class="{ 'is-invalid':errors[0] }" max="22:30:00" min="10:00:00" step="1" 
-                                v-model="companies.horacancelation">-->
-
-                                <input type="number" name="horacancelation" id="horacancelation" min="0" max="24" step="1" class="form-control"
-                                :class="{ 'is-invalid':errors[0] }" v-model="companies.horacancelation" placeholder="0">
-
-                                <div class="invalid-feedback" role="alert">
-                                    <strong>{{ errors[0] }}</strong>
-                                    <strong v-if="Hora">Hora Invalida</strong>
-                                </div>
-                            </ValidationProvider>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-store-alt"></i>
-                        Agregar Unidad
-                    </button>
-                    <button type="reset" class="btn btn-light">Restablecer</button>
+                <form method="post" @submit.prevent="handleSubmit(bussinesUnit)" @reset.prevent="reset">
+                    <v-container>
+                        <v-row>
+                            <v-col cols="12" md="6">
+                                <ValidationProvider name="company" rules="required">
+                                    <select name="company" id="company" v-model="companies.company" class="form-control">
+                                        <option value="">Seleccione Compañia</option>
+                                        <option :value="item.idCompanies" v-for="(item, index) in listSocios" :key="index">{{item.name}}</option>
+                                    </select>
+                                </ValidationProvider>
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="12" md="6">
+                                <ValidationProvider name="RFC" rules="required|rfc|max:15" v-slot="{errors}" required>
+                                    <v-text-field v-model="companies.RFC" label="RFC" :error-messages="errors" required :counter="15"></v-text-field>
+                                </ValidationProvider>
+                            </v-col>
+                            <v-col cols="12" md="6">
+                                <ValidationProvider name="nombreUnit" rules="required|max:50" v-slot="{errors}" required>
+                                    <v-text-field v-model="companies.nameUnit" label="Nombre Unidad" :error-messages="errors" :counter="50" required></v-text-field>
+                                </ValidationProvider>
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="12" md="6">
+                                <ValidationProvider name="telefono1" rules="required|max:10" v-slot="{errors}">
+                                    <v-text-field v-model="companies.telefono1" label="Telefono 1" :error-messages="errors" :counter="10" required></v-text-field>
+                                </ValidationProvider>
+                            </v-col>
+                            <v-col cols="12" md="6">
+                                <ValidationProvider name="telefono2" rules="max:10" v-slot="{errors}">
+                                    <v-text-field v-model="companies.telefono2" label="Telefono 2" :error-messages="errors" :counter="10"></v-text-field>
+                                </ValidationProvider>
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="12" md="6">
+                                <ValidationProvider name="correo" rules="required|email|max:50" v-slot="{errors}">
+                                    <v-text-field v-model="companies.correo" label="E-Mail" :error-messages="errors" :counter="50" required></v-text-field>
+                                </ValidationProvider>
+                            </v-col>
+                            <v-col cols="12" md="6">
+                                <ValidationProvider name="sitioweb" rules="max:50" v-slot="{errors}">
+                                    <v-text-field v-model="companies.sitioweb" label="Sitio Web" :error-messages="errors" :counter="50"></v-text-field>
+                                </ValidationProvider>
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="12" md="6">
+                                <ValidationProvider name="namecontact" rules="required|max:50" v-slot="{errors}">
+                                    <v-text-field v-model="companies.namecontact" label="Nombre de Contacto" :error-messages="errors" :counter="50" required></v-text-field>
+                                </ValidationProvider>
+                            </v-col>
+                            <v-col cols="12" md="6">
+                                <ValidationProvider name="horacancelation" rules="required" v-slot="{errors}">
+                                    <v-text-field v-model="companies.sitioweb" label="Timpo de Cancelacion" :error-messages="errors" type="number" min="0" max="10" step="1"></v-text-field>
+                                </ValidationProvider>
+                            </v-col>
+                        </v-row>
+                        <button type="submit" class="btn btn-primary text-white">
+                            <i class="fas fa-store-alt"></i>
+                            Agregar Unidad
+                        </button>
+                        <button type="reset" class="btn btn-light">Restablecer</button>
+                    </v-container>
                 </form>
             </ValidationObserver>
         </div>
     </div>
-  
 </template>
 
 <script>
-import { extend } from 'vee-validate';
-import { required, email } from 'vee-validate/dist/rules';
+import { required, email, max } from 'vee-validate/dist/rules'
+import { extend, setInteractionMode } from 'vee-validate'
 
 extend('email',email);
+
+extend('rfc',rfc =>{
+  var patt = new RegExp("^[A-Z,Ñ,&]{3,4}[0-9]{2}[0-1][0-9][0-3][0-9][A-Z,0-9]?[A-Z,0-9]?[0-9,A-Z]?$");
+  return patt.test(rfc)
+})
 
 extend('required', {
   ...required,

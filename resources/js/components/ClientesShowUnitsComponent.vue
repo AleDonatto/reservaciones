@@ -244,7 +244,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .contenedor{
     display: flex;
     flex-wrap: wrap;
