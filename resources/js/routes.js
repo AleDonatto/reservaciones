@@ -4,8 +4,18 @@ import ClientsReservar from './components/ClientesReservacionComponent.vue'
 
 export const routes = [
     {
-        path: '/reservar',
-        component: ClientsReservar,
-        name: "reservar"
+        path: '/allMesas',
+        component: TodasMesas,
+        name: "allMesas"
     },
+    {
+        path: '/disponibles',
+        component: MesasDisponibles,
+        name: "MesasDisponibles"
+    },
+    {
+        path: '/reservaciones_now',
+        component: ReservacionesHoy,
+        name: "ReservacionesHoy"
+    }
 ];

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\BusinessUnits;
 use App\Mesas;
+use App\Socios;
 
 class TablesController extends Controller
 {
@@ -16,6 +17,8 @@ class TablesController extends Controller
     public function index()
     {
         //
+        $socios = Socios::all();
+        return view('components.consTables')->with(compact('socios'));
     }
 
     /**
@@ -27,7 +30,8 @@ class TablesController extends Controller
     {
         //
         $unidades = BusinessUnits::all();
-        return view('components.tablesUnits')->with(compact('unidades'));
+        $companies = Socios::all();
+        return view('components.tablesUnits')->with(compact('unidades','companies'));
     }
 
     /**
@@ -57,7 +61,7 @@ class TablesController extends Controller
             'alert-type' => 'success'
         );
 
-        return back()->with($notification);
+        return $notification;
 
     }
 

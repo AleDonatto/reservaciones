@@ -1,125 +1,87 @@
 <template>
   <div class="">
-      <div class="card shadow">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Agregar Nuevo Socio</h6>
-        </div>
-        <div class="card-body">
-            <ValidationObserver  v-slot="{ handleSubmit, reset }" ref="form">
-              <form method="post" id="form" @submit.prevent="handleSubmit(newSocio)" @reset.prevent="reset">
-                  <div class="row form-group">
-                      <div class="col-6 col-md-6 col-sm-12">
-                          <label for="razonsocial">Razon Social <sup class="text-danger"> <strong>*</strong> </sup> </label>
-                          <!--<input type="text" name="razonsocial" id="razonsocial" class="form-control" 
-                          placeholder="Razon Social" v-model="socios.razonsocial">-->
-
-                          <ValidationProvider name="razonsocial" rules="required" v-slot="{ errors }">
-                            <input type="text" v-model="socios.razonsocial" name="razonsocial" class="form-control" placeholder="Razon Social" 
-                            :class="{ 'is-invalid': errors[0] }">
-
-                            <div class="invalid-feedback" role="alert">
-                              <strong>{{ errors[0] }}</strong>
-                            </div>
-                          </ValidationProvider>
-      
-                      </div>
-                      <div class="col-6 col-md-6 col-sm-12">
-                          <label for="RFC">RFC <sup class="text-danger"> <strong>*</strong> </sup> </label>
-                          <!--<input type="text" name="RFC" id="RFC" class="form-control" placeholder="RFC" v-model="socios.RFC"
-                          v-on:blur="VerificacionRFC" >-->
-
-                          <ValidationProvider name="RFC" rules="required" v-slot="{ errors }">
-                            <input type="text" class="form-control" name="RFC" placeholder="RFC" v-model="socios.RFC"
-                            v-on:blur="VerificacionRFC" :class="{ 'is-invalid': errors[0], 'is-invalid': rfcValido }">
-
-                            <div class="invalid-feedback" role="alert">
-                              <strong>{{ errors[0] }}</strong>
-                              <strong v-if="rfcValido">RFC Invalido</strong>
-                              <!--<p v-if="rfcValido">RFC Invalido</p>-->
-                            </div>
-                          </ValidationProvider>
-
-                          
-                      </div>
-                  </div>
-      
-                  <div class="row form-group">
-                      <div class="col-6 col-md-6 col-sm-12">
-                          <label for="telefono1">Telefono 1 <sup class="text-danger"> <strong>*</strong> </sup> </label>
-                          <!--<input type="tel" name="telefono1" id="telefono1" class="form-control" 
-                          placeholder="Telefono 1" v-model="socios.telefono1">-->
-
-                          <ValidationProvider name="telefono1" rules="required" v-slot="{ errors }">
-                            <input type="tel" v-model="socios.telefono1" name="telefono1" class="form-control" placeholder="Telefono1"
-                            :class="{ 'is-invalid':errors[0] }">
-
-                            <div class="invalid-feedback" role="alert">
-                              <strong>{{ errors[0] }}</strong>
-                            </div>
-                          </ValidationProvider>
-                      </div>
-                      <div class="col-6 col-md-6 col-sm-12">
-                          <label for="telefono2">Telefono 2</label>
-                          <input type="tel" name="telefono2" id="telefono2" class="form-control" placeholder="Telefono 2" 
-                          v-model="socios.telefono2">
-                      </div>
-                  </div>
-      
-                  <div class="row form-group">
-                      <div class="col-4 col-md-4 col-sm-12">
-                          <label for="email">Correo <sup class="text-danger"> <strong>*</strong> </sup> </label>
-                          <!--<input type="email" name="email" id="email" class="form-control" placeholder="example@example.com"
-                          v-model="socios.correo">-->
-                          <ValidationProvider name="email" rules="required|email" v-slot="{ errors }">
-                            <input type="email" v-model="socios.correo" name="email" class="form-control" placeholder="example@example.com" 
-                            :class="{ 'is-invalid': errors[0] }">
-
-                            <div class="invalid-feedback" role="alert">
-                              <strong>{{ errors[0] }}</strong>
-                            </div>
-                          </ValidationProvider>
-                      </div>
-                      <div class="col-4 col-md-4 col-sm-12">
-                          <label for="sitioweb">Sitio Web</label>
-                          <input type="text" name="sitioweb" id="sitioweb" class="form-control"
-                          placeholder="Sitio Web" v-model="socios.website">
-                      </div>
-                      <div class="col-4 col-md-4 col-sm-12">
-                          <label for="nombresocio">Nombre Socio <sup class="text-danger"> <strong>*</strong> </sup> </label>
-                          <!--<input type="text" name="nombresocio" id="nombresocio" class="form-control"
-                          placeholder="Nombre Socio" v-model="socios.nameContact">-->
-
-                          <ValidationProvider name="nombresocio" rules="required" v-slot="{ errors }">
-                            <input type="text" id="nombresocio" name="nombresocio" v-model="socios.nameContact" class="form-control" placeholder="Nombre Socio"
-                            :class="{ 'is-invalid':errors[0] }">
-
-                            <div class="invalid-feedback" role="alert">
-                              <strong>{{ errors[0] }}</strong>
-                            </div>
-                          </ValidationProvider>
-                      </div>
-                  </div>
-                  <button type="submit" class="btn btn-primary">
-                      <i class="fas fa-plus"></i> Agregar Nuevo Socio
-                  </button>
-                  <button type="reset" class="btn btn-light">Retablecer</button>
-              </form>
-            </ValidationObserver>
-        </div>
+    <div class="card shadow">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Agregar Nuevo Socio</h6>
+      </div>
+      <div class="card-body">
+        <ValidationObserver v-slot="{ handleSubmit, reset }" ref="form">
+          <form method="post" id="form" @submit.prevent="handleSubmit(newSocio)" @reset.prevent="reset">
+            <v-container>
+              <v-row>
+                <v-col cols="12" md="6">
+                  <ValidationProvider name="razonsocial" rules="required|max:50" v-slot="{errors}" required>
+                    <v-text-field v-model="socios.razonsocial" :error-messages="errors" :counter="50" label="Razon Social" required></v-text-field>
+                  </ValidationProvider>
+                </v-col>
+                <v-col cols="12" md="6">
+                  <ValidationProvider name="RFC" rules="required|max:15|rfc" v-slot="{errors}">
+                    <!--<v-text-field v-model="socios.RFC" :error-messages="errors" :counter="50" label="RFC" required
+                    v-on:blur="VerificacionRFC" :class="{ 'is-invalid': errors[0], 'is-invalid': rfcValido }"></v-text-field>-->
+                    <v-text-field v-model.lazy="socios.RFC" :error-messages="errors" :counter="15" label="RFC" required></v-text-field>
+                  </ValidationProvider>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" md="6">
+                  <ValidationProvider name="telefono1" rules="required|max:10" v-slot="{errors}" required>
+                    <v-text-field v-model="socios.telefono1" :error-messages="errors" :counter="10" label="Telefono 1" required></v-text-field>
+                  </ValidationProvider>
+                </v-col>
+                <v-col cols="12" md="6">
+                  <ValidationProvider name="telefono2" rules="max:10" v-slot="{errors}">
+                    <v-text-field v-model="socios.telefono2" :error-messages="errors" :counter="10" label="Telefono 2"></v-text-field>
+                  </ValidationProvider>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" md="4">
+                  <ValidationProvider name="correo" rules="required|email" v-slot="{errors}">
+                    <v-text-field v-model="socios.correo" :error-messages="errors" :counter="50" label="E-mail" required></v-text-field>
+                  </ValidationProvider>
+                </v-col>
+                <v-col cols="12" md="4">
+                  <ValidationProvider name="website" rules="" >
+                    <v-text-field v-model="socios.website" label="Web Site" :counter="50" ></v-text-field>
+                  </ValidationProvider>
+                </v-col>
+                <v-col cols="12" md="4">
+                  <ValidationProvider name="nameContact" rules="required" v-slot="{errors}">
+                    <v-text-field v-model="socios.nameContact" :error-messages="errors" :counter="50" label="Nombre del Contacto" required></v-text-field>
+                  </ValidationProvider>
+                </v-col>
+              </v-row>
+              <v-btn class="mr-4" type="submit">Agregar Nuevo Socio</v-btn>
+              <v-btn type="reset">Restablecer</v-btn>
+            </v-container>
+          </form>
+        </ValidationObserver>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { extend } from 'vee-validate';
-import { required, email } from 'vee-validate/dist/rules';
+import { required, email, max } from 'vee-validate/dist/rules'
+import { extend, setInteractionMode } from 'vee-validate'
 
-extend('email',email);
-
+setInteractionMode('eager')
 extend('required', {
   ...required,
-  message: 'Este Campo es requerido'
-});
+  message: '{_field_} can not be empty',
+})
+extend('rfc',rfc =>{
+  var patt = new RegExp("^[A-Z,Ñ,&]{3,4}[0-9]{2}[0-1][0-9][0-3][0-9][A-Z,0-9]?[A-Z,0-9]?[0-9,A-Z]?$");
+  return patt.test(rfc)
+})
+extend('max', {
+  ...max,
+  message: '{_field_} may not be greater than {length} characters',
+})
+extend('email', {
+  ...email,
+  message: 'Email must be valid',
+})
 
 export default {
   data() {
@@ -145,8 +107,12 @@ export default {
         toastr.success(serverSocios.messageDB,serverSocios.messageHeader,{timeOut :  15000});
       })
       .catch( err => {
+        toastr.options.closeButton = true;
+        toastr.options.escapeHtml = true;
+        toastr.options.progressBar = true;
+        toastr.warning(err.response,'Socios',{timeOut :  15000});
         var geterror = err
-        console.log(geterror)
+        console.log(err.response)
       })
 
       this.$refs.form.validate().then(success => {
@@ -188,7 +154,10 @@ export default {
           rfcValido = false
         }
       });*/
-    }
+    },
+    clear () {
+      this.$refs.observer.reset()
+    },
   }
 };
 </script>

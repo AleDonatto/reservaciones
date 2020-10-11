@@ -8,11 +8,11 @@
 
     <div class="contenedor">
         @foreach($negocios as $item)
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 16rem;">
             <img src="{{ asset('images/break.jpg') }}" class="card-img-top" alt="">
             <div class="card-body">
                 <h5 class="card-title">{{ $item->nameUnit }}</h5>
-                <p class="card-text">
+                <p class="card-text text-justify text-truncate">
                     {{ $item->RFC }} <br> 
                     TEl: {{ $item->phone1.','.$item->phone2 }} <br>
                     E-mail: {{ $item->address }} <br>
@@ -20,13 +20,17 @@
                     Contacto: {{ $item->nameContact }} <br>
                     Cancelacion: {{ $item->cancelation_time_limit }} (horas) 
                 </p>
-                <a href="{{ route('socios_negocios.edit',$item->idUnits ) }}" class="btn btn-light"><i class="far fa-edit"></i></a>
-                <a href="{{ route('socios_mesas.show', $item->idUnits ) }}" class="btn btn-light"><i class="fas fa-chair"></i></a>
-                <a href="{{ route('socios_reservaciones.show',$item->idUnits) }}" class="btn btn-light"><i class="far fa-address-book"></i></a>
+                <a href="{{ route('socios_negocios.edit',$item->idUnits ) }}" class="btn btn-light">
+                    <i class="far fa-edit"></i>
+                </a>
+                <a href="{{ route('socios_mesas.show', $item->idUnits ) }}" class="btn btn-light">
+                    <i class="fas fa-chair"></i>
+                </a>
             </div>
         </div>
         @endforeach 
     </div>
+
 </div>
 @endsection
 

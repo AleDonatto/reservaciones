@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Bookins;
 use App\BusinessUnits;
 use App\Mesas;
+use App\Socios;
 
 class SociosReservasController extends Controller
 {
@@ -18,6 +20,9 @@ class SociosReservasController extends Controller
     public function index()
     {
         //
+        $idcompany = Socios::where('idUser', Auth::id())->first();
+        $unidades = BusinessUnits::where('idcompany',$idcompany->idCompanies)->get();
+        return view('components.socios.consBookings')->with(compact('unidades'));
     }
 
     /**

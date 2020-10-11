@@ -52,7 +52,7 @@
         <div class="card-body">
             <table id="usertable" class="table-striped display nowrap" style="width:100%">
                 <thead>
-                    <th>id</th>
+                    <th>#</th>
                     <th>Code</th>
                     <th>Fecha Expiracion</th>
                     <th>Opciones</th>
@@ -60,7 +60,7 @@
                 <tbody>
                     @foreach($codigos as $item)
                     <tr>
-                        <td>{{ $item->idCode }}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->code_verification }}</td>
                         <td>{{ $item->date_expiration }}</td>
                         <td>

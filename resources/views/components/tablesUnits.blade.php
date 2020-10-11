@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="card shadow">
+    <!--<div class="card shadow">
         <div class="card-header py-3">
             <h6 class="m-0 font-weith-bold text-primary">Mesas de Negocio</h6>
         </div>
@@ -26,19 +26,19 @@
                     </div>
                     <div class="col-6 col-md-6 col-xl-6">
                         <label for="numerosillas">Numero de Asientos</label>
-                        <input type="number" name="numerosillas" id="numerosillas" class="form-control" min="0" step="1">
+                        <input type="number" name="numerosillas" id="numerosillas" class="form-control" min="1" step="1" value="1">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary text-white">
                     <i class="fas fa-check"></i>
                     Agregar Mesa
                 </button>
                 <button type="reset" class="btn btn-light">Retablecer</button>
             </form>
         </div>
-    </div>
+    </div>-->
 
-    <mesas-component></mesas-component>
+    <mesas-component :list_companies="{{ $companies }}" :listaunidades="{{ json_encode($unidades) }}"></mesas-component>
 
 </div>
 @endsection
