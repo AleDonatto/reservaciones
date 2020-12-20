@@ -1,7 +1,7 @@
 <template>
 <div class="card shadow">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weith-bold text-primary">Mesas de Negocio</h6>
+        <h6 class="m-0 text-primary">Mesas de Negocio</h6>
     </div>
     <v-card>
         <ValidationObserver v-slot="{ handleSubmit, reset }" ref="form">

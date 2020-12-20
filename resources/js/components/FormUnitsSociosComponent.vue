@@ -6,18 +6,17 @@
             </h6>
         </div>
         <div class="card-body">
-            <ValidationObserver v-slot="{handleSubmit, reset }" ref="form">
-                <form method="post" id="form" @submit.prevent="handleSubmit(bussinesUnit)" @reset.prevent="reset">
+            <ValidationObserver v-slot="{handleSubmit, reset }" ref="form" >
+                <form method="post" id="form" @submit.prevent="handleSubmit(bussinesUnit)" @reset.prevent="reset" enctype="multipart/form-data">
                     <div class="row form-group">
                         <div class="col-md-6 col-6 col-sm-12">
                             <label for="RFC">RFC <sup class="text-danger"> <strong>*</strong> </sup> </label>
-                            <ValidationProvider name="RFC" rules="required" v-slot="{ errors }">
+                            <ValidationProvider name="RFC" rules="required|rfc" v-slot="{ errors }">
                                 <input type="text" name="RFC" id="RFC" class="form-control" placeholder="RFC" v-model="companies.RFC"
-                                :class="{ 'is-invalid': errors[0], 'is-invalid': RFCValido }" v-on:blur="VerificacionRFC">
+                                :class="{ 'is-invalid': errors[0]}">
 
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ errors[0] }}</strong>
-                                    <strong v-if="RFCValido">RFC Invalido</strong>
                                 </div>
                             </ValidationProvider>
                         </div>
@@ -110,7 +109,25 @@
                             </ValidationProvider>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">
+                    <div class="row form-group">
+                        <div class="col-6 col-md-6 col-sm-12">
+                            <label for="imagen">Seleccionar Imagen</label>
+                            <ValidationProvider name="imagen" rules="image|ext:jpg" v-slot="{errors}">
+                                <input type="file" name="imagen" id="imagen" class="form-control" @change="getImagen" accept="image/jpeg" :class="{'is-invalid':errors[0] }">
+
+                                <div class="invalid-feedback" role="alert">
+                                    <strong>{{ errors[0] }}</strong>
+                                </div>
+                            </ValidationProvider>
+                        </div>
+                        <div class="col-6 col-md-6 col-sm-12">
+                            <figure class="figure">
+                                <img :src="imagenMuestra" alt="imagen de muestra" class="figure-img img-fluid rounded">
+                                <figcaption class="figure-caption">Dimenciones de imagen recomendada (640X958)</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary text-white">
                         <i class="fas fa-store-alt"></i>
                         Agregar Unidad
                     </button>
@@ -123,10 +140,22 @@
 </template>
 
 <script>
-import { extend } from 'vee-validate';
-import { required, email } from 'vee-validate/dist/rules';
+import { required, email, max, image, ext } from 'vee-validate/dist/rules'
+import { extend, setInteractionMode } from 'vee-validate'
 
 extend('email',email);
+
+extend('image', {
+    ...image,
+    message: 'El archivo que selecciono no es una Imagen'
+} );
+
+extend('ext', ext);
+
+extend('rfc',rfc =>{
+  var patt = new RegExp("^[A-Z,Ñ,&]{3,4}[0-9]{2}[0-1][0-9][0-3][0-9][A-Z,0-9]?[A-Z,0-9]?[0-9,A-Z]?$");
+  return patt.test(rfc)
+})
 
 extend('required', {
   ...required,
@@ -136,27 +165,50 @@ extend('required', {
 export default {
     data(){
         return{
-            companies:{RFC:"", nameUnit:"", telefono1:"", telefono2:"", correo:"", sitioweb:"", namecontact:"", horacancelation:"" },
+            companies:{RFC:"", nameUnit:"", telefono1:"", telefono2:"", correo:"", sitioweb:"", namecontact:"", horacancelation:"", imagen:null },
             RFCValido: false,
-            Hora: false
+            Hora: false,
+            imagenMuestra: ''
         };
     },
     created(){
     },
+    computed:{
+        /*imagen(){
+            return this.imagenMuestra
+        }*/
+    },
     methods:{
         bussinesUnit(){
 
-            axios.post("/socios_negocios",this.companies)
+            const formData = new FormData();
+            formData.append('RFC', this.companies.RFC)
+            formData.append('nameUnit', this.companies.nameUnit)
+            formData.append('telefono1', this.companies.telefono1)
+            formData.append('telefono2', this.companies.telefono2)
+            formData.append('correo', this.companies.correo)
+            formData.append('sitioweb', this.companies.sitioweb)
+            formData.append('namecontact', this.companies.namecontact)
+            formData.append('horacancelation', this.companies.horacancelation)
+            formData.append('imagen', this.companies.imagen)
+
+            axios.post("/socios_negocios",formData)
             .then(res => {
                 const server = res.data;
 
+                console.log(server)
+
                 toastr.options.closeButton = true;
-                toastr.options.escapeHtml = true;
+                toastr.options.escapeHtml = true; 
                 toastr.options.progressBar = true;
                 toastr.success(server.messageDB,server.messageHeader,{timeOut :  15000});
             })
             .catch( err => { 
                 console.log(err.response)
+                toastr.options.closeButton = true;
+                toastr.options.escapeHtml = true;
+                toastr.options.progressBar = true;
+                toastr.success(err.response,'Ocurrio un problema',{timeOut :  15000});
             })
 
             this.$refs.form.validate().then(success => {
@@ -165,7 +217,9 @@ export default {
                 }
                 // Resetting Values
                 this.companies.RFC = this.companies.company = this.companies.nameUnit = this.companies.telefono1 = this.companies.telefono2 = this.companies.correo = this.companies.sitioweb = '';
-                this.companies.namecontact = this.companies.horacancelation = '';
+                this.companies.namecontact = this.companies.horacancelation = "";
+                this.companies.imagen = "";
+                this.imagenMuestra = '';
                 
                 // Wait until the models are updated in the UI
                 this.$nextTick(() => {
@@ -202,6 +256,31 @@ export default {
                     this.Hora = true
                 }
             }
+        },
+        getImagen(e){
+            const img = e.target.files[0]
+            this.companies.imagen = img
+
+            let reader  = new FileReader();
+
+            reader.addEventListener("load", function () {
+                this.imagenMuestra = reader.result;
+            }.bind(this), false);
+
+            if( this.companies.imagen ){
+                if ( /\.(jpe?g|png|gif)$/i.test( this.companies.imagen.name ) ) {
+                    reader.readAsDataURL( this.companies.imagen );
+                }
+            }
+        },
+        cargarImagen(img){
+            const reader = new FileReader()
+
+            reader.onload = (e) => {
+                this.imagenMuestra = e.target.result
+            }
+
+            reader.readAsDataURL(img)
         }
 
     }
@@ -209,5 +288,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.col-md-6 > .figure > img{
+    width: 320px;
+    height: 480px;
+}
 </style>

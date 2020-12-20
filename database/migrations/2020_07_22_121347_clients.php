@@ -14,7 +14,7 @@ class Clients extends Migration
     public function up()
     {
         Schema::create('clients', function (Blueprint $table) {
-            $table->id('idCliets');
+            $table->id('idClients');
             $table->string('phone',10);
             $table->date('date_birth');
             $table->foreignId('idUser')->references('id')->on('users');

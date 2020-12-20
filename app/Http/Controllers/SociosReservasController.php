@@ -33,6 +33,9 @@ class SociosReservasController extends Controller
     public function create()
     {
         //
+        $idcompany = Socios::where('idUser', Auth::id())->first();
+        $unidades = BusinessUnits::where('idcompany',$idcompany->idCompanies)->get();
+        return view('components.socios.formBokings')->with(compact('unidades'));
 
     }
 
@@ -88,6 +91,36 @@ class SociosReservasController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validation = $request->validate([
+            'idbookings' => 'required|integer',
+            'unidad' => 'required|integer',
+            'mesa' => 'required|integer',
+            'bhour' => 'required',
+            'bdate' => 'required',
+            'personas' => 'required|integer',
+            'usuario' => 'required|integer',
+            'status' => 'required|string'
+        ]);
+
+        Bookins::where('idBooking', $id)
+        ->where('businessUnit_id', $request->unidad)
+        ->where('table_id', $request->mesa)
+        ->where('usuario_id', $request->usuario)
+        ->update([
+            'bdate' => $request->bdate,
+            'bhour' => $request->bhour,
+            'pax' => $request->personas,
+            'status' => $request->status
+        ]);
+
+        $notification = array(
+            'messageHeader' => 'Reservaciones',
+            'messageDB' => 'Reservacion modificada con exito!',
+            'alert-type' => 'success'
+        );
+
+        return $notification;
+       
     }
 
     /**

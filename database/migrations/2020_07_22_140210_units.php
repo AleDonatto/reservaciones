@@ -16,14 +16,15 @@ class Units extends Migration
         Schema::create('business_units', function (Blueprint $table) {
             $table->id('idUnits');
             $table->foreignId('idcompany')->references('idCompanies')->on('companies');
-            $table->string('RFC',10);
-            $table->string('nameUnit');
+            $table->string('RFC',15);
+            $table->string('nameUnit',100);
             $table->string('phone1',10);
             $table->string('phone2',10);
-            $table->string('address');
-            $table->string('webSite');
-            $table->string('nameContact');
-            $table->time('cancelation_time_limit',0); 
+            $table->string('address',50);
+            $table->string('webSite',50);
+            $table->string('nameContact',50);
+            $table->integer('cancelation_time_limit');
+            $table->string('imagen',100); 
             $table->timestamps();
         });
     }

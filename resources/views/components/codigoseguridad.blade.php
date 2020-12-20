@@ -34,11 +34,11 @@
                         </select>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary text-white">
                     <i class="fas fa-check"></i>
                     Crear Codigo
                 </button>
-                <button type="reset" class="btn btn-light">Retablecer</button>
+                <button type="reset" class="btn btn-light text-black">Retablecer</button>
             </form>
         </div>
 

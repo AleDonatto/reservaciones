@@ -49,7 +49,20 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
             <a href="{{ route('socios_reservaciones.create') }}" class="collapse-item">Reservar Mesa</a>
-            <a href="{{ route('socios_reservaciones.index') }}" class="collapse-item">Consulta de Reservaciones</a>
+            <a href="{{ route('socios_reservaciones.index') }}" class="collapse-item">Consulta Reservaciones</a>
+            <a href="{{ route('getUsersReservaciones') }}" class="collapse-item">Mis Reservaciones</a> 
+        </div>
+    </div>
+</li>
+<li class="nav-item">
+    <a href="#" class="nav-link collapsed" data-toggle="collapse" data-target="#collapseUser" aria-expanded="true" aria-controls="collapseUser">
+        <i class="fas fa-user-friends"></i>
+        <span>Usuarios</span>
+    </a>
+    <div id="collapseUser" class="collapse" aria-labelledby="headingUser" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Custom Components:</h6>
+            <a href="{{ route('usuariosUnidad') }}" class="collapse-item">Usuario de Unidad</a>
         </div>
     </div>
 </li>

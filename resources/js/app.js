@@ -22,9 +22,9 @@ Vue.component('ValidationObserver', ValidationObserver);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 const routes = [
-    { path: '/socios_mesas/:id', component: require('./components/SociosShowMesasComponent.vue').default, name: "allMesas", props: true },
-    { path: '/socios_mesas', component: require('./components/SociosMesasDisponibles.vue').default, name: "mesasDisponibles", props: true },
-    { path: '/socios_mesas/reservaciones', component: require('./components/SociosShowBookings.vue').default, name: "reservacionesHoy", props:true}
+    { path: '/socios_mesas/:id', component: require('./components/socios/SociosShowMesasComponent.vue').default, name: "allMesas", props: true },
+    { path: '/socios_mesas', component: require('./components/socios/SociosMesasDisponibles.vue').default, name: "mesasDisponibles", props: true },
+    { path: '/socios_mesas/reservaciones', component: require('./components/socios/SociosShowBookings.vue').default, name: "reservacionesHoy", props:true}
 ]
 
 const router = new VueRouter({
@@ -36,20 +36,30 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('formsocios-componet', require('./components/FormSociosComponent.vue').default);
 Vue.component('formbussines-component', require('./components/FormBusinessComponent.vue').default);
 Vue.component('bussinesunist_socios', require('./components/FormUnitsSociosComponent.vue').default);
-Vue.component('socios-mesas-component', require('./components/SociosMesasComponent.vue').default);
-Vue.component('socios_show_mesas', require('./components/SociosShowMesasComponent.vue').default)
-Vue.component('TheLitsBookins', require('./components/TheBookingList.vue').default)
-Vue.component('socios_formReservacion', require('./components/SociosFormReservacion.vue').default)
-Vue.component('socios_show_booking', require('./components/SociosShowBookings.vue').default)
-Vue.component('clientes_show_negocios', require('./components/ClientesShowUnitsComponent.vue').default)
-Vue.component('clientes_reservaciones', require('./components/ClientesListReservasComponent.vue').default)
-Vue.component('clientesReservaciones',require('./components/ClientesReservacionComponent.vue').default)
-Vue.component('clientes_formreservacion',require('./components/ClientesFormReservacionComponent.vue').default)
-Vue.component('clientes_all_bookings', require('./components/ClientesConsultaReservacionesComponent.vue').default)
-Vue.component('socios_cons_bookings', require('./components/SociosConsBookings.vue').default)
+Vue.component('socios-mesas-component', require('./components/socios/SociosMesasComponent.vue').default);
+Vue.component('socios_show_mesas', require('./components/socios/SociosShowMesasComponent.vue').default)
+Vue.component('TheLitsBookins', require('./components/socios/TheBookingList.vue').default)
+Vue.component('socios_form_reservacion', require('./components/socios/SociosFormReservacion.vue').default)
+Vue.component('socios_show_booking', require('./components/socios/SociosShowBookings.vue').default)
+Vue.component('clientes_show_negocios', require('./components/clientes/ClientesShowUnitsComponent.vue').default)
+Vue.component('clientes_reservaciones', require('./components/clientes/ClientesListReservasComponent.vue').default)
+Vue.component('clientesReservaciones',require('./components/clientes/ClientesReservacionComponent.vue').default)
+Vue.component('clientes_formreservacion',require('./components/clientes/ClientesFormReservacionComponent.vue').default)
+Vue.component('clientes_all_bookings', require('./components/clientes/ClientesConsultaReservacionesComponent.vue').default)
+
+Vue.component('socios_cons_bookings', require('./components/socios/SociosConsBookings.vue').default)
+Vue.component('socios_updateunits', require('./components/socios/EditNegocios.vue').default)
+Vue.component('socios-consulta-mesas', require('./components/socios/SociosConsultaMesas.vue').default)
+Vue.component('socios_misreservaciones', require('./components/socios/MisReservaciones.vue').default)
+
+Vue.component('form-users-units', require('./components/socios/FormUsersUnits.vue').default)
 Vue.component('mesas-component', require('./components/FormMesasComponent.vue').default)
 Vue.component('cons_socios', require('./components/ConsSociosComponent.vue').default)
 Vue.component('cons_tables', require('./components/ConsTablesComponent.vue').default);
+Vue.component('perfil_user', require('./components/PerfilUser.vue').default);
+Vue.component('password_user', require('./components/CambioPassword.vue').default);
+
+Vue.component('admin-user-units', require('./components/admin/AdminUsuarioUnidad.vue').default);
 
 const app = new Vue({
     router,

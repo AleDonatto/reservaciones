@@ -16,6 +16,7 @@ use App\Clientes;
 use App\BusinessUnits;
 use App\Mesas;
 use App\Bookins;
+use App\UserUnits;
 
 class SpecialController extends Controller
 {
@@ -52,7 +53,7 @@ class SpecialController extends Controller
             $user->lastname = $request->LastName;
             $user->email = $request->InputEmail;
             $user->password = Hash::make($request->InputPassword);
-            $user->rol = 3;
+            $user->rol = 4;
             $user->client_id = '';
             $user->save();
 
@@ -112,39 +113,51 @@ class SpecialController extends Controller
             );
             return back()->with($error);
         }else{
-            
-            $fechanow = now()->toDateString();
-            $vigencia = Carbon::parse($verificar_code->datedate_expiration); 
+            try{
+                $fechanow = now()->toDateString();
+                $vigencia = Carbon::parse($verificar_code->datedate_expiration); 
 
-            if($fechanow <= $vigencia){
+                if($fechanow <= $vigencia){
 
-                User::create([
-                    'name' => $request->FirstName,
-                    'lastname' => $request->LastName,
-                    'email' => $request->InputEmail,
-                    'password' => Hash::make($request->InputPassword),
-                    'rol' => 2,
-                    'client_id' => '',
-                ]);
-                
-                $iduser = User::where('name',$request->FirstName)->where('lastname',$request->LastName)->first();
+                    
+                    $usuario = new User;
+                    $usuario->name = $request->FirstName;
+                    $usuario->lastname = $request->LastName;
+                    $usuario->email = $request->InputEmail;
+                    $usuario->password = Hash::make($request->InputPassword);
+                    $usuario->rol = 2;
+                    $usuario->client_id = '';
+                    $usuario->save();
+                    
+                    $iduser = User::where('name',$request->FirstName)->where('lastname',$request->LastName)->first();
 
-                $affected = DB::table('companies')
-                ->where('idCompanies', $verificar_code->companies)
-                ->update(['iduser' => $iduser->id]);
+                    $affected = DB::table('companies')
+                    ->where('idCompanies', $verificar_code->companies)
+                    ->update(['iduser' => $iduser->id]);
 
-                $iduser->sendEmailVerificationNotification();
+                    $iduser->sendEmailVerificationNotification();
 
-                $registroCorrecto = array(
-                    'mensaje' => 'Se ha registrado correctamente',
-                    'title' => 'Registro Completado'
+                    $registroCorrecto = array(
+                        'mensaje' => 'Se ha registrado correctamente',
+                        'title' => 'Registro Completado'
+                    );
+                    if (Auth::attempt(['email' => $request->InputEmail, 'password' => $request->InputPassword])) {
+                        // Authentication passed...
+                        return redirect()->route('home')->with($registroCorrecto);
+                    }
+                }else{
+                    $error = array(
+                        'mensaje' => 'El Codigo Ingresado Expiro',
+                        'title' => ' Verifique Codigo'
+                    );
+                }
+
+            }catch(QueryException $ex){
+                $correo = array(
+                    'mensaje' => $ex->getMessage(),
+                    'title' => 'Email'
                 );
-                return redirect('login_socios')->with($registroCorrecto);
-            }else{
-                $error = array(
-                    'mensaje' => 'El Codigo Ingresado Expiro',
-                    'title' => ' Verifique Codigo'
-                );
+                return back()->with($correo);
             }
         }
     }
@@ -187,17 +200,15 @@ class SpecialController extends Controller
 
     public function getClientesResevaciones(){
         $idUsurio = Auth::id();
-        $idCliente = Clientes::where('idUser',$idUsurio)->select('idClients')->first();
-
         $fecha = date('Y-m-d');
 
         $listBookigns = DB::table('bookings')
-        ->join('business_units','bookings.businessUnit','=','business_units.idUnits')
-        ->join('tables_units','bookings.idtable','=','tables_units.idTables')
+        ->join('business_units','bookings.businessUnit_id','=','business_units.idUnits')
+        ->join('tables_units','bookings.table_id','=','tables_units.idTables')
         ->select('business_units.idUnits','business_units.nameUnit','business_units.phone1','tables_units.num_mesa','tables_units.number_chairs','bookings.*')
-        ->where('bookings.B_date','>',$fecha)
+        ->where('bookings.bdate','>',$fecha)
         ->where('bookings.status',1)
-        ->where('bookings.clients',$idCliente->idClients)
+        ->where('bookings.usuario_id',$idUsurio)
         ->get();
 
         return $listBookigns;
@@ -212,10 +223,10 @@ class SpecialController extends Controller
         $fecha = date('Y-m-d');
 
         $listBookings = DB::table('bookings')
-        ->join('business_units','bookings.businessUnit','=','business_units.idUnits')
-        ->join('tables_units','bookings.idtable','=','tables_units.idTables')
+        ->join('business_units','bookings.businessUnit_id','=','business_units.idUnits')
+        ->join('tables_units','bookings.table_id','=','tables_units.idTables')
         ->select('business_units.nameUnit','tables_units.num_mesa','bookings.*')
-        ->where('bookings.clients',$idCliente->idClients)
+        ->where('bookings.usuario_id',$idUsurio)
         ->get();
 
         return view('components.clientes.allBookings')->with(compact('listBookings','cliente'));
@@ -234,7 +245,7 @@ class SpecialController extends Controller
 
     public function getMesasUnidad($id){
         $mesas = Mesas::where('units',$id)->get();
-        return $mesas;
+        return json_encode($mesas);
     }
 
     public function postReservacion(Request $request){
@@ -248,14 +259,13 @@ class SpecialController extends Controller
         ]);
 
         $idUser = Auth::id();
-        $Cliente = Clientes::where('idUser',$idUser)->select('idClients')->first();
 
         $bookings = new Bookins;
-        $bookings->businessUnit = $request->businessUnit;
-        $bookings->idtable = $request->table;
-        $bookings->clients = $Cliente->idClients;
-        $bookings->B_date = $request->fecha;
-        $bookings->B_hour = $request->hora;
+        $bookings->businessUnit_id = $request->businessUnit;
+        $bookings->table_id = $request->table;
+        $bookings->usuario_id = $idUser;
+        $bookings->bdate = $request->fecha;
+        $bookings->bhour = $request->hora;
         $bookings->pax = $request->personas;
         $bookings->status = 1;
         $bookings->save();
@@ -267,7 +277,6 @@ class SpecialController extends Controller
         );
 
         return $notificacion;
-        
     }
 
     public function getlistaunidades($id){
@@ -275,13 +284,96 @@ class SpecialController extends Controller
         return $unidades;
     }
 
+    public function usuariosUnidad(){
+        $idUsuario = Auth::id();
+        $idCompany = Socios::where('idUser', $idUsuario)->first();
+        $unidades = $this->getlistaunidades($idCompany->idCompanies);
+        return view('components.socios.usuarioUnidad')->with(compact('unidades'));
+    }
+
+    public function getUsuariosUnidad(){
+        $idUsuario = Auth::id();
+        $idCompany = Socios::where('idUser', $idUsuario)->first();
+
+        $listausuarios = DB::table('business_units')
+        ->join('users_units', 'business_units.idUnits','=','users_units.unit_id')
+        ->join('users', 'users_units.user_id','=','users.id')
+        ->select('users.name','users.lastname','users.email','business_units.nameUnit')
+        ->where('business_units.idcompany', $idCompany->idCompanies)
+        ->get();
+
+        return json_encode($listausuarios);
+    }
+
+    public function usuariosUnidadStore(Request $request){
+         
+        $validation = $request->validate([
+            'name' => 'required|string',
+            'lastname' => 'required|string',
+            'email' => 'required|email',
+            'unidad' => 'required|integer'
+        ]);
+
+        $date = date('Y-m-d H:i:s');
+        $rfc = BusinessUnits::where('idUnits', $request->unidad)->select('RFC')->first();
+        $unidadUser = UserUnits::where('unit_id',$request->unidad)->count();
+
+        if($unidadUser >= 1){
+            $mensaje = array(
+                'messageHeader' => 'Usuario de Unidad',
+                'messageDB' => 'Ya se a creado un usuario de la unidad seleccionada!',
+                'alert-type' => 'info'
+            );
+            return $mensaje;
+        }
+
+        try{
+            $user = User::create([
+                'name' => $request->name,
+                'lastname' => $request->lastname,
+                'email' => $request->email,
+                'email_verified_at' => $date,
+                'password' => $rfc->RFC,
+                'rol' => 3,
+                'client_id' => '',
+                'created_at' => $date,
+                'updated_at' => $date
+            ]);
+
+            $selectUser = User::where('email', $request->email)->select('id')->first();
+            //$request->email->sendEmailVerificationNotification();
+
+            $userunit = new UserUnits;
+            $userunit->user_id = $selectUser->id;
+            $userunit->unit_id = $request->unidad;
+            $userunit->save();
+
+    
+            $mensaje = array(
+                'messageHeader' => 'Usuario de Unidad',
+                'messageDB' => 'Usuario creado, la contraseña por defecto es el RFC de la unidad de negocio!',
+                'alerttype' => 'success'
+            );
+    
+            return $mensaje;
+        }catch(QueryException $ex){
+            $mensaje = array(
+                'messageHeader' => 'Usuario de Unidad',
+                'messageDB' => $ex->getMessage(),
+                'alerttype' => 'warning'
+            );
+            return $mensaje;
+        }
+    }
+
+
     //clientes
     public function postBuscarMesas(Request $request){
 
         $hora = $request->hora.':00';
 
-        $mesas = DB::select("SELECT tables_units.* FROM tables_units WHERE NOT EXISTS (SELECT null FROM bookings WHERE bookings.idtable = tables_units.idTables".
-        " AND bookings.B_date= "."'$request->fecha'"." AND bookings.B_hour="."'$hora'".") AND tables_units.units = ".$request->businessUnit." GROUP BY tables_units.idTables");
+        $mesas = DB::select("SELECT tables_units.* FROM tables_units WHERE NOT EXISTS (SELECT null FROM bookings WHERE bookings.table_id = tables_units.idTables".
+        " AND bookings.bdate= "."'$request->fecha'"." AND bookings.bhour="."'$hora'".") AND tables_units.units = ".$request->businessUnit." GROUP BY tables_units.idTables");
 
         return $mesas;
     }
@@ -292,17 +384,17 @@ class SpecialController extends Controller
 
     public function cancelarReservacion($id){
         $booking = Bookins::where('idBooking',$id)->first();
-        $horaUnidad = BusinessUnits::select('cancelation_time_limit')->where('idUnits',$booking->businessUnit)->first();
+        $horaUnidad = BusinessUnits::select('cancelation_time_limit')->where('idUnits',$booking->businessUnit_id)->first();
 
         $fechaNow = date('Y-m-d');
 
         $horaNow = Carbon::now();
         $horaNow->subHour(1);
 
-        $horaReserva = Carbon::parse($booking->B_hour); //date($booking->B_hour);
+        $horaReserva = Carbon::parse($booking->bhour); //date($booking->B_hour);
         $horapermitida = $horaReserva->subHour($horaUnidad->cancelation_time_limit);
 
-        if( $fechaNow < $booking->B_date ){
+        if( $fechaNow < $booking->bdate ){
             $units = Bookins::where('idBooking',$id)
             ->update([
                 'status' => 2,
@@ -315,7 +407,7 @@ class SpecialController extends Controller
             $listaReservacion = $this->getClientesResevaciones();
             return compact('notificacion','listaReservacion');
         }
-        else if($fechaNow == $booking->B_date){
+        else if($fechaNow == $booking->bdate){
             if($horaNow->toTimeString() < $horapermitida->toTimeString()){
                 $units = Bookins::where('idBooking',$id)
                 ->update([
@@ -347,16 +439,37 @@ class SpecialController extends Controller
 
     }
 
-    public function consAllReservaciones($unidad){
-        $reservaciones = DB::table('bookings')
-        ->join('clients','bookings.clients','=','clients.idClients')
-        ->join('users','clients.idUser','=','users.id')
-        ->join('tables_units','bookings.idtable','=','tables_units.idTables')
-        ->select('users.name','users.lastname','clients.phone','tables_units.num_mesa','bookings.*')
-        ->where('bookings.businessUnit',$unidad)
-        ->orderBy('bookings.created_at','desc')
-        ->get();
-        return $reservaciones;
+    public function consAllReservaciones(Request $request){
+
+        if($request->fecha == '' ){
+            $reservaciones = DB::table('bookings')
+            ->join('users','bookings.usuario_id','=','users.id')
+            ->join('tables_units','bookings.table_id','=','tables_units.idTables')
+            ->select('users.name','users.lastname','users.rol','tables_units.num_mesa','bookings.*')
+            ->where('bookings.businessUnit_id',$request->idNegocios)
+            ->orderBy('bookings.created_at','desc')
+            ->get();
+
+            return json_encode($reservaciones);
+        }
+        else if($request->fecha == '' && $request->idNegocios = ''){
+            return '';
+        }
+        else{
+            $reservaciones = DB::table('bookings')
+                ->join('users','bookings.usuario_id','=','users.id')
+                //->join('clients','clients.idClients','=','users.id')
+                ->join('tables_units','bookings.table_id','=','tables_units.idTables')
+                ->select('users.name','users.lastname','users.rol','tables_units.num_mesa','bookings.*')
+                ->where('bookings.businessUnit_id',$request->idNegocios)
+                ->where('bookings.bdate', $request->fecha)
+                ->orderBy('bookings.created_at','desc')
+                ->get();
+
+                return json_encode($reservaciones);
+        }
+
+        
     }
 
     public function confirmarLegadaReservacion(Request $request){
@@ -387,6 +500,130 @@ class SpecialController extends Controller
         );
 
         return $notificacion;
+    }
+    // fin clientes
+
+    /** metodos **/
+    public function profileUser(){
+        return view('components.perfil');
+    }
+
+    public function getDatosUserProfile(){
+        $idUser = Auth::id();
+        $datosUser = User::where('id', $idUser)->first();
+
+        return json_encode($datosUser);
+    }
+
+    public function updateDatosUserProfile(Request $request){
+
+        $validation = $request->validate([
+            'nombre' => 'required|string',
+            'apellidos' => 'required|string',
+            'correo' => 'required|email'
+        ]);
+
+        $users = User::where('id',$request->id)
+        ->update([
+            'name' => $request->nombre,
+            'lastname' => $request->apellidos,
+            'email' => $request->correo
+        ]);
+
+        $notification = array(
+            'title' => 'Datos del Pefil',
+            'mensaje' => 'Datos actulizados correctamente!',
+            'tipo' => 'success'
+        );
+
+        return $notification;
+    }
+
+    public function updatePassword(Request $request){
+        $validation = $request->validate([
+            'nueva' => 'required|string',
+            'actual' => 'required|string',
+            'confirmarNueva' => 'required|string' 
+        ]);
+
+        if($request->nueva == $request->confirmarNueva){
+
+            $password = DB::table('users')->select('password')->where('id', Auth::id())->first();
+            $passwordActual = $password->password;
+            $passwordNueva = Hash::make($request->actual);
+
+            if(Hash::check($request->actual, $passwordActual)){
+                
+                if($request->nueva != $request->actual ){
+                    $updatePass = DB::table('users')
+                    ->where('id', Auth::id())
+                    ->update([
+                        'password' => Hash::make($request->nueva)
+                    ]);
+
+                    $mensaje = array(
+                        'title' => 'Cambio de Contraseña',
+                        'mensaje' => 'La contraseña se actualizo correctamente',
+                        'tipo' => 'success' 
+                    );
+                    return $mensaje;
+                }else{
+                    $mensaje = array(
+                        'title' => 'Cambio de Contraseña',
+                        'mensaje' => 'La nueva contraseña no puede ser igual que la anterior',
+                        'tipo' => 'error' 
+                    );
+                    return $mensaje;
+                }
+
+            }else{
+                $mensaje = array(
+                    'title' => 'Cambio de Contraseña',
+                    'mensaje' => 'La contraseña (actual) es incorrecta',
+                    'tipo' => 'error' 
+                );
+                return $mensaje;
+            }
+
+        }else{
+            $mensaje = array(
+                'title' => 'Cambio de Contraseña',
+                'mensaje' => 'La contraseña que intenta poner como nueva no coinciden',
+                'tipo' => 'error' 
+            );
+            return $mensaje;
+        }
+
+    }
+
+    public function getUsersReservaciones(){
+        $idUsuario = Auth::id();
+
+        $listBookings = DB::table('bookings')
+        ->join('business_units','bookings.businessUnit_id','=','business_units.idUnits')
+        ->join('tables_units','bookings.table_id','=','tables_units.idTables')
+        ->select('business_units.nameUnit','tables_units.num_mesa','bookings.*')
+        ->where('bookings.usuario_id',$idUsuario)
+        ->get();
+
+        return view('components.socios.consMisReservaciones')->with(compact('listBookings'));
+    }
+
+    public function getAdminUsuariosUnidad(){
+
+        $listausuarios = DB::table('business_units')
+        ->join('users_units', 'business_units.idUnits','=','users_units.unit_id')
+        ->join('users', 'users_units.user_id','=','users.id')
+        ->select('users.name','users.lastname','users.email','business_units.nameUnit')
+        ->get();
+
+        return json_encode($listausuarios);
+    }
+
+    public function viewAdminUserUnits(){
+        $unidades = BusinessUnits::all();
+
+        return view('components.admin.usuariosUnidad')->with(compact('unidades'));
     }
 
 }

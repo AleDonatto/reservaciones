@@ -90,6 +90,7 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom User</h6>
             <a href="" class="collapse-item">Nuevo Usuario</a>
+            <a href="{{ route('viewAdminUserUnits') }}" class="collapse-item">Usuario de Unidad</a>
         </div>
     </div>
 </li>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\Socios;
 use App\BusinessUnits;
 
@@ -70,6 +71,34 @@ class SociosBusinessUnitController extends Controller
         $idUser = Auth::id();
         $idSocio = Socios::select('idCompanies')->where('idUser',$idUser)->first();
 
+        if($request->imagen == null){
+
+            $bussinesUnits = new BusinessUnits;
+            $bussinesUnits->idcompany = $idSocio->idCompanies;
+            $bussinesUnits->RFC = $request->RFC;
+            $bussinesUnits->nameUnit = $request->nameUnit;
+            $bussinesUnits->phone1 = $request->telefono1;
+            $bussinesUnits->phone2 = $request->telefono2;
+            $bussinesUnits->address = $request->correo;
+            $bussinesUnits->webSite = $request->sitioweb;
+            $bussinesUnits->nameContact = $request->namecontact;
+            $bussinesUnits->cancelation_time_limit = $request->horacancelation;  
+            $bussinesUnits->imagen = '';
+            $bussinesUnits->save();
+
+            $notification = array(
+                'messageHeader' => 'Unidades de Negocio',
+                'messageDB' => 'Unidad agregada con exito!',
+                'alert-type' => 'success'
+            );
+    
+            return $notification; 
+        }
+
+        $eliminar = array(" ", ".");
+        $nameImagen = mb_strtolower(str_replace($eliminar, "", $request->nameUnit));
+        $path = $request->file('imagen')->storeAs('public', $nameImagen.'.jpg');
+
         $bussinesUnits = new BusinessUnits;
         $bussinesUnits->idcompany = $idSocio->idCompanies;
         $bussinesUnits->RFC = $request->RFC;
@@ -79,7 +108,8 @@ class SociosBusinessUnitController extends Controller
         $bussinesUnits->address = $request->correo;
         $bussinesUnits->webSite = $request->sitioweb;
         $bussinesUnits->nameContact = $request->namecontact;
-        $bussinesUnits->cancelation_time_limit = $request->horacancelation;   
+        $bussinesUnits->cancelation_time_limit = $request->horacancelation;  
+        $bussinesUnits->imagen = $path;
         $bussinesUnits->save();
 
         $notification = array(
@@ -126,38 +156,95 @@ class SociosBusinessUnitController extends Controller
     public function update(Request $request, $id)
     {
         //
-
         $validation = $request->validate([
-            'rfc' => 'required|string',
-            'unidad' => 'required|string',
+            'RFC' => 'required|string',
+            'idCompany' => 'required|integer',
+            'idUnit' => 'required|integer',
             'telefono1' => 'required|string',
             'telefono2' => 'required|string',
             'correo' => 'required|email',
             'sitioweb' => 'required|string',
+            'nameUnit' => 'required|string',
             'namecontact' => 'required|string',
-            'hora' => 'required|integer'
+            'horacancelation' => 'required|integer'
         ]);
 
-        $units = BusinessUnits::where('idUnits',$request->idunidad)
-        ->where('idcompany',$request->compania)
+        if($request->imagen == null){
+
+            $units = BusinessUnits::where('idUnits',$request->idUnit)
+            ->where('idcompany',$request->idCompany)
+            ->update([
+                'RFC' => $request->RFC,
+                'nameUnit' => $request->nameUnit,
+                'phone1' => $request->telefono1,
+                'phone2' => $request->telefono2,
+                'address' => $request->correo,
+                'webSite' => $request->sitioweb,
+                'nameContact' => $request->namecontact,
+                'cancelation_time_limit' => $request->horacancelation
+            ]);
+            
+            $notification = array(
+                'messageHeader' => 'Unidades de Negocio',
+                'messageDB' => 'Datos modificados con exito!',
+                'alert-type' => 'success'
+            );
+
+            return $notification;
+
+        }else if($request->file('imagen')){
+
+            Storage::delete($request->imagenAnterior);
+
+            $eliminar = array(" ", ".");
+            $nameImagen = mb_strtolower(str_replace($eliminar, "", $request->nameUnit));
+            $path = $request->file('imagen')->storeAs('public', $nameImagen.'.jpg');    
+
+            $units = BusinessUnits::where('idUnits',$request->idUnit)
+            ->where('idcompany',$request->idCompany)
+            ->update([
+                'RFC' => $request->RFC,
+                'nameUnit' => $request->nameUnit,
+                'phone1' => $request->telefono1,
+                'phone2' => $request->telefono2,
+                'address' => $request->correo,
+                'webSite' => $request->sitioweb,
+                'nameContact' => $request->namecontact,
+                'cancelation_time_limit' => $request->horacancelation,
+                'imagen' => $path
+            ]);
+
+            $notification = array(
+                'messageHeader' => 'Unidades de Negocio',
+                'messageDB' => 'Datos modificados con exito!',
+                'alert-type' => 'success'
+            );
+
+            return $notification;
+        }
+        
+        $units = BusinessUnits::where('idUnits',$request->idUnit)
+        ->where('idcompany',$request->idCompany)
         ->update([
-            'RFC' => $request->rfc,
-            'nameUnit' => $request->unidad,
+            'RFC' => $request->RFC,
+            'nameUnit' => $request->nameUnit,
             'phone1' => $request->telefono1,
             'phone2' => $request->telefono2,
             'address' => $request->correo,
             'webSite' => $request->sitioweb,
             'nameContact' => $request->namecontact,
-            'cancelation_time_limit' => $request->hora
+            'cancelation_time_limit' => $request->horacancelation
         ]);
 
         $notification = array(
             'messageHeader' => 'Unidades de Negocio',
-            'messageDB' => 'Unidad Modificada con exito!',
+            'messageDB' => 'Datos modificados con exito!',
             'alert-type' => 'success'
         );
 
-        return redirect()->route('socios_negocios.index')->with($notification);
+        return $notification;
+        
+        //return redirect()->route('socios_negocios.index')->with($notification);
     }
 
     /**

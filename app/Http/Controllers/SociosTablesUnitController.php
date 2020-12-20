@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 use App\Mesas;
 use App\Socios;
+use App\BusinessUnits;
 use App\Bookins;
 
 class SociosTablesUnitController extends Controller
@@ -20,19 +21,21 @@ class SociosTablesUnitController extends Controller
     public function index(Request $request)
     {
         //
-        if($request->json()){
+        if($request->ajax()){
+
+            $mesas = DB::table('tables_units')
+            ->select('tables_units.*')
+            ->where('tables_units.units',$request->idUnidad)
+            ->get();
+
+            return $mesas;
         }
 
         $idUser = Auth::id();
         $idSocio = Socios::select('idCompanies')->where('idUser',$idUser)->first();
+        $unidades = BusinessUnits::where('idcompany', $idSocio->idCompanies)->get();
 
-        $mesas = DB::table('tables_units')
-        ->join('business_units','business_units.idUnits','=','tables_units.units')
-        ->select('business_units.nameUnit','tables_units.*')
-        ->where('business_units.idcompany',$idSocio->idCompanies)
-        ->get();
-
-        return view('components.socios.consMesas')->with(compact('mesas'));
+        return view('components.socios.consMesas')->with(compact('unidades'));
     }
 
     /**
@@ -125,16 +128,16 @@ class SociosTablesUnitController extends Controller
     {
         //
         $validation = $request->validate([
-            'numMesa' => 'required|string',
-            'numPersonas' => 'required|string',
-            'estatusMesa' => 'required|string'
+            'num_mesa' => 'required|string',
+            'number_chairs' => 'required|integer',
+            'status' => 'required|string'
         ]);
 
-        $units = Mesas::where('idTables',$request->idMesa)
+        $units = Mesas::where('idTables',$request->idTables)
         ->update([
-            'num_mesa' => $request->numMesa,
-            'number_chairs' => $request->numPersonas,
-            'status' => $request->estatusMesa
+            'num_mesa' => $request->num_mesa,
+            'number_chairs' => $request->number_chairs,
+            'status' => $request->status
         ]);
 
         $notification = array(
@@ -143,7 +146,7 @@ class SociosTablesUnitController extends Controller
             'alert-type' => 'success'
         );
 
-        return back()->with($notification);
+        return $notification;
     }
 
     /**

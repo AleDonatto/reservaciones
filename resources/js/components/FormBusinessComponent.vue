@@ -22,48 +22,48 @@
                         <v-row>
                             <v-col cols="12" md="6">
                                 <ValidationProvider name="RFC" rules="required|rfc|max:15" v-slot="{errors}" required>
-                                    <v-text-field v-model="companies.RFC" label="RFC" :error-messages="errors" required :counter="15"></v-text-field>
+                                    <v-text-field outlined v-model="companies.RFC" label="RFC" :error-messages="errors" required :counter="15"></v-text-field>
                                 </ValidationProvider>
                             </v-col>
                             <v-col cols="12" md="6">
                                 <ValidationProvider name="nombreUnit" rules="required|max:50" v-slot="{errors}" required>
-                                    <v-text-field v-model="companies.nameUnit" label="Nombre Unidad" :error-messages="errors" :counter="50" required></v-text-field>
+                                    <v-text-field outlined v-model="companies.nameUnit" label="Nombre Unidad" :error-messages="errors" :counter="50" required></v-text-field>
                                 </ValidationProvider>
                             </v-col>
                         </v-row>
                         <v-row>
                             <v-col cols="12" md="6">
                                 <ValidationProvider name="telefono1" rules="required|max:10" v-slot="{errors}">
-                                    <v-text-field v-model="companies.telefono1" label="Telefono 1" :error-messages="errors" :counter="10" required></v-text-field>
+                                    <v-text-field outlined v-model="companies.telefono1" label="Telefono 1" :error-messages="errors" :counter="10" required></v-text-field>
                                 </ValidationProvider>
                             </v-col>
                             <v-col cols="12" md="6">
                                 <ValidationProvider name="telefono2" rules="max:10" v-slot="{errors}">
-                                    <v-text-field v-model="companies.telefono2" label="Telefono 2" :error-messages="errors" :counter="10"></v-text-field>
+                                    <v-text-field outlined v-model="companies.telefono2" label="Telefono 2" :error-messages="errors" :counter="10"></v-text-field>
                                 </ValidationProvider>
                             </v-col>
                         </v-row>
                         <v-row>
                             <v-col cols="12" md="6">
                                 <ValidationProvider name="correo" rules="required|email|max:50" v-slot="{errors}">
-                                    <v-text-field v-model="companies.correo" label="E-Mail" :error-messages="errors" :counter="50" required></v-text-field>
+                                    <v-text-field outlined v-model="companies.correo" label="E-Mail" :error-messages="errors" :counter="50" required></v-text-field>
                                 </ValidationProvider>
                             </v-col>
                             <v-col cols="12" md="6">
                                 <ValidationProvider name="sitioweb" rules="max:50" v-slot="{errors}">
-                                    <v-text-field v-model="companies.sitioweb" label="Sitio Web" :error-messages="errors" :counter="50"></v-text-field>
+                                    <v-text-field outlined v-model="companies.sitioweb" label="Sitio Web" :error-messages="errors" :counter="50"></v-text-field>
                                 </ValidationProvider>
                             </v-col>
                         </v-row>
                         <v-row>
                             <v-col cols="12" md="6">
                                 <ValidationProvider name="namecontact" rules="required|max:50" v-slot="{errors}">
-                                    <v-text-field v-model="companies.namecontact" label="Nombre de Contacto" :error-messages="errors" :counter="50" required></v-text-field>
+                                    <v-text-field outlined v-model="companies.namecontact" label="Nombre de Contacto" :error-messages="errors" :counter="50" required></v-text-field>
                                 </ValidationProvider>
                             </v-col>
                             <v-col cols="12" md="6">
                                 <ValidationProvider name="horacancelation" rules="required" v-slot="{errors}">
-                                    <v-text-field v-model="companies.sitioweb" label="Timpo de Cancelacion" :error-messages="errors" type="number" min="0" max="10" step="1"></v-text-field>
+                                    <v-text-field outlined v-model="companies.sitioweb" label="Timpo de Cancelacion" :error-messages="errors" type="number" min="0" max="10" step="1"></v-text-field>
                                 </ValidationProvider>
                             </v-col>
                         </v-row>
@@ -124,8 +124,12 @@ export default {
                 toastr.success(server.messageDB,server.messageHeader,{timeOut :  15000});
             })
             .catch( err => {
-                const error = err 
-                console.log(error)
+                const error = err.respose
+
+                toastr.options.closeButton = true;
+                toastr.options.escapeHtml = true;
+                toastr.options.progressBar = true;
+                toastr.success(error,'Ocurrio un Problema',{timeOut :  15000}); 
             })
 
             this.$refs.form.validate().then(success => {

@@ -16,6 +16,7 @@ class TablesUnits extends Migration
         Schema::create('tables_units', function (Blueprint $table) {
             $table->id('idTables');
             $table->foreignId('units')->references('idUnits')->on('business_units');
+            $table->string('num_mesa',20);
             $table->integer('number_chairs');
             $table->string('status',10);
             $table->timestamps();

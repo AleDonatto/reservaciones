@@ -105,8 +105,9 @@
             </form>
         </div>
     </div>-->
-
-    <formsocios-componet></formsocios-componet>
+    <v-app>
+        <formsocios-componet></formsocios-componet>
+    </v-app>
     <!--<div class="justify-content-center col-md-12 col-xl-12 col-sm-12">
         <form action="{{ route('socios.store') }}" method="post">
             @csrf
@@ -202,30 +203,3 @@
     </div>-->
 </div>
 @endsection
-
-@push('scripts')
-<script>
-    /*$.validator.addMethod("RFC", function (value, element) {
-        if (value !== '') {
-            var patt = new RegExp("^[A-Z,Ñ,&]{3,4}[0-9]{2}[0-1][0-9][0-3][0-9][A-Z,0-9]?[A-Z,0-9]?[0-9,A-Z]?$");
-            return patt.test(value);
-        } else {
-            return false;
-        }
-    }, "Ingrese un RFC valido");*/
-
-    /*$('#RFC').on('blur',function(){
-        var value = $("#RFC").val()
-
-        if(value !== ''){
-            var patt = new RegExp("^[A-Z,Ñ,&]{3,4}[0-9]{2}[0-1][0-9][0-3][0-9][A-Z,0-9]?[A-Z,0-9]?[0-9,A-Z]?$");
-            var reg =  patt.test(value)
-
-            $('#validacion').text('rfc invalido')
-            console.log(reg)
-        }else{
-            return false
-        }
-    });*/
-</script>
-@endpush

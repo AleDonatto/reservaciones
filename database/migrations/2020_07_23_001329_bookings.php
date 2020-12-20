@@ -15,11 +15,11 @@ class Bookings extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id('idBooking');
-            $table->foreignId('businessUnit')->references('idUnits')->on('business_units');
-            $table->foreignId('table')->references('idTables')->on('tables_units');
-            $table->foreignId('clients')->references('idCliets')->on('clients');
-            $table->date('date');
-            $table->time('hour',0);
+            $table->foreignId('businessUnit_id')->references('idUnits')->on('business_units');
+            $table->foreignId('table_id')->references('idTables')->on('tables_units');
+            $table->foreignId('usuario_id')->references('id')->on('users');
+            $table->date('bdate');
+            $table->time('bhour',0);
             $table->integer('pax');
             $table->string('status',10);
             $table->timestamps();

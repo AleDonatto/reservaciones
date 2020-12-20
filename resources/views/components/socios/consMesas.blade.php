@@ -6,7 +6,11 @@
         <h1 class="h3 mb-0 text-gray-800">Consulta de Mesas</h1>
     </div>
 
-    <div class="card shadow">
+    <v-app>
+        <socios-consulta-mesas :unidades="{{ $unidades }}"></socios-consulta-mesas>
+    </v-app>
+
+    <!--<div class="card shadow">
         <div class="card-header py-3">
             <h4 class="m-0 font-weight-bold text-primary">Todas las mesas</h4>
         </div>
@@ -21,30 +25,25 @@
                     <th>Opciones</th>
                 </thead>
                 <tbody>
-                    @foreach($mesas as $item)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->nameUnit }}</td>
-                        <td>{{ $item->num_mesa }}</td>
-                        <td>{{ $item->number_chairs }}</td>
-                        @if($item->status == 0)
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td>Disponible</td>
-                        @elseif($item->status == 1)
                         <td>Reservada</td>
-                        @endif  
                         <td>
                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#mesasModal"
-                            data-id="{{ $item->idTables }}" data-num="{{ $item->num_mesa }}" data-sillas="{{ $item->number_chairs }}"
-                            data-estatus="{{ $item->status }}">
+                            data-id="" data-num="" data-sillas=""
+                            data-estatus="">
                                 <i class="far fa-edit"></i>
                             </button>
                         </td>
                     </tr>
-                    @endforeach
                 </tbody>
             </table>
         </div>
-    </div>
+    </div>-->
 </div>
 
 <div class="modal fade" id="mesasModal" tabindex="-1" aria-labelledby="mesasModalLabel" aria-hidden="true">
