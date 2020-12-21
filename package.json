@@ -24,8 +24,6 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "datatables.net-bs4": "^1.10.21",
-        "datatables.net-buttons-bs4": "^1.6.2",
         "sweetalert": "^2.1.2",
         "vee-validate": "^3.3.7",
         "vue-router": "^3.4.3",
