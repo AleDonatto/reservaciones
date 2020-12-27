@@ -84,7 +84,7 @@
                                                 <label for="numMesa">Mesa</label>
                                                 <ValidationProvider name="mesa" rules="required" v-slot="{errors}">
                                                     <input type="text" name="numMesa" id="numMesa" class="form-control" v-model="mesas.num_mesa"
-                                                    :class="{'is-invalid': errors[0] }">
+                                                    :class="{'is-invalid': errors[0] }" maxlength="10">
 
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ errors[0] }}</strong>

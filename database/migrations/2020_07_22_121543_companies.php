@@ -19,9 +19,9 @@ class Companies extends Migration
             $table->string('name');
             $table->string('phone1',10);
             $table->string('phone2',10);
-            $table->string('email');
-            $table->string('website');
-            $table->string('name_contact');
+            $table->string('email',50);
+            $table->string('website',50);
+            $table->string('name_contact',50);
             $table->foreignId('idUser')->references('id')->on('users');
             $table->timestamps();
         });

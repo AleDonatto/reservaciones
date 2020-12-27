@@ -14,7 +14,7 @@
                                     <label for="nombre">Nombre</label>
                                     <ValidationProvider name="nombre" rules="required" v-slot="{ errors }">
                                         <input type="text" name="nombre" id="nombre" class="form-control" v-model="user.nombre"
-                                        :class="{'is-invalid': errors[0] }">
+                                        :class="{'is-invalid': errors[0] }" maxlength="50">
 
                                         <div class="invalid-feedback" role="alert">
                                             <strong>{{ errors[0] }}</strong>
@@ -25,7 +25,7 @@
                                     <label for="apellidos">Apellidos</label>
                                     <ValidationProvider name="apellidos" rules="required" v-slot="{ errors }">
                                         <input type="text" name="apellidos" id="apellidos" class="form-control" v-model="user.apellidos"
-                                        :class="{'is-invalid': errors[0]}">
+                                        :class="{'is-invalid': errors[0]}" maxlength="50">
                                         
                                         <div class="invalid-feedback" role="alert">
                                             <strong>{{ errors[0] }}</strong>
@@ -36,7 +36,7 @@
                                     <label for="correo">E-mail</label>
                                     <ValidationProvider name="correo" rules="required" v-slot="{ errors }">
                                         <input type="email" name="" id="" class="form-control" v-model="user.correo"
-                                        :class="{'is-invalid': errors[0]}">
+                                        :class="{'is-invalid': errors[0]}" maxlength="50">
 
                                         <div class="invalid-feedback" role="alert">
                                             <strong>{{ errors[0] }}</strong>

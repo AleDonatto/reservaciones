@@ -60,6 +60,16 @@ Vue.component('perfil_user', require('./components/PerfilUser.vue').default);
 Vue.component('password_user', require('./components/CambioPassword.vue').default);
 
 Vue.component('admin-user-units', require('./components/admin/AdminUsuarioUnidad.vue').default);
+Vue.component('codigos-registro', require('./components/admin/CodigoRegistro.vue').default);
+Vue.component('admin-reservaciones', require('./components/admin/FormBookingsAdmin.vue').default);
+Vue.component('admin_misreservaciones', require('./components/admin/MisReservacionesAdmin.vue').default);
+Vue.component('admin_allreservaciones', require('./components/admin/AllReservacionesAdmin').default);
+Vue.component('form-user-admin', require('./components/admin/FormUserAdmin.vue').default);
+
+Vue.component('form-mesas-userunits', require('./components/userunits/FormMesasUserUnits.vue').default);
+Vue.component('consmesas-userunits', require('./components/userunits/ConsMesasUserUnit.vue').default );
+Vue.component('form-reservaciones-userunit', require('./components/userunits/FormReservacionesUserUnit.vue').default);
+Vue.component('cons-reservaciones-userunit', require('./components/userunits/ConsReservacionesUserUnit.vue').default);
 
 const app = new Vue({
     router,

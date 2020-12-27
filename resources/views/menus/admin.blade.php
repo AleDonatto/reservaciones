@@ -61,7 +61,9 @@
     <div id="collapseBooking" class="collapse" aria-labelledby="headingBookig" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
-            <a href="" class="collapse-item">Consulta de Reservaciones</a>
+            <a href="{{ route('adminFormReservacion') }}" class="collapse-item">Reservar Mesa</a>
+            <a href="{{ route('adminMisReservaciones') }}" class="collapse-item">Mis Reservaciones</a>
+            <a href="{{ route('adminAllReservaciones') }}" class="collapse-item">Consulta de Reservaciones</a>
         </div>
     </div>
 </li>
@@ -76,7 +78,6 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Utilities:</h6>
             <a class="collapse-item" href="{{ route('codigos.create') }}">Nuevo Codigo</a>
-            <a class="collapse-item" href="">Consulta de codigos</a>
         </div>
     </div>
 </li>
@@ -89,7 +90,7 @@
     <div class="collapse" id="collapseUser" aria-labelledby="headingUser" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom User</h6>
-            <a href="" class="collapse-item">Nuevo Usuario</a>
+            <a href="{{ route('userAdministrador') }}" class="collapse-item">Nuevo Usuario</a>
             <a href="{{ route('viewAdminUserUnits') }}" class="collapse-item">Usuario de Unidad</a>
         </div>
     </div>

@@ -54,6 +54,8 @@
                 @elseif( Auth::user()->rol == 2)
                     @include('menus.socio')
                 @elseif( Auth::user()->rol == 3)
+                    @include('menus.userunit')
+                @elseif( Auth::user()->rol == 4)
                     @include('menus.cliente')
                 @endif
             </ul>

@@ -68,10 +68,10 @@ class SociosBusinessUnitController extends Controller
             'telefono2' => 'required|string' 
         ]);
 
-        $idUser = Auth::id();
-        $idSocio = Socios::select('idCompanies')->where('idUser',$idUser)->first();
+        /*$idUser = Auth::id();
+        $idSocio = Socios::select('idCompanies')->where('idUser',$idUser)->first();*/
 
-        if($request->imagen == null){
+        if(!$request->file('imagen')){
 
             $bussinesUnits = new BusinessUnits;
             $bussinesUnits->idcompany = $idSocio->idCompanies;
@@ -169,7 +169,7 @@ class SociosBusinessUnitController extends Controller
             'horacancelation' => 'required|integer'
         ]);
 
-        if($request->imagen == null){
+        if(!$request->file('imagen')){
 
             $units = BusinessUnits::where('idUnits',$request->idUnit)
             ->where('idcompany',$request->idCompany)
@@ -222,27 +222,6 @@ class SociosBusinessUnitController extends Controller
 
             return $notification;
         }
-        
-        $units = BusinessUnits::where('idUnits',$request->idUnit)
-        ->where('idcompany',$request->idCompany)
-        ->update([
-            'RFC' => $request->RFC,
-            'nameUnit' => $request->nameUnit,
-            'phone1' => $request->telefono1,
-            'phone2' => $request->telefono2,
-            'address' => $request->correo,
-            'webSite' => $request->sitioweb,
-            'nameContact' => $request->namecontact,
-            'cancelation_time_limit' => $request->horacancelation
-        ]);
-
-        $notification = array(
-            'messageHeader' => 'Unidades de Negocio',
-            'messageDB' => 'Datos modificados con exito!',
-            'alert-type' => 'success'
-        );
-
-        return $notification;
         
         //return redirect()->route('socios_negocios.index')->with($notification);
     }

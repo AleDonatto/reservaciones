@@ -10,10 +10,16 @@
                     <v-row>
                         <v-col cols="12" md="6">
                             <label for="company">Seleccione Compañia</label>
-                            <select name="company" id="company" class="form-control" v-model="id_company" :onchange="getUnidades()"> 
-                                <option value="" selected>Seleccione</option>
-                                <option :value="item.idCompanies" v-for="(item, index) in list_companies" :key="index">{{ item.name }}</option>
-                            </select>
+                            <ValidationProvider name="company" rules="required" v-slot="{ errors }">
+                                <select name="company" id="company" class="form-control" v-model="id_company" :onchange="getUnidades()" :class="{'is-invalid':errors[0]}"> 
+                                    <option value="" selected>Seleccione</option>
+                                    <option :value="item.idCompanies" v-for="(item, index) in list_companies" :key="index">{{ item.name }}</option>
+                                </select>
+
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ errors[0] }}</strong>
+                                </span>
+                            </ValidationProvider>
                         </v-col>
                         <v-col cols="12" md="6">
                             <label for="unidad">Seleccione Unidad</label>
@@ -29,13 +35,19 @@
                     </v-row>
                     <v-row>
                         <v-col cols="6" md="6" sm="6">
+                            <label for="num_mesa">Numero/Nombre Mesa</label>
                             <ValidationProvider name="num_mesa" rules="required|max:15" v-slot="{ errors }">
-                                <v-text-field v-model="mesas.numMesa" label="Nombre/numero Mesa" :error-messages="errors" :counter="15" ></v-text-field>
+                                <input type="text" name="num_mesa" id="" class="form-control" v-model="mesas.numMesa" maxlength="15" 
+                                :class="{'is-invalid':errors[0]}">
+                                <!--<v-text-field v-model="mesas.numMesa" label="Nombre/numero Mesa" :error-messages="errors" :counter="15" ></v-text-field>-->
                             </ValidationProvider>
                         </v-col>
                         <v-col cols="6" md="6" sm="6">
+                            <label for="sillas">Numero de Sillas</label>
                             <ValidationProvider name="sillas" rules="required" v-slot="{errors}">
-                                <v-text-field v-model="mesas.numerosillas" :error-messages="errors" type="number" min="1" max="10" step="1"></v-text-field>
+                                <input type="number" name="sillas" id="" class="form-control" v-model="mesas.numerosillas" min="1" max="50" step="1"
+                                :class="{'is-invalid':errors[0]}">
+                                <!--<v-text-field v-model="mesas.numerosillas" :error-messages="errors" type="number" min="1" max="10" step="1"></v-text-field>-->
                             </ValidationProvider>
                         </v-col>
                     </v-row>
@@ -60,8 +72,8 @@ export default {
     },
     data: () =>({
         listunits:[],
-        id_company: 0,
-        mesas:{ negocio: '', numMesa:'', numerosillas:0 },
+        id_company: '',
+        mesas:{ negocio: '', numMesa:'', numerosillas:1 },
         actual: 0, 
         anterior: 0
     }),

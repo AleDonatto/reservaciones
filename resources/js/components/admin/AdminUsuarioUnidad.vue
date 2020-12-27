@@ -12,7 +12,7 @@
                                 <label for="name">Nombre</label>
                                 <ValidationProvider name="name" rules="required" v-slot="{ errors }">
                                     <input type="text" name="name" id="name" v-model="usuario.name" class="form-control"
-                                    :class="{'is-invalid':errors[0] }">
+                                    :class="{'is-invalid':errors[0] }" maxlength="50">
 
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ errors[0] }}</strong>
@@ -23,7 +23,7 @@
                                 <label for="lastname">Apellidos</label>
                                 <ValidationProvider name="lastname" rules="required" v-slot="{ errors }">
                                     <input type="text" name="lastname" id="lastname" v-model="usuario.lastname" class="form-control"
-                                    :class="{'is-invalid': errors[0] }">
+                                    :class="{'is-invalid': errors[0] }" maxlength="50">
 
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ errors[0] }}</strong>
@@ -50,7 +50,8 @@
                             <div class="form-group col-md-6">
                                 <label for="correo">Correo</label>
                                 <ValidationProvider name="correo" rules="required" v-slot="{errors}">
-                                    <input type="email" name="correo" id="correo" v-model="usuario.email" class="form-control" :class="{'is-invalid':errors[0]}">
+                                    <input type="email" name="correo" id="correo" v-model="usuario.email" class="form-control" 
+                                    :class="{'is-invalid':errors[0]}" maxlength="50">
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ errors[0] }}</strong>
                                     </span>

@@ -95,11 +95,11 @@ class SociosTablesUnitController extends Controller
         $mesas = Mesas::where('units',$id)->get();
 
         $bookings = DB::table('clients')
-        ->join('bookings','bookings.clients','=','clients.idClients')
         ->join('users','users.id','=','clients.idUser')
+        ->join('bookings','bookings.usuario_id','=','users.id')
         ->select('users.name','users.lastname','clients.phone','bookings.*')
-        ->where('bookings.businessUnit',$id)
-        ->where('bookings.B_date',$dateNow->toDateString())
+        ->where('bookings.businessUnit_id',$id)
+        ->where('bookings.bdate',$dateNow->toDateString())
         ->where('bookings.status',1)
         ->get();
 

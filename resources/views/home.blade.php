@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 
-    @if(Auth::user()->rol == 3)
+    @if(Auth::user()->rol == 4)
         @include('components.clientes.homereservar')
     @endif
 

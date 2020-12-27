@@ -333,7 +333,7 @@ class SpecialController extends Controller
                 'lastname' => $request->lastname,
                 'email' => $request->email,
                 'email_verified_at' => $date,
-                'password' => $rfc->RFC,
+                'password' => Hash::make($rfc->RFC),
                 'rol' => 3,
                 'client_id' => '',
                 'created_at' => $date,
@@ -365,6 +365,54 @@ class SpecialController extends Controller
             return $mensaje;
         }
     }
+
+    public function adminFormReservacion(){
+        $unidades = DB::table('business_units')
+        ->select('business_units.*')
+        ->get();
+
+        return view('components.admin.formBookings')->with(compact('unidades'));
+    }
+
+    public function userAdministrador(){
+        $usuarios = DB::table('users')
+        ->select('users.name', 'users.lastname', 'users.email', 'users.rol')
+        ->where('users.rol', 1)
+        ->get();
+
+        return view('components.admin.formUserAdmin')->with(compact('usuarios'));
+    }
+
+    public function createUserAdmin(Request $request){
+
+        $validation = $request->validate([
+            'name' => 'required|string',
+            'lastname' => 'required|string',
+            'email' => 'required|email'
+        ]);
+
+        $date = date('Y-m-d H:i:s');
+
+        $usuario = User::create([
+            'name' => $request->name,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'email_verified_at' => $date,
+            'password' => Hash::make('quicktable'),
+            'rol' => 1,
+            'client_id' => '',
+            'created_at' => $date,
+            'updated_at' => $date
+        ]);
+
+        $usuarios = DB::table('users')
+        ->select('users.name', 'users.lastname', 'users.email', 'users.rol')
+        ->where('users.rol', 1)
+        ->get();
+        
+        return json_encode($usuarios);
+    }
+
 
 
     //clientes
@@ -458,7 +506,7 @@ class SpecialController extends Controller
         else{
             $reservaciones = DB::table('bookings')
                 ->join('users','bookings.usuario_id','=','users.id')
-                //->join('clients','clients.idClients','=','users.id')
+                ->join('clients','clients.idUser','=','users.id')
                 ->join('tables_units','bookings.table_id','=','tables_units.idTables')
                 ->select('users.name','users.lastname','users.rol','tables_units.num_mesa','bookings.*')
                 ->where('bookings.businessUnit_id',$request->idNegocios)
@@ -468,8 +516,6 @@ class SpecialController extends Controller
 
                 return json_encode($reservaciones);
         }
-
-        
     }
 
     public function confirmarLegadaReservacion(Request $request){
@@ -607,6 +653,25 @@ class SpecialController extends Controller
         ->get();
 
         return view('components.socios.consMisReservaciones')->with(compact('listBookings'));
+    }
+
+    public function getAdminReservaciones(){
+        $idUsuario = Auth::id();
+
+        $listBookings = DB::table('bookings')
+        ->join('business_units','bookings.businessUnit_id','=','business_units.idUnits')
+        ->join('tables_units','bookings.table_id','=','tables_units.idTables')
+        ->select('business_units.nameUnit','tables_units.num_mesa','bookings.*')
+        ->where('bookings.usuario_id',$idUsuario)
+        ->get();
+
+        return view('components.admin.consMisReservaciones')->with(compact('listBookings'));
+    }
+
+    public function adminAllBookings(){
+        $unidades = BusinessUnits::all();
+        
+        return view('components.admin.consReservaciones')->with(compact('unidades'));
     }
 
     public function getAdminUsuariosUnidad(){

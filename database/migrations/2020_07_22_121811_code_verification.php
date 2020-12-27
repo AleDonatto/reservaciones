@@ -15,7 +15,7 @@ class CodeVerification extends Migration
     {
         Schema::create('code_verifications', function (Blueprint $table) {
             $table->id('idCode');
-            $table->string('code_verification');
+            $table->string('code_verification',50);
             $table->date('date_expiration');
             $table->foreignId('user')->references('id')->on('users');
             $table->foreignId('companies')->references('idCompanies')->on('companies');

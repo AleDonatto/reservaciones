@@ -13,7 +13,7 @@
                             <label for="RFC">RFC <sup class="text-danger"> <strong>*</strong> </sup> </label>
                             <ValidationProvider name="RFC" rules="required|rfc" v-slot="{ errors }">
                                 <input type="text" name="RFC" id="RFC" class="form-control" placeholder="RFC" v-model="companies.RFC"
-                                :class="{ 'is-invalid': errors[0]}">
+                                :class="{ 'is-invalid': errors[0]}" maxlength="20">
 
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ errors[0] }}</strong>
@@ -24,7 +24,7 @@
                             <label for="nombreUNit">Nombre de la Unidad <sup class="text-danger"> <strong>*</strong> </sup></label>
                             <ValidationProvider name="nombreUnit" rules="required" v-slot="{ errors }">
                                 <input type="text" name="nombreUnit" id="nombreUnit" class="form-control" placeholder="Nombre de la Unidad"
-                                :class="{ 'is-invalid': errors[0] }" v-model="companies.nameUnit">
+                                :class="{ 'is-invalid': errors[0] }" v-model="companies.nameUnit" maxlength="50">
 
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ errors[0] }}</strong>
@@ -37,7 +37,7 @@
                             <label for="telefono1">Telefono 1 <sup class="text-danger"> <strong>*</strong> </sup></label>
                             <ValidationProvider name="telefono1" rules="required" v-slot="{ errors }">
                                 <input type="tel" name="telefono1" id="telefono1" class="form-control" placeholder="Telefono 1" v-model="companies.telefono1"
-                                :class="{ 'is-invalid': errors[0] }">
+                                :class="{ 'is-invalid': errors[0] }" maxlength="10">
 
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ errors [0] }}</strong>
@@ -48,7 +48,7 @@
                             <label for="telefono2">Telefono 2</label>
                             <ValidationProvider name="telefono2" rules="" v-slot="{ errors }">
                                 <input type="tel" name="telefono2" id="telefono2" class="form-control" placeholder="Telefono 2" v-model="companies.telefono2"
-                                :class="{ 'is-invalid':errors[0] }">
+                                :class="{ 'is-invalid':errors[0] }" maxlength="10">
 
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ errors[0] }}</strong>
@@ -61,7 +61,7 @@
                             <label for="correo">Correo <sup class="text-danger"> <strong>*</strong> </sup></label>
                             <ValidationProvider name="correo" rules="required" v-slot="{ errors }">
                                 <input type="email" name="correo" id="correo" class="form-control" placeholder="Correo" v-model="companies.correo"
-                                :class="{ 'is-invalid':errors[0] }">
+                                :class="{ 'is-invalid':errors[0] }" maxlength="50">
 
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ errors[0] }}</strong>
@@ -72,7 +72,7 @@
                             <label for="sitioweb">Sitio Web</label>
                             <ValidationProvider name="sitioweb" rules="" v-slot="{ errors }">
                                 <input type="text" name="sitioweb" id="sitioweb" class="form-control" placeholder="Sitio Web" v-model="companies.sitioweb"
-                                :class="{ 'is-invalid':errors[0] }">
+                                :class="{ 'is-invalid':errors[0] }" maxlength="50">
 
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ errors[0] }}</strong>
@@ -85,7 +85,7 @@
                             <label for="namecontact">Nombre del Contacto<sup class="text-danger"> <strong>*</strong> </sup></label>
                             <ValidationProvider name="namecontact" rules="required" v-slot="{ errors }">
                                 <input type="text" name="namecontact" id="namecontact" class="form-control" placeholder="Nombre del Contacto"
-                                :class="{ 'is-invalid':errors[0] }" v-model="companies.namecontact">
+                                :class="{ 'is-invalid':errors[0] }" v-model="companies.namecontact" maxlength="50">
 
                                 <div class="invalid-feedback" role="alert">
                                     <strong>{{ errors[0] }}</strong>
@@ -195,8 +195,6 @@ export default {
             axios.post("/socios_negocios",formData)
             .then(res => {
                 const server = res.data;
-
-                console.log(server)
 
                 toastr.options.closeButton = true;
                 toastr.options.escapeHtml = true; 

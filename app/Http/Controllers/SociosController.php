@@ -69,7 +69,6 @@ class SociosController extends Controller
         );
 
         return $notification;
-
     }
 
     /**
@@ -104,6 +103,38 @@ class SociosController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validation = $request->validate([
+            'RFC' => 'required|string',
+            'email' => 'required|email',
+            'idcompanies' => 'required|integer',
+            'name' => 'required|string',
+            'name_contact' => 'required|string',
+            'phone1' => 'required|string',
+            'phone2' => 'required|string',
+            'user' => 'required|integer',
+            'website' => 'required|string' 
+        ]);
+
+        Socios::where('idCompanies', $id)
+        ->where('idUser', $request->user)
+        ->update([
+            'RFC' => $request->RFC,
+            'name' => $request->name,
+            'phone1' => $request->phone1,
+            'phone2' => $request->phone2,
+            'email' => $request->email,
+            'website' => $request->website,
+            'name_contact' => $request->name_contact
+        ]);
+
+        $notification = array(
+            'messageHeader' => 'Socios',
+            'messageDB' => 'Datos del socio modificado con exito!',
+            'alert-type' => 'success'
+        );
+
+        return $notification;
+
     }
 
     /**

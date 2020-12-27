@@ -83,7 +83,7 @@
                                     <label for="personas">Personas</label>
 
                                     <ValidationProvider name="personas" rules="required" v-slot="{ errors }">
-                                        <input type="number" name="personas" id="personas" step="1" min="0" class="form-control" 
+                                        <input type="number" name="personas" id="personas" step="1" min="1" class="form-control" 
                                         v-model="booking.personas" :class="{ 'is-invalid':errors[0] }">
 
                                         <span class="invalid-feedback" role="alert">

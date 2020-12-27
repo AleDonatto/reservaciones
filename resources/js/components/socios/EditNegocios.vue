@@ -7,7 +7,7 @@
                     <label for="rfc">RFC</label>
                     <ValidationProvider name="rfc" rules="required|rfc" v-slot="{errors}">
                         <input type="text" name="rfc" id="rfc" class="form-control" v-model="companies.RFC" 
-                        :class="{ 'is-invalid':errors[0] }">
+                        :class="{ 'is-invalid':errors[0] }" maxlength="20">
                         <input type="hidden" name="idunidad" >
                         <input type="hidden" name="compania" >
                         
@@ -20,7 +20,7 @@
                         <label for="unidad">Nombre Unidad</label>
                         <ValidationProvider name="nameunidad" rules="required" v-slot="{errors}">
                             <input type="text" name="nameunidad" id="nameunidad" class="form-control" v-model="companies.nameUnit"
-                            :class="{ 'is-invalid':errors[0] }">
+                            :class="{ 'is-invalid':errors[0] }" maxlength="50">
 
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ errors[0] }}</strong>
@@ -33,7 +33,7 @@
                         <label for="telefono1">Telefono 1</label>
                         <ValidationProvider name="telefono1" rules="required" v-slot="{errors}">
                             <input type="text" name="telefono1" id="telefono1" class="form-control" v-model="companies.telefono1"
-                            :class="{ 'is-invalid':errors[0] }">
+                            :class="{ 'is-invalid':errors[0] }" maxlength="10">
 
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ errors[0] }}</strong>
@@ -44,7 +44,7 @@
                         <label for="telefono2">Telefono 2</label>
                         <ValidationProvider name="telefono2" rules="required" v-slot="{errors}">
                             <input type="text" name="telefono2" id="telefono2" class="form-control" v-model="companies.telefono2"
-                            :class="{'is-invalid': errors[0] }">
+                            :class="{'is-invalid': errors[0] }" maxlength="10">
 
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ errors[0] }}</strong>
@@ -57,7 +57,7 @@
                         <label for="correo">Correo</label>
                         <ValidationProvider name="correo" rules="required" v-slot="{errors}">
                             <input type="email" name="email" id="email" class="form-control" v-model="companies.correo" 
-                            :class="{'is-invalid': errors[0]}">
+                            :class="{'is-invalid': errors[0]}" maxlength="50">
 
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ errors[0] }}</strong>
@@ -68,7 +68,7 @@
                         <label for="sitioweb">Sitio Web</label>
                         <ValidationProvider name="sitioweb" rules="required" v-slot="{errors}">
                             <input type="text" name="sitioweb" id="sitioweb" class="form-control" v-model="companies.sitioweb" 
-                            :class="{ 'is-invalid':errors[0] }">
+                            :class="{ 'is-invalid':errors[0] }" maxlength="50">
 
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ errors[0] }}</strong>
@@ -81,7 +81,7 @@
                         <label for="namecontact">Nombre del Contacto</label>
                         <ValidationProvider name="nameContact" rules="required" v-slot="{errors}">
                             <input type="text" name="nameContact" id="nameContact" class="form-control" v-model="companies.namecontact"
-                            :class="{'is-invalid':errors[0]}">
+                            :class="{'is-invalid':errors[0]}" maxlength="50">
 
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ errors[0] }}</strong>

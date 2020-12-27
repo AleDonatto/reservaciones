@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Socios;
 use App\Codigos;
 
@@ -28,7 +29,11 @@ class CodigosController extends Controller
     {
         //
         $socios = Socios::all();
-        $codigos = Codigos::all();
+        $codigos = DB::table('code_verifications')
+        ->join('companies','companies.idCompanies','=','code_verifications.companies')
+        ->select('code_verifications.*','companies.name')
+        ->get();
+
         return view('components.codigoseguridad')->with(compact('socios','codigos'));
     }
 
@@ -42,25 +47,25 @@ class CodigosController extends Controller
     {
         //
         $validation = $request->validate([
-            'codigo' => 'required|integer',
+            'code' => 'required',
             'fecha' => 'required|date',
-            'socio' => 'required'
+            'companies' => 'required'
         ]);
 
+
         $codigo = new Codigos;
-        $codigo->code_verification = $request->codigo;
+        $codigo->code_verification = $request->code;
         $codigo->date_expiration = $request->fecha;
         $codigo->user = Auth::id();
-        $codigo->companies = $request->socio;
+        $codigo->companies = $request->companies;
         $codigo->save();
 
-        $notification = array(
-            'messageHeader' => 'Codigos',
-            'messageDB' => 'Codigo se seguridad agregado al socio!',
-            'alert-type' => 'success'
-        );
-        
-        return back()->with($notification);
+        $codigos = DB::table('code_verifications')
+        ->join('companies','companies.idCompanies','=','code_verifications.companies')
+        ->select('code_verifications.*','companies.name')
+        ->get();
+
+        return json_encode($codigos);
     }
 
     /**
@@ -95,6 +100,30 @@ class CodigosController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validation = $request->validate([
+            'companies' => 'required|integer',
+            'fecha' => 'required',
+            'idCode' => 'required|integer',
+            'numero' => 'required|string',
+            'user' => 'required|string'
+        ]);
+
+        Codigos::where('idCode', $id)
+        ->where('user', $request->user)
+        ->where('companies', $request->companies)
+        ->update([
+            'date_expiration' => $request->fecha,
+        ]);
+
+        $notification = array(
+            'messageHeader' => 'Codigos de Registro',
+            'messageDB' => 'Codigo Modificado con exito!',
+            'alert-type' => 'success'
+        );
+
+        return $notification;
+
+
     }
 
     /**

@@ -55,26 +55,53 @@ class BusinessUnitController extends Controller
             'horacancelation' => 'required'
         ]);
 
-        $negocios = new BusinessUnits;
-        $negocios->idcompany = $request->company;
-        $negocios->RFC = $request->RFC;
-        $negocios->nameUnit = $request->nameUnit;
-        $negocios->phone1 = $request->telefono1;
-        $negocios->phone2 = $request->telefono2;
-        $negocios->address = $request->correo;
-        $negocios->webSite = $request->sitioweb;
-        $negocios->nameContact = $request->namecontact;
-        $negocios->cancelation_time_limit = $request->horacancelation;
-        $negocios->save();
+        if(!$request->file('imagen')){
+            $negocios = new BusinessUnits;
+            $negocios->idcompany = $request->company;
+            $negocios->RFC = $request->RFC;
+            $negocios->nameUnit = $request->nameUnit;
+            $negocios->phone1 = $request->telefono1;
+            $negocios->phone2 = $request->telefono2;
+            $negocios->address = $request->correo;
+            $negocios->webSite = $request->sitioweb;
+            $negocios->nameContact = $request->namecontact;
+            $negocios->cancelation_time_limit = $request->horacancelation;
+            $negocios->imagen = '';
+            $negocios->save();
 
-        
-        $notification = array(
-            'messageHeader' => 'Negocios',
-            'messageDB' => 'Unidad de negocio agregada con exito!',
-            'alert-type' => 'success'
-        );
+            $notification = array(
+                'messageHeader' => 'Negocios',
+                'messageDB' => 'Unidad de negocio agregada con exito!',
+                'alert-type' => 'success'
+            );
+    
+            return $notification;
+        }else{
+            $eliminar = array(" ", ".");
+            $nameImagen = mb_strtolower(str_replace($eliminar, "", $request->nameUnit));
+            $path = $request->file('imagen')->storeAs('public', $nameImagen.'.jpg');
 
-        return $notification;
+            $bussinesUnits = new BusinessUnits;
+            $bussinesUnits->idcompany = $request->company;
+            $bussinesUnits->RFC = $request->RFC;
+            $bussinesUnits->nameUnit = $request->nameUnit;
+            $bussinesUnits->phone1 = $request->telefono1;
+            $bussinesUnits->phone2 = $request->telefono2;
+            $bussinesUnits->address = $request->correo;
+            $bussinesUnits->webSite = $request->sitioweb;
+            $bussinesUnits->nameContact = $request->namecontact;
+            $bussinesUnits->cancelation_time_limit = $request->horacancelation;  
+            $bussinesUnits->imagen = $path;
+            $bussinesUnits->save();
+
+            $notification = array(
+                'messageHeader' => 'Unidades de Negocio',
+                'messageDB' => 'Unidad agregada con exito!',
+                'alert-type' => 'success'
+            );
+
+            return $notification;
+        }
     }
 
     /**

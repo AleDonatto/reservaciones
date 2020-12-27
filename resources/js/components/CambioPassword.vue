@@ -13,7 +13,7 @@
                                 <label for="actual">Contraseña Actual</label>
                                 <ValidationProvider name="actual" rules="required" v-slot="{errors}">
                                     <input type="password" name="actual" id="actual" class="form-control" v-model="user.actual"
-                                    :class="{'is-invalid': errors[0] }">
+                                    :class="{'is-invalid': errors[0] }" maxlength="15">
 
                                     <div class="invalid-feedback" role="alert">
                                         <strong>{{ errors[0] }}</strong>
@@ -24,7 +24,7 @@
                                 <label for="nueva">Nueva Conatraseña</label>
                                 <ValidationProvider name="nueva" rules="required" v-slot="{ errors }">
                                     <input type="password" name="nueva" id="nueva" class="form-control" v-model="user.nueva"
-                                    :class="{'is-invalid': errors[0]}">
+                                    :class="{'is-invalid': errors[0]}" maxlength="15">
 
                                     <div class="invalid-feedback" role="alert">
                                         <strong>{{ errors[0] }}</strong>
@@ -35,7 +35,7 @@
                                 <label for="confirmar">Confirmar Nueva Contraseña</label>
                                 <ValidationProvider name="confirmar" rules="required" v-slot="{ errors }">
                                     <input type="password" name="confirmar" id="confirmar" class="form-control" v-model="user.confirmarNueva"
-                                    :class="{'is-invalid':errors[0]}">
+                                    :class="{'is-invalid':errors[0]}" maxlength="15">
 
                                     <div class="invalid-feedback" role="alert">
                                         <strong>{{ errors[0] }}</strong>

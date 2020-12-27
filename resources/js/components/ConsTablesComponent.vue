@@ -33,13 +33,18 @@
     </div>
 
     <div class="contenedor" v-if="showMesas">
-        <div class="card mb-3 " style="max-width: 350px;" v-for="(item, index) in listamesas " :key="index"
-        :class="{'bg-success text-dark':item.status == 0, 'text-white bg-warning':item.status == 1 }">
-            <div class="row no-gutters">
-                <div class="col-md-12">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">{{ item.num_mesa }}</h5>
-                        <p class="card-text">Sillas: {{ item.number_chairs }}</p>
+        <div class="" v-if="listamesas == 0">
+            <p>No hay Mesas agregadas</p>
+        </div>
+        <div class="" v-else>
+            <div class="card mb-3 " style="max-width: 350px;" v-for="(item, index) in listamesas " :key="index"
+            :class="{'bg-success text-dark':item.status == 0, 'text-white bg-warning':item.status == 1 }">
+                <div class="row no-gutters">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">{{ item.num_mesa }}</h5>
+                            <p class="card-text">Sillas: {{ item.number_chairs }}</p>
+                        </div>
                     </div>
                 </div>
             </div>

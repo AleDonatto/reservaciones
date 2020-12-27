@@ -90,7 +90,7 @@
                                             <div class="form-group col-md-6">
                                                 <label for="pax">Pax</label>
                                                 <ValidationProvider name="pax" rules="required" v-slot="{errors}">
-                                                    <input type="number" name="pax" id="pax" class="form-control" step="1" min="0" v-model="booking.pax" 
+                                                    <input type="number" name="pax" id="pax" class="form-control" step="1" min="1" v-model="booking.pax" 
                                                     :class="{'is-invalid': errors[0]}">
 
                                                     <span class="invalid-feedback" role="alert">
