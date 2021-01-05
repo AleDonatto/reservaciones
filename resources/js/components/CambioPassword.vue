@@ -21,7 +21,7 @@
                                 </ValidationProvider>
                             </div>
                             <div class="form-group col-md-12">
-                                <label for="nueva">Nueva Conatraseña</label>
+                                <label for="nueva">Nueva Contraseña</label>
                                 <ValidationProvider name="nueva" rules="required" v-slot="{ errors }">
                                     <input type="password" name="nueva" id="nueva" class="form-control" v-model="user.nueva"
                                     :class="{'is-invalid': errors[0]}" maxlength="15">

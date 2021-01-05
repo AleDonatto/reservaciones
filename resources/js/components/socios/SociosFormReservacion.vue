@@ -24,7 +24,7 @@
                             <label for="fecha">Fecha</label>
                             <ValidationProvider name="fecha" v-slot="{ errors }" rules="required|fechav">
                                 <input type="date" name="fecha" id="fecha" class="form-control" v-model="booking.fecha" 
-                                :class="{'is-invalid':errors[0] }" min="2020-09-01" max="2020-12-31">
+                                :class="{'is-invalid':errors[0] }">
 
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ errors[0] }}</strong>
@@ -61,7 +61,7 @@
                                     <label for="fecha">Fecha</label>
                                     <ValidationProvider name="fecha" v-slot="{ errors }" rules="required|fechav">
                                         <input type="date" name="fecha" id="fecha" class="form-control" v-model="booking.fecha" 
-                                        :class="{'is-invalid':errors[0] }" min="2020-09-01" max="2020-12-31">
+                                        :class="{'is-invalid':errors[0] }">
 
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ errors[0] }}</strong>
@@ -96,7 +96,7 @@
                                 <div class="col-12">
                                     <h5>Mesas</h5>
                                 </div>
-                                <div class="listamesas col-md-12">
+                                <div class="contenedor col-md-12">
                                     <div class="card mb-3" style="max-width: 400px;" v-for="(item, index) in listMesas " :key="item.idTables"
                                     :class="{'card text-white bg-success mb-3':item.status == 0, 'text-white bg-warning':item.status == 1 }">
                                         <div class="row no-gutters">
@@ -155,7 +155,7 @@ export default {
             showUnidades: true,
             showMesas: false,
             listMesas:[],
-            booking:{ businessUnit:0, table:0, fecha:'', hora:'', personas:0 },
+            booking:{ businessUnit:0, table:0, fecha:'', hora:'', personas:1 },
             formMesas: false
         }
     },
@@ -189,29 +189,33 @@ export default {
         },
         reservarMesa(){
 
-            axios.post('/postReservacion',this.booking)
-            .then(res => {
-                var response = res.data
-                swal(response.titulo,response.mensage, response.tipo);
-            })
-            .catch(err =>{
-                console.log(err.response)
-            })
+            if(this.booking.table == ''){
+                swal('Reservaciones','Seleccione una mesa!','warning');
+            }else{
+                axios.post('/postReservacion',this.booking)
+                .then(res => {
+                    var response = res.data
+                    swal(response.titulo,response.mensage, response.tipo);
+                })
+                .catch(err =>{
+                    console.log(err.response)
+                })
 
-            this.$refs.form.validate().then(success => {
-                if (!success) {
-                    return;
-                }
-                // Resetting Values
-                this.booking.businessUnit = this.booking.table = this.booking.personas = 0;
-                this.booking.fecha = this.booking.hora = ''; 
-                // Wait until the models are updated in the UI
-                this.$nextTick(() => {
-                    this.$refs.form.reset();
-                    this.showMesas = false
-                    this.showUnidades = true
+                this.$refs.form.validate().then(success => {
+                    if (!success) {
+                        return;
+                    }
+                    // Resetting Values
+                    this.booking.businessUnit = this.booking.table = this.booking.personas = 0;
+                    this.booking.fecha = this.booking.hora = ''; 
+                    // Wait until the models are updated in the UI
+                    this.$nextTick(() => {
+                        this.$refs.form.reset();
+                        this.showMesas = false
+                        this.showUnidades = true
+                    });
                 });
-            });
+            }
         }
     }
 }

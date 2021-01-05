@@ -6,7 +6,7 @@
                 <h3>Seleccione Mesa</h3>
             </div>
             <div>
-                <div class="listamesas">
+                <div class="contenedor listamesas">
                     <ValidationObserver v-slot="{handleSubmit, reset }" ref="form">
                         <form @submit.prevent="handleSubmit(reservarMesa)" @reset.prevent="reset" method="post">
                             <div class="row form-group">
@@ -131,6 +131,14 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.contenedor{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
 
+.contenedor > .card {
+    margin-bottom: 10px;
+}
 </style>
