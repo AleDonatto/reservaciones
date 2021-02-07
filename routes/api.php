@@ -13,12 +13,22 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('appLogin', 'ApiController@loginApp');
+
+Route::get('getAllUnits', 'ApiController@getAllUnits');
+
+Route::get('getUnit/{id}', 'ApiController@getUnit');
+
+Route::get('getallmisreservaciones/{usuario}', 'ApiController@getAllMisReservaciones');
+
+Route::get('getReservacionesRecientes/{usuario}', 'ApiController@getReservacionesRecientes');
+
+Route::get('getReservacion/{id}', 'ApiController@getReservacion');
+
+Route::get('cancelarReservacion/{id}', 'ApiController@cacelarReservacion');
+
+Route::post('modificarReservacion/{id}', 'ApiController@modificarReservacion');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::resource('socios','SociosController');
-
-Route::get('getDatosUserProfile', 'SpecialController@getDatosUserProfile')->name('getDatosUserProfile');
-

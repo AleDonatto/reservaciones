@@ -7,7 +7,7 @@
         </div>
         <div class="card-body">
             <ValidationObserver v-slot="{handleSubmit, reset }" ref="form">
-                <form method="post" @submit.prevent="handleSubmit(bussinesUnit)" @reset.prevent="reset">
+                <form method="post" @submit.prevent="handleSubmit(bussinesUnit)" @reset.prevent="reset" enctype="multipart/form-data">
                     <v-container>
                         <v-row>
                             <v-col cols="12" md="6">
