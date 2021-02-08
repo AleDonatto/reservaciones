@@ -37,7 +37,6 @@ class ApiController extends Controller
         $unidades = BusinessUnits::all();
 
         return response()->json([
-            "ok" => true,
            "data" => $unidades,            
         ]);
 
