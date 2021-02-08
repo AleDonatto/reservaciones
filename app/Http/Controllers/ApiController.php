@@ -36,7 +36,12 @@ class ApiController extends Controller
     public function getAllUnits(){
         $unidades = BusinessUnits::all();
 
-        return json_encode($unidades);
+        return response()->json([
+            "ok" => true,
+           "data" => $unidades,            
+        ]);
+
+        //return json_encode($unidades);
     }
 
     public function getUnit($id){
