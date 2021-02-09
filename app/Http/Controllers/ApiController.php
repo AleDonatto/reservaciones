@@ -34,7 +34,7 @@ class ApiController extends Controller
     }
 
     public function getAllUnits(){
-        $unidades = BusinessUnits::all();
+        $unidades = BusinessUnits::all()->toArray();
 
         return response()->json([
            "data" => $unidades,            
