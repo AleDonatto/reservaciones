@@ -29,6 +29,8 @@ Route::get('cancelarReservacion/{id}', 'ApiController@cacelarReservacion');
 
 Route::post('modificarReservacion/{id}', 'ApiController@modificarReservacion');
 
+Route::post('buscarMesas','ApiController@getMesasUnidad');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

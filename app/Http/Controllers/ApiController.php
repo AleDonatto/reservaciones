@@ -46,7 +46,9 @@ class ApiController extends Controller
     public function getUnit($id){
         $unidades = BusinessUnits::where('idUnits', $id)->get();
 
-        return json_encode($unidades);
+        return response()->json([
+            "data" => $unidades
+        ]);
     }
 
     public function createBooking(Request $request){
@@ -65,10 +67,23 @@ class ApiController extends Controller
         ->where('bookings.clients',$cliente)
         ->get(); 
         
-        return json_decode($listBookings);
+        return response()->json([
+            "data" => $listBookings
+        ]);
     }
 
     public function getReservacion($id){
 
+    }
+
+    public function getMesasUnidad(Request $request){
+        $hora = $request->hora.':00';
+
+        $mesas = DB::select("SELECT tables_units.* FROM tables_units WHERE NOT EXISTS (SELECT null FROM bookings WHERE bookings.table_id = tables_units.idTables".
+        " AND bookings.bdate= "."'$request->fecha'"." AND bookings.bhour="."'$hora'".") AND tables_units.units = ".$request->businessUnit." GROUP BY tables_units.idTables");
+
+        return response()->json([
+            "data" => $mesas
+        ]);
     }
 }
