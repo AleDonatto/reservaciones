@@ -25,7 +25,7 @@ class ApiController extends Controller
             ], 401);
         }
 
-        $user = DB::table('users')->where('email',$request->email)->get();
+        $user = DB::table('users')->where('email',$request->email)->first();
 
         if($user->rol != 4 ){
             return  response()->json([
