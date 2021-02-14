@@ -17,6 +17,7 @@ class ApiController extends Controller
     public function loginApp(Request $request){
         $input = $request->only('email', 'password');
         $jwt_token = null;
+        
         if (!$jwt_token = JWTAuth::attempt($input)) {
             return  response()->json([
                 'status' => 'invalid_credentials',
@@ -25,6 +26,13 @@ class ApiController extends Controller
         }
 
         $user = DB::table('users')->where('email',$request->email)->get();
+
+        if($user->rol != 4 ){
+            return  response()->json([
+                'status' => 'invalid_credentials',
+                'message' => 'El usuario no es de tipo cliente.',
+            ], 401);
+        }
 
         return  response()->json([
             'status' => 'ok',
