@@ -60,7 +60,30 @@ class ApiController extends Controller
     }
 
     public function createBooking(Request $request){
-        return $request;
+        $validation = $request->validate([
+            'unidad' => 'required|integer',
+            'fecha' => 'required|date',
+            'hora' => 'required',
+            'pax' => 'required|integer',
+            'mesa' => 'required|integer'
+        ]);
+
+        $bookings = new Bookins;
+        $bookings->businessUnit_id = $request->unidad;
+        $bookings->table_id = $request->mesa;
+        $bookings->usuario_id = $request->usuarioId;
+        $bookings->bdate = $request->fecha;
+        $bookings->bhour = $request->hora;
+        $bookings->pax = $request->pax;
+        $bookings->status = 1;
+        $bookings->save();
+
+        $response = [
+            'success' => true,
+            'message' => 'Reservacion Creada',
+        ];
+        
+        return response()->json($response,'200');
     }
 
     public function getAllMisReservaciones($usuario){
@@ -78,10 +101,6 @@ class ApiController extends Controller
         return response()->json([
             "data" => $listBookings
         ]);
-    }
-
-    public function getReservacion($id){
-
     }
 
     public function getMesasUnidad(Request $request){

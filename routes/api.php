@@ -23,13 +23,13 @@ Route::get('getallmisreservaciones/{usuario}', 'ApiController@getAllMisReservaci
 
 Route::get('getReservacionesRecientes/{usuario}', 'ApiController@getReservacionesRecientes');
 
-Route::get('getReservacion/{id}', 'ApiController@getReservacion');
-
 Route::get('cancelarReservacion/{id}', 'ApiController@cacelarReservacion');
 
 Route::post('modificarReservacion/{id}', 'ApiController@modificarReservacion');
 
 Route::post('buscarMesas','ApiController@getMesasUnidad');
+
+Route::post('createReservacion', 'ApiController@createBooking');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
