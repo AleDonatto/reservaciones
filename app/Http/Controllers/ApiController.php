@@ -43,7 +43,7 @@ class ApiController extends Controller
 
     public function getAllUnits(){
         $unidades = BusinessUnits::all();
-        
+
         return response()->json([
             "data" => $unidades,            
         ]);
@@ -90,7 +90,7 @@ class ApiController extends Controller
         $mesas = DB::select("SELECT tables_units.* FROM tables_units WHERE NOT EXISTS (SELECT null FROM bookings WHERE bookings.table_id = tables_units.idTables".
         " AND bookings.bdate= "."'$request->fecha'"." AND bookings.bhour="."'$hora'".") AND tables_units.units = ".$request->businessUnit." GROUP BY tables_units.idTables");
 
-        //return json_encode($mesas);
+        return json_encode($mesas);
 
         return response()->json([
             $mesas
