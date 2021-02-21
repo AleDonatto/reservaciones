@@ -93,7 +93,7 @@ class ApiController extends Controller
         $response = [
             'success' => true,
             'data'    => $mesas,
-            'message' => $message,
+            'message' => 'ok',
         ];
         
         return response()->json($response,'200');
