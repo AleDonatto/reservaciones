@@ -71,7 +71,7 @@ class ApiController extends Controller
         $bookings = new Bookins;
         $bookings->businessUnit_id = $request->unidad;
         $bookings->table_id = $request->mesa;
-        $bookings->usuario_id = $request->usuarioId;
+        $bookings->usuario_id = $request->usuario_id;
         $bookings->bdate = $request->fecha;
         $bookings->bhour = $request->hora;
         $bookings->pax = $request->pax;
