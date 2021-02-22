@@ -10,6 +10,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use JWTAuth;
 use App\BusinessUnits;
 use App\Clientes;
+use App\Bookins;
 
 class ApiController extends Controller
 {
