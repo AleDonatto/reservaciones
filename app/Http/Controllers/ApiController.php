@@ -87,21 +87,25 @@ class ApiController extends Controller
         return response()->json($response,'200');
     }
 
-    public function getAllMisReservaciones($usuario){
+    public function getAllReservacionesCliente($usuario){
         $idCliente = Clientes::where('idUser',$usuario)->select('idClients')->first();
 
         $cliente = $idCliente->idClients;
 
         $listBookings = DB::table('bookings')
-        ->join('business_units','bookings.businessUnit','=','business_units.idUnits')
-        ->join('tables_units','bookings.idtable','=','tables_units.idTables')
+        ->join('business_units','bookings.businessUnit_id','=','business_units.idUnits')
+        ->join('tables_units','bookings.table_id','=','tables_units.idTables')
         ->select('business_units.nameUnit','tables_units.num_mesa','bookings.*')
-        ->where('bookings.clients',$cliente)
+        ->where('bookings.usuarios_id',$cliente)
         ->get(); 
+
+        $response = [
+            'success' => true,
+            'data'    => $listBookings,
+            'message' => 'ok',
+        ];
         
-        return response()->json([
-            "data" => $listBookings
-        ]);
+        return response()->json($response, '200');
     }
 
     public function getMesasUnidad(Request $request){
