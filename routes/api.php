@@ -19,7 +19,7 @@ Route::get('getAllUnits', 'ApiController@getAllUnits');
 
 Route::get('getUnit/{id}', 'ApiController@getUnit');
 
-Route::get('getallmisreservaciones/{usuario}', 'ApiController@getAllReservacionesCliente');
+Route::get('getallreservacionesCliente/{usuario}', 'ApiController@getAllReservacionesCliente');
 
 Route::get('getReservacionesRecientes/{usuario}', 'ApiController@getReservacionesRecientes');
 

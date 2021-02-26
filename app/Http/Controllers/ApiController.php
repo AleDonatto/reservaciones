@@ -96,7 +96,7 @@ class ApiController extends Controller
         ->join('business_units','bookings.businessUnit_id','=','business_units.idUnits')
         ->join('tables_units','bookings.table_id','=','tables_units.idTables')
         ->select('business_units.nameUnit','tables_units.num_mesa','bookings.*')
-        ->where('bookings.usuarios_id',$cliente)
+        ->where('bookings.usuario_id',$cliente)
         ->get(); 
 
         $response = [
