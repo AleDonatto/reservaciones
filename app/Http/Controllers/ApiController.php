@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use JWTAuth;
 use App\BusinessUnits;
+use App\User;
 use App\Clientes;
 use App\Bookins;
 
@@ -88,15 +89,12 @@ class ApiController extends Controller
     }
 
     public function getAllReservacionesCliente($usuario){
-        $idCliente = Clientes::where('idUser',$usuario)->select('idClients')->first();
-
-        $cliente = $idCliente->idClients;
 
         $listBookings = DB::table('bookings')
         ->join('business_units','bookings.businessUnit_id','=','business_units.idUnits')
         ->join('tables_units','bookings.table_id','=','tables_units.idTables')
         ->select('business_units.nameUnit','tables_units.num_mesa','bookings.*')
-        ->where('bookings.usuario_id',$cliente)
+        ->where('bookings.usuario_id',$usuario)
         ->get(); 
 
         $response = [
