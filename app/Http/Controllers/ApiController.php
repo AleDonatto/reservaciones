@@ -120,4 +120,33 @@ class ApiController extends Controller
         
         return response()->json($response,'200');
     }
+
+    public function modificarReservacion(Request $request){
+        $validation = $request->validate([
+            'id' => 'required|integer',
+            'unidad' => 'required|integer',
+            'mesa' => 'required|integer',
+            'hora' => 'required',
+            'fecha' => 'required',
+            'pax' => 'required|integer',
+            'usuarioId' => 'required|integer',
+        ]);
+
+        Bookins::where('idBooking', $id)
+        ->where('businessUnit_id', $request->unidad)
+        ->where('table_id', $request->mesa)
+        ->where('usuario_id', $request->usuarioId)
+        ->update([
+            'bdate' => $request->fecha,
+            'bhour' => $request->hora,
+            'pax' => $request->pax,
+        ]);
+
+        $response = [
+            'success' => true,
+            'message' => 'Reservacion Creada',
+        ];
+        
+        return response()->json($response,'200');
+    }
 }
