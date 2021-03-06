@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use JWTAuth;
 use App\BusinessUnits;
@@ -144,9 +145,67 @@ class ApiController extends Controller
 
         $response = [
             'success' => true,
-            'message' => 'Reservacion Creada',
+            'message' => 'Se a cambiado su reservacion',
         ];
         
         return response()->json($response,'200');
+    }
+
+    public function cancelarReservacion($idReservacion){
+
+        $booking = Bookins::where('idBooking',$idReservacion)->first();
+        $horaUnidad = BusinessUnits::select('cancelation_time_limit')->where('idUnits',$booking->businessUnit_id)->first();
+
+        $fechaNow = date('Y-m-d');
+
+        $horaNow = Carbon::now();
+        $horaNow->subHour(1);
+
+        $horaReserva = Carbon::parse($booking->bhour); //date($booking->B_hour);
+        $horapermitida = $horaReserva->subHour($horaUnidad->cancelation_time_limit);
+
+        if( $fechaNow < $booking->bdate ){
+            $units = Bookins::where('idBooking',$idReservacion)
+            ->update([
+                'status' => 2,
+            ]);
+
+            $response = [
+                'success' => true,
+                'message' => 'Se cancelo su reservacion',
+            ];
+            
+            return response()->json($response,'200');
+        }
+        else if($fechaNow == $booking->bdate){
+            if($horaNow->toTimeString() < $horapermitida->toTimeString()){
+                $units = Bookins::where('idBooking',$idReservacion)
+                ->update([
+                    'status' => 2,
+                ]);
+
+                $response = [
+                    'success' => true,
+                    'message' => 'Se cancelo su reservacion',
+                ];
+                
+                return response()->json($response,'200');
+            }
+            else{
+                $response = [
+                    'success' => true,
+                    'message' => 'Ya no es posible cancelar su reservacion.',
+                ];
+                
+                return response()->json($response,'200');
+            }
+        }else{
+            $response = [
+                'success' => true,
+                'message' => 'Ya no es posible cancelar su reservacion.',
+            ];
+            
+            return response()->json($response,'200');
+        }
     }
 }

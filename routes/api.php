@@ -23,7 +23,7 @@ Route::get('getallreservacionesCliente/{usuario}', 'ApiController@getAllReservac
 
 Route::get('getReservacionesRecientes/{usuario}', 'ApiController@getReservacionesRecientes');
 
-Route::get('cancelarReservacion/{id}', 'ApiController@cacelarReservacion');
+Route::get('cancelarReservacion/{id}', 'ApiController@cancelarReservacion');
 
 Route::post('modificarReservacion', 'ApiController@modificarReservacion');
 
