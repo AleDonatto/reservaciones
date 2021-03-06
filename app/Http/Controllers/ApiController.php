@@ -132,7 +132,7 @@ class ApiController extends Controller
             'usuarioId' => 'required|integer',
         ]);
 
-        Bookins::where('idBooking', $id)
+        Bookins::where('idBooking', $request->id)
         ->where('businessUnit_id', $request->unidad)
         ->where('table_id', $request->mesa)
         ->where('usuario_id', $request->usuarioId)
