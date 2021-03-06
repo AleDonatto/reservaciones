@@ -25,7 +25,7 @@ Route::get('getReservacionesRecientes/{usuario}', 'ApiController@getReservacione
 
 Route::get('cancelarReservacion/{id}', 'ApiController@cacelarReservacion');
 
-Route::post('modificarReservacion/{id}', 'ApiController@modificarReservacion');
+Route::post('modificarReservacion', 'ApiController@modificarReservacion');
 
 Route::post('buscarMesas','ApiController@getMesasUnidad');
 
